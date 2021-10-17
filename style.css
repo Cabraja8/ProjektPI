@@ -4,4 +4,14 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #ddd;
+  min-height: 100%;
+}
+
+.active {
+  background-color: #ffffff;
+}
+
+footer {
+  margin-top: auto;
 }
