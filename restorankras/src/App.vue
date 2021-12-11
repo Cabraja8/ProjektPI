@@ -9,9 +9,9 @@
         </div>
       </div>
 
-      <nav class="navbar bg-light navbar-light navbar-expand-lg">
+      <nav id="nav" class="navbar bg-light navbar-light navbar-expand-lg">
         <div class="container">
-          <a href="Home" class="navbar-brand"
+          <a href="" class="navbar-brand"
             ><img src="@/../public/images/logo.png" alt="Logo"
           /></a>
 
@@ -27,14 +27,13 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                
-                <router-link to="/Home" class="nav-link"
-                  >Početna</router-link
-                >
+                <router-link to="/Home" class="nav-link">Početna</router-link>
               </li>
 
               <li class="nav-item">
-                <router-link to="Narudzbe" class="nav-link">Naruđžbe</router-link to>
+                <router-link to="/Narudzbe" class="nav-link"
+                  >Naruđžbe</router-link
+                >
               </li>
               <li class="nav-item">
                 <router-link to="/o-nama" class="nav-link">O Nama</router-link>
@@ -46,13 +45,11 @@
               </li>
             </ul>
           </div>
-          
         </div>
-        
       </nav>
-      
-      <router-view />
     </header>
+
+    <router-view />
 
     <footer>
       <div class="container">
@@ -102,7 +99,7 @@
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #5b5555;
 
     &.router-link-exact-active {
       color: #ed4646;

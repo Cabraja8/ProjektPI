@@ -1,4 +1,4 @@
-No
+/* No
   media
   query
   since
@@ -29,9 +29,9 @@ Extra
   (large desktops, 1200px and up)
   @media
   (min-width: 1200px) {
-}
+} */
 
-=============*/
+
 
 /*-- Bootstrap Mobile Gutter Fix --*/
 .row, .container-fluid {
@@ -66,8 +66,8 @@ Extra
 .nav-item {
   padding: 0.5rem;
 }
-.nav-link {
-  color: #5b5555 !important;
+/* .nav-link {
+  color: #5b5555 !important; */
 }
 .nav-link.active,
 .nav-link:hover {
