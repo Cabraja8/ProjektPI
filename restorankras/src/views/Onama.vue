@@ -1,5 +1,5 @@
 <template>
-  <div class="Onama">
+  <div id="Onama">
     <div class="col-12 text-center mt-5">
       <h1 class="text-dark pt-4">O nama</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -9,7 +9,7 @@
       <div class="container-fluid padding py-4 my-4">
         <div class="row padding">
           <div class="col-lg-8 py-4 my-4">
-            <h1>O pizzama i ponudama</h1>
+            <h1>O ponudama</h1>
 
             <p>
               U zadnjih 10 godina, specijalizirali smo se u jelima s roštilja,
@@ -20,28 +20,34 @@
             </p>
           </div>
           <div class="col-lg-4">
-            <img src="" alt="Service" class="w-100" />
+            <img
+              src="@/../public/images/service.jpg"
+              alt="Service"
+              class="w-100"
+            />
           </div>
         </div>
       </div>
     </div>
-
     <div class="container py-4 my-4">
       <div class="container-fluid padding py-4 my-4">
         <div class="row padding">
-          <div class="col-lg-4">
-            <img src="images/takeaway.png" alt="Service" class="w-100" />
-          </div>
           <div class="col-lg-8 py-4 my-4">
-            <h1>Take Away</h1>
+            <h1>Take away</h1>
 
-            <p>
-              Najbolje je jesti kod kuće uz cjelu obitelj i to uz dobru hranu
-            </p>
+            <p>Najbolje jesti kod kuće uz obitelj</p>
+          </div>
+          <div class="col-lg-4">
+            <img
+              src="@/../public/images/takeaway.png"
+              alt="Takeaway"
+              class="w-100"
+            />
           </div>
         </div>
       </div>
     </div>
+
     <div class="container py-4 my-4">
       <div class="container-fluid padding py-4 my-4">
         <div class="row padding">
@@ -61,6 +67,28 @@
     <div class="col-12 text-center mt-5">
       <h1 class="text-dark pt-4">Lokacija</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
+      <div class="container py-4 my-4">
+        <div class="container-fluid padding py-4 my-4">
+          <div class="row padding">
+            <div class="col-lg-8 py-4 my-4">
+              <h1>Adresa</h1>
+
+              <p>52465,Lanterna Tar</p>
+            </div>
+            <div class="col-lg-4">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11226.176806208228!2d13.5942393!3d45.2974315!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8987ed38d8e3eae0!2sPizzeria%20%E2%80%93%20Bistro%20Kras!5e0!3m2!1shr!2shr!4v1639232462152!5m2!1shr!2shr"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                class="w-100"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

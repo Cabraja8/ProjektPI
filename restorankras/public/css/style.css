@@ -31,10 +31,9 @@ Extra
   (min-width: 1200px) {
 } */
 
-
-
 /*-- Bootstrap Mobile Gutter Fix --*/
-.row, .container-fluid {
+.row,
+.container-fluid {
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
@@ -66,9 +65,9 @@ Extra
 .nav-item {
   padding: 0.5rem;
 }
-/* .nav-link {
+/* /* .nav-link {
   color: #5b5555 !important; */
-}
+
 .nav-link.active,
 .nav-link:hover {
   color: #ed4646 !important;
