@@ -2,12 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Onama from "../views/Onama.vue";
+import Narudzbe from "../views/Narudzbe.vue";
+import prijavise from "../views/Prijavise.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/Home",
     name: "Home",
     component: Home,
   },
@@ -20,20 +22,12 @@ const routes = [
   {
     path: "/Narudzbe",
     name: "narudzbe",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Narudzbe.vue"),
+    component: Narudzbe,
   },
   {
     path: "/Login",
     name: "Prijavise",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Prijavise.vue"),
+    component: prijavise,
   },
 ];
 

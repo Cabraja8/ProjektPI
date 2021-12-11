@@ -4,7 +4,7 @@
       <div class="top-bar">
         <div class="container">
           <div class="col 12 text-right">
-            <p><a href="tel">Tel:+385 52 443 695</a></p>
+            <p><a href="">Tel:+385 52 443 695</a></p>
           </div>
         </div>
       </div>
@@ -27,24 +27,31 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <router-link to="/Home" class="nav-link active"
+                
+                <router-link to="/Home" class="nav-link"
                   >Početna</router-link
                 >
               </li>
 
               <li class="nav-item">
-                <a href="Narudzbe" class="nav-link">Naruđžbe</a>
+                <router-link to="Narudzbe" class="nav-link">Naruđžbe</router-link to>
               </li>
               <li class="nav-item">
                 <router-link to="/o-nama" class="nav-link">O Nama</router-link>
               </li>
               <li class="nav-item">
-                <a href="/Login" class="nav-link">Prijavi se</a>
+                <router-link to="/Login" class="nav-link"
+                  >Prijavi se</router-link
+                >
               </li>
             </ul>
           </div>
+          
         </div>
+        
       </nav>
+      
+      <router-view />
     </header>
 
     <footer>
