@@ -35,19 +35,25 @@
           <img src="@/../public/images/ponude.jpg" alt="" class="w-100" />
           <h4 class="my-4">Ponude</h4>
           <p>Sve šta vas zanimna stistnite gumb za više informacija</p>
-          <a href="" class="btn btn-outline-danger btn-md">Pogledajte ponude</a>
+          <router-link to="@/../Narudzbe" class="btn btn-outline-danger btn-md"
+            >Pogledajte ponude</router-link
+          >
         </div>
         <div class="col-md-4 my-4">
           <img src="@/../public/images/takeaway.png" alt="" class="w-100" />
           <h4 class="my-4">Take Away</h4>
           <p>Uzmi si hranu za van i uživaj</p>
-          <a href="" class="btn btn-outline-danger btn-md">Naruči</a>
+          <router-link to="@/../o-nama" class="btn btn-outline-danger btn-md"
+            >Više informacija</router-link
+          >
         </div>
         <div class="col-md-4 my-4">
           <img src="@/../public/images/coffetogo.jpg" alt="" class="w-100" />
           <h4 class="my-4">Coffe to Go</h4>
           <p>Uzmite si kavu za van uz dobro jutro</p>
-          <a href="" class="btn btn-outline-danger btn-md">Uzmi za van</a>
+          <router-link to="@/../o-nama" class="btn btn-outline-danger btn-md"
+            >Više informacija</router-link
+          >
         </div>
       </div>
     </div>

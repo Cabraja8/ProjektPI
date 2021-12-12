@@ -1,5 +1,5 @@
 <template>
-  <div id="Onama">
+  <div class="Onama">
     <div class="col-12 text-center mt-5">
       <h1 class="text-dark pt-4">O nama</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -57,7 +57,11 @@
             <p>Uz dobro jutro tu je i dobra kava. Uvijek dobro dođe</p>
           </div>
           <div class="col-lg-4">
-            <img src="images/coffetogo.jpg" alt="Service" class="w-100" />
+            <img
+              src="@/../public/images/coffetogo.jpg"
+              alt="Service"
+              class="w-100"
+            />
           </div>
         </div>
       </div>
