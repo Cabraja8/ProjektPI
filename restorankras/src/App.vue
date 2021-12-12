@@ -27,7 +27,7 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <router-link to="/Home" class="nav-link">Početna</router-link>
+                <router-link to="/" class="nav-link">Početna</router-link>
               </li>
 
               <li class="nav-item">

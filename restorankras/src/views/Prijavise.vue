@@ -1,6 +1,6 @@
 <template>
   <div class="prijavise">
-    <div class="container py-4">
+    <div class="container py-6 padding py-4 my-4">
       <div
         class="
           row
@@ -12,10 +12,11 @@
           formcon
         "
       >
-        <div class="col-sm-8 col-md-6 col-lg-4 bg-white rounded p-4 shadow">
+        <div class="col-sm-8 col-md-6 col-lg-4 bg-light rounded p-4 shadow">
           <div class="row justify-content-center mb-4">
             <img src="@/../public/images/logo.png" class="" />
           </div>
+
           <form>
             <div class="mb-4">
               <label for="username" class="form-label">Username:</label>
@@ -25,7 +26,7 @@
               <label for="password" class="form-label">Password:</label>
               <input type="password" class="form-control" id="password" />
             </div>
-            <button type="submit" class="btn btn-success w-100">Log in</button>
+            <button type="submit" class="btn btn-danger w-100">Log in</button>
           </form>
         </div>
       </div>
