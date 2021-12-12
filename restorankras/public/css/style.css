@@ -157,3 +157,10 @@ ul.social li {
 .bg-sh:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.formcon {
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
