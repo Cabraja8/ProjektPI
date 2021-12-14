@@ -57,9 +57,18 @@
               <label for="pice" class="form-label">Piće:</label>
               <input type="pice" class="form-control" id="pice" />
             </div>
-            <button type="submit" class="btn btn-danger w-50">Odustani</button>
+            <div class="mb-4">
+              <label for="Iznos" class="form-label">Iznos:</label>
+            </div>
+            <div class="mb-4">
+              <label for="Iznoskn" class="form-label"> 0,00</label>
+            </div>
+            <div class="mb-4">
+              <label for="HRK" class="form-label">HRK</label>
+            </div>
+            <button type="button" class="btn btn-danger w-50">Odustani</button>
             <div class="mb-4"></div>
-            <button type="submit" class="btn btn-danger w-50">Pošalji</button>
+            <button type="button" class="btn btn-danger w-50">Pošalji</button>
           </form>
         </div>
       </div>

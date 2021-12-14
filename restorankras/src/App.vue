@@ -11,9 +11,9 @@
 
       <nav id="nav" class="navbar bg-light navbar-light navbar-expand-lg">
         <div class="container">
-          <a href="" class="navbar-brand"
+          <router-link to="/" class="navbar-brand"
             ><img src="@/../public/images/logo.png" alt="Logo"
-          /></a>
+          /></router-link>
 
           <button
             class="navbar-toggler"
