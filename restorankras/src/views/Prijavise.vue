@@ -47,16 +47,16 @@
 </template>
 
 <script>
-// import { firebase } from "@/firebase.js";
+import { firebase } from "@/firebase";
 export default {
   name: "Login",
-  LoginPodaci() {
+  data() {
     return {
       Username: " ",
       Password: " ",
     };
   },
-  funkcija: {
+  methods: {
     proba() {
       alert("Ok");
     },
