@@ -47,7 +47,7 @@
           </div>
         </div>
       </nav>
-    </header>
+    
 
     <router-view />
 
