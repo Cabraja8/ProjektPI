@@ -52,8 +52,8 @@ export default {
   name: "Login",
   data() {
     return {
-      Username: " ",
-      Password: " ",
+      Username: "",
+      Password: "",
     };
   },
   methods: {
