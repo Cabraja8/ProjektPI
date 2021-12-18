@@ -111,6 +111,9 @@
 </template>
 
 <script>
+import { db } from "@/firebase";
+import { firebase } from "@/firebase";
+
 export default {
   name: "Narudzbe",
   data() {
@@ -125,7 +128,24 @@ export default {
     };
   },
   methods: {
-    Posalji() {},
+    Posalji() {
+      let Ime = this.Ime;
+      let Prezime = Prezime;
+      let BrojTelefona = this.BrojTelefona;
+      let Adresa = this.Adresa;
+      let Kategorijajela = this.Kategorijajela;
+      let Jelo = this.Jelo;
+      let Pice = this.Pice;
+      db.collection("Narudzbe").add({
+        Ime: Ime,
+        Prezime: Prezime,
+        BrojTelefona: BrojTelefona,
+        Adresa: Adresa,
+        KategorijaJela: Kategorijajela,
+        Jelo: Jelo,
+        Pice: Pice,
+      });
+    },
 
     Odustani() {},
   },
