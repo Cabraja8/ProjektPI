@@ -109,6 +109,9 @@ firebase.auth().onAuthStateChanged(function (user) {
     console.log("No user");
     store.currentUser = null;
   }
+  if (!ruta.meta.needUser) {
+    router.push({ name: "Home" });
+  }
 
   if (ruta.meta.needUser) {
     router.push({ name: "Prijavise" });
