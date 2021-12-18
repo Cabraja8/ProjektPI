@@ -19,12 +19,12 @@
 
           <form>
             <div class="mb-4">
-              <label for="username" class="form-label">Username:</label>
+              <label for="Email" class="form-label">E-mail:</label>
               <input
-                type="username"
-                v-model="Username"
+                type="E-mail"
+                v-model="Email"
                 class="form-control"
-                id="username"
+                id="Email"
               />
             </div>
             <div class="mb-4">
@@ -36,7 +36,11 @@
                 id="password"
               />
             </div>
-            <button type="button" @click="proba" class="btn btn-danger w-100">
+            <button
+              type="button"
+              @click="logiranje"
+              class="btn btn-danger w-100"
+            >
               Log in
             </button>
           </form>
@@ -52,13 +56,22 @@ export default {
   name: "Login",
   data() {
     return {
-      Username: "",
+      Email: "",
       Password: "",
     };
   },
   methods: {
-    proba() {
-      alert("Ok");
+    logiranje() {
+      const user = firebase
+        .auth()
+        .signInWithEmailAndPassword(this.Email, this.Password)
+        .then((result) => {
+          console.log("Uspješna prijava");
+          this.$router.replace({ name: "Home" });
+        })
+        .catch(function (err) {
+          console.error("Error", err);
+        });
     },
   },
 };

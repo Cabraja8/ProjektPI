@@ -1,19 +1,6 @@
-# restorankras
+Restoran Kras
+Tim: Ivan Čabraja
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Fakultet informatike u Puli
+Kolegij: Programsko Inženjerstvo
+Mentor: doc.dr.sc. Nikola Tanković
