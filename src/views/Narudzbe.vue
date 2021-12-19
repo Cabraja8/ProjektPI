@@ -88,6 +88,15 @@
               />
             </div>
             <div class="mb-4">
+              <label for="Napomena" class="form-label">Napomena:</label>
+              <input
+                type="Napomena"
+                v-model="Napomena"
+                class="form-control"
+                id="Napomena"
+              />
+            </div>
+            <div class="mb-4">
               <label for="Iznos" class="form-label">Iznos:</label>
             </div>
             <div class="mb-4">
@@ -125,25 +134,21 @@ export default {
       KategorijaJela: "",
       Jelo: "",
       Pice: "",
+      Napomena: "",
     };
   },
   methods: {
     Posalji() {
-      let Ime = this.Ime;
-      let Prezime = Prezime;
-      let BrojTelefona = this.BrojTelefona;
-      let Adresa = this.Adresa;
-      let Kategorijajela = this.Kategorijajela;
-      let Jelo = this.Jelo;
-      let Pice = this.Pice;
-      db.collection("Narudzbe").add({
-        Ime: Ime,
-        Prezime: Prezime,
-        BrojTelefona: BrojTelefona,
-        Adresa: Adresa,
-        KategorijaJela: Kategorijajela,
-        Jelo: Jelo,
-        Pice: Pice,
+      db.collection("Narudzbe").doc().set({
+        Ime: this.Ime,
+        Prezime: this.Prezime,
+        BrojTelefona: this.BrojTelefona,
+        Adresa: this.Adresa,
+        KategorijaJela: this.KategorijaJela,
+        Jelo: this.Jelo,
+        Pice: this.Pice,
+        Napomena: this.Napomena,
+        Date: Date.now(),
       });
     },
 
