@@ -4,10 +4,8 @@
       <h1 class="text-dark pt-4">Pregled Artikla</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-    <div id="container"></div>
-    <div class="col-12 text-center mt-5">
-      <h1 class="text-dark pt-4">Dodaj Artikl</h1>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+    <div id="container">
+      <Artikl />
     </div>
     <div id="container">
       <div class="container py-4 my-4">
@@ -81,6 +79,8 @@
           </div>
         </div>
       </div>
+      <h1>Dodaj Artikl</h1>
+      <div class="border-top border-danger w-100 mx-auto my-3"></div>
       <div class="container py-6 padding py-4 my-4">
         <div
           class="
@@ -101,24 +101,64 @@
             <form>
               <div class="mb-4">
                 <label for="naziv" class="form-label">Naziv Proizvoda:</label>
-                <input type="naziv" class="form-control" id="ime" />
+                <input
+                  type="naziv"
+                  v-model="Naziv_proizvoda"
+                  class="form-control"
+                  id="ime"
+                />
               </div>
-              <div class="mb-4">
-                <label for="kategorija" class="form-label"
-                  >Kategorija Proizvoda:</label
+              <div class="form-group">
+                <label for="kategorije">Kategorija Proizvoda:</label>
+                <select
+                  class="form-control"
+                  v-model="Kategorija_proizvoda"
+                  id="kategorije"
                 >
-                <input type="kategorija" class="form-control" id="kategorija" />
+                  <option v-for="Kategorija in Kategorije" :key="Kategorija.id">
+                    {{ Kategorija.Naziv }}
+                  </option>
+                </select>
               </div>
               <div class="mb-4">
-                <label for="cijena" class="form-label">Cijena:</label>
-                <input type="cijena" class="form-control" id="cijena" />
+                <label for="sastojci" class="form-label">Sastojci:</label>
+                <input type="sastojci" class="form-control" id="sastojci" />
               </div>
 
-              <button type="button" class="btn btn-danger w-50">
+              <div class="mb-4">
+                <label for="cijena" class="form-label">Cijena:</label>
+                <input
+                  type="number"
+                  v-model="Cijena"
+                  class="form-control"
+                  id="cijena"
+                />
+              </div>
+              <div class="mb-4">
+                <label for="file" class="form-label">Slika:</label>
+                <input
+                  type="file"
+                  v-on="Slika"
+                  class="form-control"
+                  id="file"
+                />
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-danger w-50"
+                @click="OdustaniArtikl"
+              >
                 Odustani
               </button>
               <div class="mb-4"></div>
-              <button type="button" class="btn btn-danger w-50">Pošalji</button>
+              <button
+                type="button"
+                class="btn btn-success w-50"
+                @click="DodajArtikl"
+              >
+                Dodaj
+              </button>
             </form>
           </div>
         </div>
@@ -171,6 +211,8 @@
 <script>
 import { db } from "@/firebase";
 import { firebase } from "@/firebase";
+// import Artikl from "../components/Artikl.vue";
+
 export default {
   name: "Upravljaj",
   data() {
@@ -178,14 +220,23 @@ export default {
       Narudzbe: [],
       Kategorije: [],
       Naziv_kategorije: "",
+      Naziv_proizvoda: "",
+      KategorijaProizvoda: "",
+      Sastojci: "",
+      Cijena: "",
+      Slika: "",
     };
   },
+  // components: {
+  //   Artikl,
+  // },
   mounted() {
     this.GetNarudzbe();
     this.GetKategoriju();
   },
 
   methods: {
+    // NARUDZBE
     GetNarudzbe() {
       db.collection("Narudzbe")
         .orderBy("Date", "desc")
@@ -217,6 +268,7 @@ export default {
         });
     },
 
+    // KATEGORIJA
     GetKategoriju() {
       db.collection("Kategorije")
         .orderBy("Date", "desc")
@@ -251,6 +303,13 @@ export default {
           this.GetKategoriju();
         });
     },
-  },
+
+    //DODAVANJE ARTIKLA
+
+    DodajArtikl() {},
+    OdustaniArtikl() {},
+
+    //PRIKAZ ARTIKLA
+  }, //  od methods
 };
 </script>

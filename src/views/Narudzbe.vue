@@ -58,16 +58,13 @@
                 id="Adresa"
               />
             </div>
-            <div class="mb-4">
-              <label for="kategorija" class="form-label"
-                >Kategorija jela:</label
-              >
-              <input
-                type="kategorija"
-                v-model="KategorijaJela"
-                class="form-control"
-                id="kategorija"
-              />
+            <div class="form-group">
+              <label for="kategorije">Kategorija Proizvoda:</label>
+              <select class="form-control" id="kategorije">
+                <option v-for="Kategorija in Kategorije" :key="Kategorija.id">
+                  {{ Kategorija.Naziv }}
+                </option>
+              </select>
             </div>
             <div class="mb-4">
               <label for="jelo" class="form-label">Jelo:</label>
@@ -122,6 +119,7 @@
 <script>
 import { db } from "@/firebase";
 import { firebase } from "@/firebase";
+import Upravljaj from "@/views/Upravljaj.vue";
 
 export default {
   name: "Narudzbe",
@@ -136,6 +134,9 @@ export default {
       Pice: "",
       Napomena: "",
     };
+  },
+  mounted() {
+    this.GetKategoriju();
   },
   methods: {
     Posalji() {
