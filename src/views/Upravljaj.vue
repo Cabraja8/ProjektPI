@@ -4,13 +4,27 @@
       <h1 class="text-dark pt-4">Pregled Artikla</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-    <div id="container col-lg-12 py-4 my-4">
-      <Artikl />
-      <Artikl />
-      <Artikl />
-      <Artikl />
-      <Artikl />
-      <Artikl />
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-4 my-4">
+          <Artikl />
+        </div>
+        <div class="col-4 my-4">
+          <Artikl />
+        </div>
+        <div class="col-4 my-4">
+          <Artikl />
+        </div>
+        <div class="col-4 my-4">
+          <Artikl />
+        </div>
+        <div class="col-4 my-4">
+          <Artikl />
+        </div>
+        <div class="col-4 my-4">
+          <Artikl />
+        </div>
+      </div>
     </div>
     <div id="container">
       <div class="container py-4 my-4">
@@ -207,11 +221,11 @@
       <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-    <div class="card mt-4 py-4 md-4">
+    <div class="card mt-4 py-4 my-4 md-4">
       <table class="table m-0 pd-4 py-4 md-4">
         <thead>
           <tr>
-            <th scope="col">Ime</th>
+            <th scope="col ">Ime</th>
             <th scope="col">Prezime</th>
             <th scope="col">Broj Telefona</th>
             <th scope="col">Adresa</th>

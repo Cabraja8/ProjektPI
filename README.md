@@ -1,13 +1,11 @@
 # Restoran Kras
 
-Web Aplikacije za restoran Gost može naručit preko forme uz to može i klkinut za dodat u formu
+Web Aplikacije za restoran
+
+Gost može naručit preko forme uz to može i klkinut za dodat u formu
 
 A Korisnik je zadužen da prima Naruđžbe (Prikazuje mu se u tablici)
 uz to može i dodat Jelo ili piće te ga uredit, može dodat i kategoriju za jelo i Piće
-
-# Autori i zaduženje
-
-**Ivan Čabraja** -Sve
 
 ### Prototip aplikacije
 
@@ -20,6 +18,7 @@ Web:
 # Organizacija
 
 [Sveučilište Jurja Dobrile u Puli](http://www.unipu.hr/)  
-[Fakultet informatike u Puli](https://fipu.unipu.hr/)  
-Programsko inženjerstvo, ak.god. 20XX./20XX.  
+[Fakultet informatike u Puli](https://fipu.unipu.hr/)
+
+[Programsko inženjerstvo](http://ntankovic.unipu.hr/pi), ak.god. 2021./2022.  
 Mentor: **Nikola Tanković** (https://fipu.unipu.hr/fipu/nikola.tankovic, nikola.tankovic@unipu.hr)
