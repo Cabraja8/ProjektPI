@@ -103,7 +103,7 @@
                       <td>{{ KategorijaJela.NazivJela }}</td>
                       <td>
                         <button
-                          class="btn btn-danger btn-sm w-50"
+                          class="btn btn-danger btn-sm w-100"
                           @click="DeleteKategorijuJela(KategorijaJela.id)"
                         >
                           Briši
@@ -120,7 +120,7 @@
                     <td>{{ KategorijePice.NazivPica }}</td>
                     <td>
                       <button
-                        class="btn btn-danger btn-sm w-50"
+                        class="btn btn-danger btn-sm w-100"
                         @click="DeleteKategorijuPica(KategorijePice.id)"
                       >
                         Briši
@@ -163,13 +163,32 @@
                 />
               </div>
               <div class="form-group">
-                <label for="kategorije">Kategorija Proizvoda:</label>
-                <select class="form-control" id="kategorije">
+                <label for="kategorijeJela">Kategorija Jela:</label>
+                <select
+                  class="form-control"
+                  id="kategorijeJela"
+                  v-model="KategorijaJelaPrikaz"
+                >
                   <option
                     v-for="KategorijaJela in KategorijeJela"
                     :key="KategorijaJela.id"
                   >
                     {{ KategorijaJela.NazivJela }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="kategorijePica">Kategorija Pića:</label>
+                <select
+                  class="form-control"
+                  id="kategorijePica"
+                  v-model="KategorijaPicaPrikaz"
+                >
+                  <option
+                    v-for="KategorijePice in KategorijePica"
+                    :key="KategorijePice.id"
+                  >
+                    {{ KategorijePice.NazivPica }}
                   </option>
                 </select>
               </div>
@@ -281,7 +300,8 @@ export default {
       Naziv_kategorijePica: "",
       //Forma za dodavanje
       Naziv_proizvoda: "",
-      KategorijaProizvoda: "",
+      KategorijaJelaPrikaz: "",
+      KategorijaPicaPrikaz: "",
       Sastojci: "",
       Cijena: "",
       Slika: "",
