@@ -4,7 +4,12 @@
       <h1 class="text-dark pt-4">Pregled Artikla</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-    <div id="container">
+    <div id="container col-lg-12 py-4 my-4">
+      <Artikl />
+      <Artikl />
+      <Artikl />
+      <Artikl />
+      <Artikl />
       <Artikl />
     </div>
     <div id="container">
@@ -247,7 +252,7 @@
 import { db } from "@/firebase";
 import { firebase } from "@/firebase";
 
-// import Artikl from "@/components/Artikl.vue";
+import Artikl from "@/components/Artikl.vue";
 
 export default {
   name: "Upravljaj",
@@ -272,9 +277,9 @@ export default {
       PiceClick: true,
     };
   },
-  // components: {
-  //   Artikl,
-  // },
+  components: {
+    Artikl,
+  },
   mounted() {
     this.GetNarudzbe();
     this.GetKategorijuJela();
