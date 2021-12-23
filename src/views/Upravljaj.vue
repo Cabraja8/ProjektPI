@@ -44,41 +44,63 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>
-                        <div class="mb-4">
-                          <input
-                            type="kategorijaJela"
-                            v-model="Naziv_kategorijeJela"
-                            class="form-control w-80"
-                            id="kategorijaJela"
-                          />
-                        </div>
-                        <div class="mb-4">
-                          <input
-                            type="kategorijaPica"
-                            v-model="Naziv_kategorijePica"
-                            class="form-control w-80"
-                            id="kategorijaPica"
-                          />
-                        </div>
-                      </td>
-                      <div class="mb-4 my-4">
-                        <button
-                          @click="AddKategoriju"
-                          class="btn btn-success btn-sm w-80"
+                      <div class="form-group">
+                        <select
+                          name="Odabir2"
+                          class="form-control"
+                          id="KategorijePrikaz2"
+                          v-model="KategorijaPrikaz2"
                         >
-                          Dodaj Jelo
-                        </button>
-                      </div>
-                      <div class="mb-4 my-4">
-                        <button
-                          @click="AddKategorijuPica"
-                          class="btn btn-success btn-sm w-80"
-                        >
-                          Dodaj Piće
-                        </button>
+                          <option value="Jelo">Jelo</option>
+                          <option value="Piće">Piće</option>
+                        </select>
                       </div>
                     </tr>
+                    <tr>
+                      <td>
+                        <template v-if="KategorijaPrikaz2 === 'Jelo'">
+                          <div class="mb-4">
+                            <input
+                              type="kategorijaJela"
+                              v-model="Naziv_kategorijeJela"
+                              class="form-control w-80"
+                              id="kategorijaJela"
+                            />
+                          </div>
+                        </template>
+                        <template v-if="KategorijaPrikaz2 === 'Piće'">
+                          <div class="mb-4">
+                            <input
+                              type="kategorijaPica"
+                              v-model="Naziv_kategorijePica"
+                              class="form-control w-80"
+                              id="kategorijaPica"
+                            />
+                          </div>
+                        </template>
+                      </td>
+                      <template v-if="KategorijaPrikaz2 === 'Jelo'">
+                        <div class="mb-4 my-4">
+                          <button
+                            @click="AddKategoriju"
+                            class="btn btn-success btn-sm w-80"
+                          >
+                            Dodaj Jelo
+                          </button>
+                        </div>
+                      </template>
+                      <template v-if="KategorijaPrikaz2 === 'Piće'">
+                        <div class="mb-4 my-4">
+                          <button
+                            @click="AddKategorijuPica"
+                            class="btn btn-success btn-sm w-80"
+                          >
+                            Dodaj Piće
+                          </button>
+                        </div>
+                      </template>
+                    </tr>
+                    <tr></tr>
                   </tbody>
                 </table>
               </div>
@@ -153,84 +175,127 @@
             </div>
 
             <form>
-              <div class="mb-4">
-                <label for="naziv" class="form-label">Naziv Proizvoda:</label>
-                <input
-                  type="naziv"
-                  v-model="Naziv_proizvoda"
-                  class="form-control"
-                  id="ime"
-                />
+              <div class="form-group">
+                <div class="mb-4">
+                  <label for="naziv" class="form-label">Naziv Proizvoda:</label>
+                  <input
+                    type="naziv"
+                    v-model="Naziv_proizvoda"
+                    class="form-control"
+                    id="naziv"
+                  />
+                </div>
               </div>
               <div class="form-group">
-                <label for="kategorijeJela">Kategorija Jela:</label>
+                <label for="kategorijePrikaz">Kategorija:</label>
                 <select
+                  name="Odabir"
                   class="form-control"
-                  id="kategorijeJela"
-                  v-model="KategorijaJelaPrikaz"
+                  id="kategorijePrikaz"
+                  v-model="KategorijaPrikaz"
                 >
-                  <option
-                    v-for="KategorijaJela in KategorijeJela"
-                    :key="KategorijaJela.id"
-                  >
-                    {{ KategorijaJela.NazivJela }}
-                  </option>
+                  <option value="Jelo">Jelo</option>
+                  <option value="Piće">Piće</option>
                 </select>
+              </div>
+              <template v-if="KategorijaPrikaz === 'Jelo'">
+                <div class="form-group">
+                  <label for="kategorijeJela">Kategorija Jela:</label>
+                  <select
+                    class="form-control"
+                    id="kategorijeJela"
+                    v-model="KategorijaJelaPrikaz"
+                  >
+                    <option
+                      v-for="KategorijaJela in KategorijeJela"
+                      :key="KategorijaJela.id"
+                    >
+                      {{ KategorijaJela.NazivJela }}
+                    </option>
+                  </select>
+                </div>
+              </template>
+              <template v-if="KategorijaPrikaz === 'Piće'">
+                <div class="form-group">
+                  <label for="kategorijePica">Kategorija Pića:</label>
+                  <select
+                    class="form-control"
+                    id="kategorijePica"
+                    v-model="KategorijaPicaPrikaz"
+                  >
+                    <option
+                      v-for="KategorijePice in KategorijePica"
+                      :key="KategorijePice.id"
+                    >
+                      {{ KategorijePice.NazivPica }}
+                    </option>
+                  </select>
+                </div>
+              </template>
+              <div class="form-group">
+                <div class="mb-4">
+                  <label for="sastojci" class="form-label">Sastojci:</label>
+                  <input type="sastojci" class="form-control" id="sastojci" />
+                </div>
               </div>
               <div class="form-group">
-                <label for="kategorijePica">Kategorija Pića:</label>
-                <select
-                  class="form-control"
-                  id="kategorijePica"
-                  v-model="KategorijaPicaPrikaz"
-                >
-                  <option
-                    v-for="KategorijePice in KategorijePica"
-                    :key="KategorijePice.id"
-                  >
-                    {{ KategorijePice.NazivPica }}
-                  </option>
-                </select>
+                <div class="mb-4">
+                  <label for="cijena" class="form-label">Cijena:</label>
+                  <input
+                    type="number"
+                    v-model="Cijena"
+                    class="form-control"
+                    id="cijena"
+                  />
+                </div>
               </div>
-              <div class="mb-4">
-                <label for="sastojci" class="form-label">Sastojci:</label>
-                <input type="sastojci" class="form-control" id="sastojci" />
+              <div class="form-group">
+                <div class="mb-4">
+                  <label for="file" class="form-label">Slika:</label>
+                  <input
+                    type="file"
+                    v-on="Slika"
+                    class="form-control"
+                    id="file"
+                  />
+                </div>
               </div>
-
-              <div class="mb-4">
-                <label for="cijena" class="form-label">Cijena:</label>
-                <input
-                  type="number"
-                  v-model="Cijena"
-                  class="form-control"
-                  id="cijena"
-                />
+              <div class="form-group">
+                <div class="mb-4">
+                  <template v-if="KategorijaPrikaz === 'Jelo'">
+                    <button
+                      type="button"
+                      class="btn btn-danger w-20"
+                      @click="OdustaniArtikl"
+                    >
+                      Odustani
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-success w-20"
+                      @click="DodajArtiklJelo"
+                    >
+                      Dodaj Jelo
+                    </button>
+                  </template>
+                  <template v-if="KategorijaPrikaz === 'Piće'">
+                    <button
+                      type="button"
+                      class="btn btn-danger w-20"
+                      @click="OdustaniArtikl"
+                    >
+                      Odustani
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-success w-20"
+                      @click="DodajArtiklPice"
+                    >
+                      Dodaj Piće
+                    </button>
+                  </template>
+                </div>
               </div>
-              <div class="mb-4">
-                <label for="file" class="form-label">Slika:</label>
-                <input
-                  type="file"
-                  v-on="Slika"
-                  class="form-control"
-                  id="file"
-                />
-              </div>
-
-              <button
-                type="button"
-                class="btn btn-danger w-50"
-                @click="OdustaniArtikl"
-              >
-                Odustani
-              </button>
-              <div class="mb-4"></div>
-              <button
-                type="button"
-                class="btn btn-success w-50"
-                @click="DodajArtikl"
-              >
-                Dodaj
-              </button>
             </form>
           </div>
         </div>
@@ -300,6 +365,8 @@ export default {
       Naziv_kategorijePica: "",
       //Forma za dodavanje
       Naziv_proizvoda: "",
+      KategorijaPrikaz: "",
+      KategorijaPrikaz2: "",
       KategorijaJelaPrikaz: "",
       KategorijaPicaPrikaz: "",
       Sastojci: "",
@@ -392,7 +459,6 @@ export default {
           this.GetKategorijuPica();
         });
     },
-
     GetKategorijuPica() {
       db.collection("Pica")
         .orderBy("Date", "desc")
@@ -428,7 +494,10 @@ export default {
 
     //DODAVANJE ARTIKLA
 
-    DodajArtikl() {},
+    DodajArtiklJelo() {},
+
+    DodajArtiklPice() {},
+
     OdustaniArtikl() {},
 
     //PRIKAZ ARTIKLA

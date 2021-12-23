@@ -61,7 +61,10 @@
             <div class="form-group">
               <label for="kategorije">Kategorija Proizvoda:</label>
               <select class="form-control" id="kategorije">
-                <option v-for="Kategorija in Kategorije" :key="Kategorija.id">
+                <option
+                  v-for="Kategorija in KategorijeJela"
+                  :key="Kategorija.id"
+                >
                   {{ Kategorija.Naziv }}
                 </option>
               </select>
