@@ -366,7 +366,9 @@ export default {
       //Forma za dodavanje
       Naziv_proizvoda: "",
       KategorijaPrikaz: "",
+      //
       KategorijaPrikaz2: "",
+      //
       KategorijaJelaPrikaz: "",
       KategorijaPicaPrikaz: "",
       Sastojci: "",
@@ -438,7 +440,7 @@ export default {
 
     AddKategoriju() {
       db.collection("Jelo")
-        .doc()
+        .doc(this.Naziv_kategorijeJela)
         .set({
           NazivJela: this.Naziv_kategorijeJela,
           Date: Date.now(),
@@ -450,7 +452,7 @@ export default {
 
     AddKategorijuPica() {
       db.collection("Pica")
-        .doc()
+        .doc(this.Naziv_kategorijePica)
         .set({
           NazivPica: this.Naziv_kategorijePica,
           Date: Date.now(),
@@ -494,7 +496,21 @@ export default {
 
     //DODAVANJE ARTIKLA
 
-    DodajArtiklJelo() {},
+    DodajArtiklJelo() {
+      db.collection("Jelo")
+        .doc(this.KategorijaJelaPrikaz)
+        .collection(this.KategorijaJelaPrikaz)
+        .doc(this.Naziv_proizvoda)
+        .set({
+          Naziv: this.Naziv_proizvoda,
+          Sastojci: this.Sastojci,
+          Cijena: this.Cijena,
+          Slika: this.Slika,
+          Date: Date.now(),
+        });
+    },
+
+    GetArtikliJelo() {},
 
     DodajArtiklPice() {},
 

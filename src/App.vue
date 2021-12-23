@@ -135,7 +135,6 @@ export default {
         });
     },
   },
-  // components: { Artikl },
 };
 </script>
 
