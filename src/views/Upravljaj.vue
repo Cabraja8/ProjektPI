@@ -4,25 +4,14 @@
       <h1 class="text-dark pt-4">Pregled Artikla</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-    <div class="container my-4">
+    <div class="container-fluid py-4 my-4">
       <div class="row">
-        <div class="col-4 my-4">
-          <Artikl />
-        </div>
-        <div class="col-4 my-4">
-          <Artikl />
-        </div>
-        <div class="col-4 my-4">
-          <Artikl />
-        </div>
-        <div class="col-4 my-4">
-          <Artikl />
-        </div>
-        <div class="col-4 my-4">
-          <Artikl />
-        </div>
-        <div class="col-4 my-4">
-          <Artikl />
+        <div class="col-lg-4 py-4 my-4">
+          <Artikl
+            v-for="Artikla in Artikli"
+            :key="Artikla.id"
+            :ArtiklNaziv="Artikla"
+          />
         </div>
       </div>
     </div>
@@ -300,48 +289,49 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 text-center mt-5">
-      <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
-    </div>
-    <div class="card mt-4 py-4 my-4 md-4">
-      <table class="table m-0 pd-4 py-4 md-4">
-        <thead>
-          <tr>
-            <th scope="col ">Ime</th>
-            <th scope="col">Prezime</th>
-            <th scope="col">Broj Telefona</th>
-            <th scope="col">Adresa</th>
-            <th scope="col">Jelo</th>
-            <th scope="col">Piće</th>
-            <th scope="col">Cijena</th>
-            <th scope="col">Napomena</th>
-            <th scope="col">Brisanje</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- prikaz narudzbe -->
-          <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
-            <td>{{ Narudzba.Ime }}</td>
-            <td>{{ Narudzba.Prezime }}</td>
-            <td>{{ Narudzba.BrojTelefona }}</td>
-            <td>{{ Narudzba.Adresa }}</td>
-            <td>{{ Narudzba.KategorijaJela }}</td>
-            <td>{{ Narudzba.Jelo }}</td>
-            <td>{{ Narudzba.Pice }}</td>
-            <td>{{ Narudzba.Napomena }}</td>
-            <td>
-              <button
-                class="btn btn-danger btn-sm"
-                @click="Delete(Narudzba.id)"
-              >
-                Obriši
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <div class="col-12 text-center mt-5">
+        <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
+        <div class="border-top border-danger w-100 mx-auto my-3"></div>
+      </div>
+      <div class="col-lg-12 py-4 my-4">
+        <table class="table m-0 pd-4 py-4 md-4">
+          <thead>
+            <tr>
+              <th scope="col ">Ime</th>
+              <th scope="col">Prezime</th>
+              <th scope="col">Broj Telefona</th>
+              <th scope="col">Adresa</th>
+              <th scope="col">Jelo</th>
+              <th scope="col">Piće</th>
+              <th scope="col">Cijena</th>
+              <th scope="col">Napomena</th>
+              <th scope="col">Brisanje</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- prikaz narudzbe -->
+            <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
+              <td>{{ Narudzba.Ime }}</td>
+              <td>{{ Narudzba.Prezime }}</td>
+              <td>{{ Narudzba.BrojTelefona }}</td>
+              <td>{{ Narudzba.Adresa }}</td>
+              <td>{{ Narudzba.KategorijaJela }}</td>
+              <td>{{ Narudzba.Jelo }}</td>
+              <td>{{ Narudzba.Pice }}</td>
+              <td>{{ Narudzba.Napomena }}</td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  @click="Delete(Narudzba.id)"
+                >
+                  Obriši
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -374,12 +364,11 @@ export default {
       Sastojci: "",
       Cijena: "",
       Slika: "",
-      // input
 
-      JeloClick: true,
-      PiceClick: true,
+      Artikli: [],
     };
   },
+
   components: {
     Artikl,
   },
@@ -387,6 +376,7 @@ export default {
     this.GetNarudzbe();
     this.GetKategorijuJela();
     this.GetKategorijuPica();
+    this.GetArtikliJela();
   },
 
   methods: {
@@ -489,7 +479,6 @@ export default {
         .doc(id)
         .delete()
         .then(() => {
-          KategorijeJela.value = "";
           this.GetKategorijuPica();
         });
     },
@@ -510,9 +499,39 @@ export default {
         });
     },
 
-    GetArtikliJelo() {},
+    DodajArtiklPice() {
+      db.collection("Pica")
+        .doc(this.KategorijaPicaPrikaz)
+        .collection(this.KategorijaPicaPrikaz)
+        .doc(this.Naziv_proizvoda)
+        .set({
+          Naziv: this.Naziv_proizvoda,
+          Sastojci: this.Sastojci,
+          Cijena: this.Cijena,
+          Slika: this.Slika,
+          Date: Date.now(),
+        });
+    },
 
-    DodajArtiklPice() {},
+    GetArtikliJela() {
+      db.collection("Jelo")
+        .doc(this.this.Naziv_proizvoda)
+
+        .orderBy("Date", "desc")
+        .get()
+        .then((query) => {
+          this.Artikli = [];
+          query.forEach((doc) => {
+            this.Artikli.push({
+              id: doc.id,
+              Naziv_proizvoda: doc.data().Naziv_proizvoda,
+              Sastojci: doc.data().Sastojci,
+              Cijena: doc.data().Cijena,
+              Slika: doc.data().Slika,
+            });
+          });
+        });
+    },
 
     OdustaniArtikl() {},
 

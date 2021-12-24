@@ -8,9 +8,9 @@
           alt="..."
         />
         <div class="card-body">
-          <h5 class="card-title">Naziv_proizvoda</h5>
-          <p class="card-text">Sastojci</p>
-          <p class="card-text">Cijena</p>
+          <h5 class="card-title">{{ ArtiklNaziv.Naziv_proizvoda }}</h5>
+          <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
+          <p class="card-text">{{ ArtiklNaziv.Cijena }}</p>
           <a href="#" class="btn btn-success">Edit</a>
           <a href="#" class="btn btn-danger">Obriši</a>
         </div>
@@ -22,6 +22,7 @@
 <script>
 export default {
   name: "Artikl",
+  props: ["ArtiklNaziv"],
 };
 </script>
 
