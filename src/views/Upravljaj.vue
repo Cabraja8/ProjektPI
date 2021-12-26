@@ -15,7 +15,6 @@
                   class="form-control"
                   id="KategorijePrikaz4"
                   v-model="KategorijaPrikaz4"
-                  @click="Clear(KategorijaPrikaz3)"
                 >
                   <option value="Jelo">Jelo</option>
                   <option value="Piće">Piće</option>
@@ -169,7 +168,6 @@
                         </div>
                       </template>
                     </tr>
-                    <tr></tr>
                   </tbody>
                 </table>
               </div>
@@ -324,14 +322,15 @@
                 </div>
               </div>
               <div class="form-group">
+                <label for="file" class="form-label">Slika:</label>
                 <div class="mb-4">
-                  <label for="file" class="form-label">Slika:</label>
-                  <input
+                  <croppa :width="100" :height="100" v-model="Slika"> </croppa>
+                  <!-- <input
                     type="file"
-                    v-on="Slika"
+                    @change="UploadFile"
                     class="form-control"
                     id="file"
-                  />
+                  /> -->
                 </div>
               </div>
               <div class="form-group">
@@ -423,7 +422,14 @@
 
 <script>
 import { db } from "@/firebase";
-import { firebase } from "@/firebase";
+import { firebase, storage } from "@/firebase";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
 
 import Artikl from "@/components/Artikl.vue";
 
@@ -452,7 +458,7 @@ export default {
       KategorijaPicaPrikaz: "",
       Sastojci: "",
       Cijena: "",
-      Slika: "",
+      Slika: null,
 
       Artikli: [],
     };
@@ -580,6 +586,18 @@ export default {
     //DODAVANJE ARTIKLA
 
     DodajArtiklJelo() {
+      this.Slika.generateBlob((blobData) => {
+        console.log(blobData);
+        let ImgName = "Jelo/" + Date.now() + ".png";
+        storage
+          .ref(ImgName)
+          .put(blobData)
+          .then((result) => {
+            console.log("Uspješno");
+            console.log(result);
+          });
+      });
+
       db.collection("Jelo")
         .doc(this.KategorijaJelaPrikaz)
         .collection(this.KategorijaJelaPrikaz)
@@ -653,9 +671,7 @@ export default {
         });
     },
 
-    Clear(KategorijaPrikaz3) {
-      KategorijaPrikaz4 = "";
-    },
+    UploadFile(imgfile) {},
 
     OdustaniArtikl() {},
 
