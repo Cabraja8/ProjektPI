@@ -3,7 +3,7 @@
     <div class="container-fluid py-4 my-4">
       <div class="card">
         <img
-          src="@/../public/images/pizza.jpeg"
+          :src="ArtiklNaziv.Slika"
           class="card-img-top img-thumbnail"
           alt="..."
         />

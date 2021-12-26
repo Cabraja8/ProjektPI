@@ -477,6 +477,8 @@ export default {
 
   methods: {
     // NARUDZBE
+
+    //DOHVACANJE NARUDZBE
     GetNarudzbe() {
       db.collection("Narudzbe")
         .orderBy("Date", "desc")
@@ -499,6 +501,8 @@ export default {
         });
     },
 
+    // BRISANJE NARUDZBE
+
     Delete(id) {
       db.collection("Narudzbe")
         .doc(id)
@@ -509,6 +513,8 @@ export default {
     },
 
     // KATEGORIJA
+
+    // DOHVACANJE KATEGORIJE JELA
     GetKategorijuJela() {
       db.collection("Jelo")
         .orderBy("Date", "desc")
@@ -524,6 +530,7 @@ export default {
         });
     },
 
+    // DODAVANJE KATEGORIJE JELA
     AddKategoriju() {
       db.collection("Jelo")
         .doc(this.Naziv_kategorijeJela)
@@ -537,6 +544,7 @@ export default {
         });
     },
 
+    // DODAVANJE KATEGORIJE PIĆA
     AddKategorijuPica() {
       db.collection("Pica")
         .doc(this.Naziv_kategorijePica)
@@ -549,6 +557,8 @@ export default {
           this.GetArtikliPica();
         });
     },
+
+    // DOHVACANJE KATEGORIJE PIĆA
     GetKategorijuPica() {
       db.collection("Pica")
         .orderBy("Date", "desc")
@@ -564,6 +574,7 @@ export default {
         });
     },
 
+    // BRISANJE KATEGORIJE JELA
     DeleteKategorijuJela(id) {
       db.collection("Jelo")
         .doc(id)
@@ -573,6 +584,7 @@ export default {
           this.GetArtikliJela();
         });
     },
+    // BRISANJE KATEGORIJE PIĆA
     DeleteKategorijuPica(id) {
       db.collection("Pica")
         .doc(id)
@@ -583,54 +595,77 @@ export default {
         });
     },
 
-    //DODAVANJE ARTIKLA
+    //DODAVANJE ARTIKLA (JELO) -- PREKO FORME
 
     DodajArtiklJelo() {
       this.Slika.generateBlob((blobData) => {
-        console.log(blobData);
-        let ImgName = "Jelo/" + Date.now() + ".png";
+        let ImgName = "Jela/" + Date.now() + ".png";
         storage
           .ref(ImgName)
           .put(blobData)
           .then((result) => {
-            console.log("Uspješno");
-            console.log(result);
+            result.ref.getDownloadURL().then((url) => {
+              db.collection("Jelo")
+                .doc(this.KategorijaJelaPrikaz)
+                .collection(this.KategorijaJelaPrikaz)
+                .doc(this.Naziv)
+                .set({
+                  Naziv: this.Naziv,
+                  Sastojci: this.Sastojci,
+                  Cijena: this.Cijena,
+                  Slika: url,
+                  Date: Date.now(),
+                })
+                .then(() => {
+                  this.GetArtikliJela();
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            });
+          })
+          .catch((err) => {
+            console.error(err);
           });
       });
-
-      db.collection("Jelo")
-        .doc(this.KategorijaJelaPrikaz)
-        .collection(this.KategorijaJelaPrikaz)
-        .doc(this.Naziv)
-        .set({
-          Naziv: this.Naziv,
-          Sastojci: this.Sastojci,
-          Cijena: this.Cijena,
-          Slika: this.Slika,
-          Date: Date.now(),
-        })
-        .then(() => {
-          this.GetArtikliJela();
-        });
     },
+
+    //DODAVANJE ARTIKLA (PIĆE) -- PREKO FORME
 
     DodajArtiklPice() {
-      db.collection("Pica")
-        .doc(this.KategorijaPicaPrikaz)
-        .collection(this.KategorijaPicaPrikaz)
-        .doc(this.Naziv)
-        .set({
-          Naziv: this.Naziv,
-          Sastojci: this.Sastojci,
-          Cijena: this.Cijena,
-          Slika: this.Slika,
-          Date: Date.now(),
-        })
-        .then(() => {
-          this.GetArtikliPica();
-        });
+      this.Slika.generateBlob((blobData) => {
+        let ImgName = "Pica/" + Date.now() + ".png";
+        storage
+          .ref(ImgName)
+          .put(blobData)
+          .then((result) => {
+            result.ref.getDownloadURL().then((url) => {
+              db.collection("Pica")
+                .doc(this.KategorijaPicaPrikaz)
+                .collection(this.KategorijaPicaPrikaz)
+                .doc(this.Naziv)
+                .set({
+                  Naziv: this.Naziv,
+                  Sastojci: this.Sastojci,
+                  Cijena: this.Cijena,
+                  Slika: url,
+                  Date: Date.now(),
+                })
+                .then(() => {
+                  this.GetArtikliPica();
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      });
     },
 
+    //DOHVACANJE JELA kad se klikne
     GetArtikliJela(KategorijaPrikaz3) {
       db.collection("Jelo")
         .doc(this.KategorijaPrikaz3)
@@ -650,6 +685,8 @@ export default {
           });
         });
     },
+
+    //DOHVACANJE PIĆA kad se klikne
 
     GetArtikliPica(KategorijaPrikaz3) {
       db.collection("Pica")
@@ -671,7 +708,7 @@ export default {
         });
     },
 
-    UploadFile(imgfile) {},
+    // BRISANJE forme
 
     OdustaniArtikl() {},
 
