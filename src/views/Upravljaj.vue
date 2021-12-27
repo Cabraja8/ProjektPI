@@ -16,8 +16,8 @@
                   id="KategorijePrikaz4"
                   v-model="KategorijaPrikaz4"
                 >
-                  <option value="Jelo">Jelo</option>
-                  <option value="Piće">Piće</option>
+                  <option value="Jelo" @click="Clear">Jelo</option>
+                  <option value="Piće" @click="Clear">Piće</option>
                 </select>
               </div>
               <template v-if="KategorijaPrikaz4 === 'Jelo'">
@@ -152,6 +152,7 @@
                           <button
                             @click="AddKategoriju"
                             class="btn btn-success btn-sm w-80"
+                            required
                           >
                             Dodaj Jelo
                           </button>
@@ -162,6 +163,7 @@
                           <button
                             @click="AddKategorijuPica"
                             class="btn btn-success btn-sm w-80"
+                            required
                           >
                             Dodaj Piće
                           </button>
@@ -250,6 +252,7 @@
                     v-model="Naziv"
                     class="form-control"
                     id="naziv"
+                    required
                   />
                 </div>
               </div>
@@ -260,6 +263,7 @@
                   class="form-control"
                   id="kategorijePrikaz"
                   v-model="KategorijaPrikaz"
+                  required
                 >
                   <option value="Jelo">Jelo</option>
                   <option value="Piće">Piće</option>
@@ -289,6 +293,7 @@
                     class="form-control"
                     id="kategorijePica"
                     v-model="KategorijaPicaPrikaz"
+                    required
                   >
                     <option
                       v-for="KategorijePice in KategorijePica"
@@ -307,6 +312,7 @@
                     class="form-control"
                     id="sastojci"
                     v-model="Sastojci"
+                    required
                   />
                 </div>
               </div>
@@ -318,19 +324,15 @@
                     v-model="Cijena"
                     class="form-control"
                     id="cijena"
+                    required
                   />
                 </div>
               </div>
               <div class="form-group">
                 <label for="file" class="form-label">Slika:</label>
                 <div class="mb-4">
-                  <croppa :width="100" :height="100" v-model="Slika"> </croppa>
-                  <!-- <input
-                    type="file"
-                    @change="UploadFile"
-                    class="form-control"
-                    id="file"
-                  /> -->
+                  <croppa :width="100" :height="100" v-model="Slika" required>
+                  </croppa>
                 </div>
               </div>
               <div class="form-group">
@@ -541,7 +543,8 @@ export default {
         .then(() => {
           this.GetKategorijuJela();
           this.GetArtikliJela();
-        });
+        })
+        .set(((this.Naziv_kategorijeJela = ""), (this.KategorijaPrikaz2 = "")));
     },
 
     // DODAVANJE KATEGORIJE PIĆA
@@ -555,7 +558,8 @@ export default {
         .then(() => {
           this.GetKategorijuPica();
           this.GetArtikliPica();
-        });
+        })
+        .set(((this.Naziv_kategorijePica = ""), (this.KategorijaPrikaz2 = "")));
     },
 
     // DOHVACANJE KATEGORIJE PIĆA
@@ -706,6 +710,10 @@ export default {
             });
           });
         });
+    },
+
+    Clear() {
+      this.KategorijaPrikaz3 = "";
     },
 
     // BRISANJE forme
