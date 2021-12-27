@@ -718,9 +718,13 @@ export default {
 
     // BRISANJE forme
 
-    OdustaniArtikl() {},
-
-    //PRIKAZ ARTIKLA
+    OdustaniArtikl() {
+      (this.Naziv = ""),
+        (this.KategorijaPrikaz = ""),
+        (this.Sastojci = ""),
+        (this.Cijena = ""),
+        this.Slika.remove();
+    },
   }, //  od methods
 };
 </script>

@@ -141,6 +141,8 @@ export default {
   mounted() {
     this.GetKategoriju();
   },
+  // props: ["ArtiklNaziv"],
+  // props: ["KategorijaJela"],
   methods: {
     Posalji() {
       db.collection("Narudzbe").doc().set({
