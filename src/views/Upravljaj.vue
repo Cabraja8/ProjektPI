@@ -86,6 +86,7 @@
                     v-for="Artikla in Artikli"
                     :key="Artikla.id"
                     :ArtiklNaziv="Artikla"
+                    v-on:brisip="DeleteArtiklPica($event)"
                   />
                 </div>
               </template>
@@ -618,6 +619,7 @@ export default {
                 .set({
                   Naziv: this.Naziv,
                   Sastojci: this.Sastojci,
+                  KategorijaJela: this.KategorijaPrikaz,
                   Cijena: this.Cijena,
                   Slika: url,
                   Date: Date.now(),
@@ -656,6 +658,7 @@ export default {
                 .set({
                   Naziv: this.Naziv,
                   Sastojci: this.Sastojci,
+                  KategorijaPica: this.KategorijaPrikaz,
                   Cijena: this.Cijena,
                   Slika: url,
                   Date: Date.now(),
@@ -690,6 +693,7 @@ export default {
             this.Artikli.push({
               id: doc.id,
               Naziv: doc.data().Naziv,
+              KategorijaJela: doc.data().KategorijaJela,
               Sastojci: doc.data().Sastojci,
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
@@ -712,6 +716,7 @@ export default {
             this.Artikli.push({
               id: doc.id,
               Naziv: doc.data().Naziv,
+              KategorijaPica: doc.data().KategorijaPica,
               Sastojci: doc.data().Sastojci,
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
@@ -739,9 +744,6 @@ export default {
     },
 
     DeleteArtiklJela(id) {
-      console.log("test123");
-      console.log("testdelete", id);
-      console.log(this.KategorijaPrikaz3);
       db.collection("Jelo")
         .doc(this.KategorijaPrikaz3)
         .collection(this.KategorijaPrikaz3)
@@ -750,6 +752,17 @@ export default {
         .then(() => {
           this.Artikli = [];
           this.GetArtikliJela();
+        });
+    },
+    DeleteArtiklPica(id2) {
+      db.collection("Pica")
+        .doc(this.KategorijaPrikaz3)
+        .collection(this.KategorijaPrikaz3)
+        .doc(id2)
+        .delete()
+        .then(() => {
+          this.Artikli = [];
+          this.GetArtikliPica();
         });
     },
   }, //  od methods
