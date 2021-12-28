@@ -6,7 +6,6 @@
       <div class="container-fluid">
         <div class="container-fluid padding">
           <div class="row">
-            <div class="col-lg-4 py-4 my-4"></div>
             <div class="col-lg-4 py-4 my-4 mx-auto">
               <div class="form-group">
                 <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
@@ -632,6 +631,9 @@ export default {
             console.error(err);
           });
       });
+      setTimeout(() => {
+        this.OdustaniArtikl();
+      }, 1000);
     },
 
     //DODAVANJE ARTIKLA (PIĆE) -- PREKO FORME
@@ -667,6 +669,9 @@ export default {
             console.error(err);
           });
       });
+      setTimeout(() => {
+        this.OdustaniArtikl();
+      }, 1000);
     },
 
     //DOHVACANJE JELA kad se klikne
@@ -714,6 +719,8 @@ export default {
 
     Clear() {
       this.KategorijaPrikaz3 = "";
+      this.GetArtikliJela();
+      this.GetArtikliPica();
     },
 
     // BRISANJE forme

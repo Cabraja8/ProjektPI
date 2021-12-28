@@ -123,6 +123,7 @@
 import { db } from "@/firebase";
 import { firebase } from "@/firebase";
 import Upravljaj from "@/views/Upravljaj.vue";
+import Artikl from "@/components/Artikl.vue";
 
 export default {
   name: "Narudzbe",
@@ -143,6 +144,9 @@ export default {
   },
   // props: ["ArtiklNaziv"],
   // props: ["KategorijaJela"],
+  components: {
+    Artikl,
+  },
   methods: {
     Posalji() {
       db.collection("Narudzbe").doc().set({
