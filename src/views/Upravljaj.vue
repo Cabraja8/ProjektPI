@@ -6,6 +6,7 @@
       <div class="container-fluid">
         <div class="container-fluid padding">
           <div class="row">
+            <div class="col-lg-4 py-4 my-4"></div>
             <div class="col-lg-4 py-4 my-4 mx-auto">
               <div class="form-group">
                 <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
@@ -50,6 +51,7 @@
                     v-for="Artikla in Artikli"
                     :key="Artikla.id"
                     :ArtiklNaziv="Artikla"
+                    v-on:brisi="DeleteArtiklJela($event)"
                   />
                 </div>
               </template>
@@ -474,6 +476,7 @@ export default {
     this.GetKategorijuPica();
     this.GetArtikliJela();
     this.GetArtikliPica();
+    this.$emit("NaziviJela");
   },
 
   methods: {
@@ -728,9 +731,26 @@ export default {
     OdustaniArtikl() {
       (this.Naziv = ""),
         (this.KategorijaPrikaz = ""),
+        (this.KategorijaJelaPrikaz = ""),
+        (this.KategorijaPicaPrikaz = ""),
         (this.Sastojci = ""),
         (this.Cijena = ""),
         this.Slika.remove();
+    },
+
+    DeleteArtiklJela(id) {
+      console.log("test123");
+      console.log("testdelete", id);
+      console.log(this.KategorijaPrikaz3);
+      db.collection("Jelo")
+        .doc(this.KategorijaPrikaz3)
+        .collection(this.KategorijaPrikaz3)
+        .doc(id)
+        .delete()
+        .then(() => {
+          this.Artikli = [];
+          this.GetArtikliJela();
+        });
     },
   }, //  od methods
 };
