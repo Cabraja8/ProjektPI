@@ -1,26 +1,30 @@
 <template>
   <div class="artikl">
-    <div class="container-fluid py-4 my-4">
-      <div class="card">
+    <div class="container-fluid py-4 my-4 bg-reddanger md-0 col-lg-12 mt-5">
+      <div class="card container-fluid">
         <img
           :src="ArtiklNaziv.Slika"
           class="card-img-top img-thumbnail"
           alt="..."
         />
-        <div class="card-body py-4 my-4">
+        <div class="card-body py-4 my-4 col-lg-12 md-4">
           <h5 class="card-title">{{ ArtiklNaziv.Naziv }}</h5>
           <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
           <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
 
           <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
-            <a href="#" class="btn btn-success">Uredi Jelo</a>
-            <button class="btn btn-danger" @click="NaziviJela">
-              Obriši Jelo
-            </button>
+            <div class="form-group c">
+              <a href="#" class="btn btn-success btn-12-sm">Uredi Jelo</a>
+              <button class="btn btn-danger btn-12-sm" @click="NaziviJela">
+                Obriši Jelo
+              </button>
+            </div>
           </template>
           <template v-else>
-            <a href="#" class="btn btn-success">Uredi Piće</a>
-            <button class="btn btn-danger" @click="NaziviPica">
+            <button class="btn btn-success btn-12-sm" @click="EditArtiklClick">
+              Uredi Piće
+            </button>
+            <button class="btn btn-danger btn-12-sm" @click="NaziviPica">
               Obriši Piće
             </button>
           </template>
@@ -57,7 +61,8 @@ export default {
 
       this.$emit("brisip", this.id2);
     },
-  },
+    EditArtiklClick() {},
+  }, //od Methods
 };
 </script>
 

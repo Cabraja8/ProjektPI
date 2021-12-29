@@ -6,8 +6,7 @@
       <div class="container-fluid">
         <div class="container-fluid padding">
           <div class="row">
-            <div class="col-lg-4 py-4 my-4"></div>
-            <div class="col-lg-4 py-4 my-4 mx-auto">
+            <div class="col-lg-6 py-4 my-4 mx-auto md-4">
               <div class="form-group">
                 <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
                 <select
@@ -19,9 +18,8 @@
                   <option value="Jelo" @click="Clear">Jelo</option>
                   <option value="Piće" @click="Clear">Piće</option>
                 </select>
-              </div>
-              <template v-if="KategorijaPrikaz4 === 'Jelo'">
-                <div class="form-group">
+                <div class="border-top border-danger w-100 mx-auto my-3"></div>
+                <template v-if="KategorijaPrikaz4 === 'Jelo'">
                   <label for="kategorijeJela">Kategorija Jela:</label>
                   <div
                     class="
@@ -47,16 +45,8 @@
                       </option>
                     </select>
                   </div>
-                  <Artikl
-                    v-for="Artikla in Artikli"
-                    :key="Artikla.id"
-                    :ArtiklNaziv="Artikla"
-                    v-on:brisi="DeleteArtiklJela($event)"
-                  />
-                </div>
-              </template>
-              <template v-if="KategorijaPrikaz4 === 'Piće'">
-                <div class="form-group">
+                </template>
+                <template v-if="KategorijaPrikaz4 === 'Piće'">
                   <label for="kategorijePica">Kategorija Pića:</label>
                   <div
                     class="
@@ -82,16 +72,51 @@
                       </option>
                     </select>
                   </div>
-                  <Artikl
-                    v-for="Artikla in Artikli"
-                    :key="Artikla.id"
-                    :ArtiklNaziv="Artikla"
-                    v-on:brisip="DeleteArtiklPica($event)"
-                  />
-                </div>
-              </template>
+                </template>
+              </div>
             </div>
-            <div class="col-lg-4 py-4 my-4"></div>
+            <div class="container mt-5">
+              <div class="col-12 py-4 my-4 mx-auto md-3">
+                <template v-if="KategorijaPrikaz4 === 'Jelo'">
+                  <div
+                    class="border-top border-danger w-100 mx-auto my-3"
+                  ></div>
+                  <div class="row">
+                    <Artikl
+                      class="col-lg-3"
+                      v-for="Artikla in Artikli"
+                      :key="Artikla.id"
+                      :ArtiklNaziv="Artikla"
+                      v-on:brisi="DeleteArtiklJela($event)"
+                    />
+                  </div>
+                  <div
+                    class="border-top border-danger w-100 mx-auto my-3"
+                  ></div>
+                </template>
+              </div>
+            </div>
+            <div class="container mt-5">
+              <div class="col-12 py-4 my-4 mx-auto md-3">
+                <template v-if="KategorijaPrikaz4 === 'Piće'">
+                  <div
+                    class="border-top border-danger w-100 mx-auto my-3"
+                  ></div>
+                  <div class="row">
+                    <Artikl
+                      class="col-lg-3"
+                      v-for="Artikla in Artikli"
+                      :key="Artikla.id"
+                      :ArtiklNaziv="Artikla"
+                      v-on:brisip="DeleteArtiklPica($event)"
+                    />
+                  </div>
+                  <div
+                    class="border-top border-danger w-100 mx-auto my-3"
+                  ></div>
+                </template>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -100,21 +125,21 @@
       <div class="container py-4 my-4">
         <div class="container-fluid padding py-4 my-4">
           <div class="row padding">
-            <div class="col-lg-6 py-4 my-4">
-              <!-- prvi dio -->
+            <div class="col-lg-6 py-4 my-4 md-0">
+              <!-- DODAJ KATEGORIJE -->
               <h1>Dodaj kategorije</h1>
               <div class="border-top border-danger w-100 mx-auto my-3"></div>
-              <div class="card mt-4 py-4 md-4">
-                <table class="table m-0">
+              <div class="mt-4 py-4 md-4">
+                <table class="table pd-4 py-4 md-4">
                   <thead>
-                    <tr>
+                    <tr class="bg-reddanger text-white">
                       <th scope="col">Naziv Kategorije</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <div class="form-group">
+                      <div class="form-group my-4 w-100 col">
                         <select
                           name="Odabir2"
                           class="form-control"
@@ -129,7 +154,7 @@
                     <tr>
                       <td>
                         <template v-if="KategorijaPrikaz2 === 'Jelo'">
-                          <div class="mb-4">
+                          <div class="mb-4 w-100 col">
                             <input
                               type="kategorijaJela"
                               v-model="Naziv_kategorijeJela"
@@ -139,7 +164,7 @@
                           </div>
                         </template>
                         <template v-if="KategorijaPrikaz2 === 'Piće'">
-                          <div class="mb-4">
+                          <div class="mb-4 w-100 col">
                             <input
                               type="kategorijaPica"
                               v-model="Naziv_kategorijePica"
@@ -177,14 +202,14 @@
               </div>
             </div>
             <div class="col-lg-6 py-4 my-4">
-              <!-- drugi dio -->
+              <!-- PRIKAZ KATEGORIJE -->
               <h1>Prikaz kategorije</h1>
               <div class="border-top border-danger w-100 mx-auto my-3"></div>
               <div class="card mt-4 py-4 md-4">
-                <table class="table m-0 pd-4 py-4 md-4">
+                <table class="table m-0 pd-4 py-4 md-4 table-hover">
                   <thead>
-                    <tr>
-                      <th scope="col">Naziv Kategorije Jela</th>
+                    <tr class="bg-reddanger text-white">
+                      <th scope="col ">Naziv Kategorije Jela</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -204,28 +229,37 @@
                       </td>
                     </tr>
                   </tbody>
-                  <th scope="col">Naziv Kategorije Pića</th>
-                  <th scope="col"></th>
-                  <tr
-                    v-for="KategorijePice in KategorijePica"
-                    :key="KategorijePice.id"
-                  >
-                    <td>{{ KategorijePice.NazivPica }}</td>
-                    <td>
-                      <button
-                        class="btn btn-danger btn-sm w-100"
-                        @click="DeleteKategorijuPica(KategorijePice.id)"
-                      >
-                        Briši
-                      </button>
-                    </td>
-                  </tr>
+                </table>
+                <table class="table m-0 pd-4 py-4 md-4 table-hover">
+                  <thead>
+                    <tr class="bg-reddanger text-white">
+                      <th scope="col ">Naziv Kategorije Pića</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="KategorijePice in KategorijePica"
+                      :key="KategorijePice.id"
+                    >
+                      <td>{{ KategorijePice.NazivPica }}</td>
+                      <td>
+                        <button
+                          class="btn btn-danger btn-sm w-100"
+                          @click="DeleteKategorijuPica(KategorijePice.id)"
+                        >
+                          Briši
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- DODAJ ARTIKL -->
       <h1>Dodaj Artikl</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
       <div class="container py-6 padding py-4 my-4">
@@ -377,7 +411,7 @@
           </div>
         </div>
       </div>
-
+      <!-- PREGLED NARUDŽBI -->
       <div class="col-12 text-center mt-5">
         <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
         <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -411,7 +445,7 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- prikaz narudzbe -->
+                <!-- PRIKAZ -->
                 <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
                   <th scope="col">{{ Narudzba.Ime }}</th>
                   <th scope="col">{{ Narudzba.Prezime }}</th>
@@ -765,7 +799,6 @@ export default {
         .doc(id)
         .delete()
         .then(() => {
-          this.Artikli = [];
           this.GetArtikliJela();
         });
     },
@@ -776,7 +809,6 @@ export default {
         .doc(id2)
         .delete()
         .then(() => {
-          this.Artikli = [];
           this.GetArtikliPica();
         });
     },
