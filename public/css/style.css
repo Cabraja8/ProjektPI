@@ -164,3 +164,7 @@ ul.social li {
   display: flex;
   position: relative;
 }
+
+.bg-reddanger {
+  background-color: #ed4646;
+}

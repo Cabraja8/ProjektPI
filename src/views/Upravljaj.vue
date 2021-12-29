@@ -382,43 +382,58 @@
         <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
         <div class="border-top border-danger w-100 mx-auto my-3"></div>
       </div>
-      <div class="col-lg-12 py-4 my-4 mx-auto">
-        <table class="table m-0 pd-4 py-4 md-4 mx-auto">
-          <thead>
-            <tr>
-              <th scope="col ">Ime</th>
-              <th scope="col">Prezime</th>
-              <th scope="col">Broj Telefona</th>
-              <th scope="col">Adresa</th>
-              <th scope="col">Jelo</th>
-              <th scope="col">Piće</th>
-              <th scope="col">Cijena</th>
-              <th scope="col">Napomena</th>
-              <th scope="col">Brisanje</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- prikaz narudzbe -->
-            <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
-              <td>{{ Narudzba.Ime }}</td>
-              <td>{{ Narudzba.Prezime }}</td>
-              <td>{{ Narudzba.BrojTelefona }}</td>
-              <td>{{ Narudzba.Adresa }}</td>
-              <td>{{ Narudzba.KategorijaJela }}</td>
-              <td>{{ Narudzba.Jelo }}</td>
-              <td>{{ Narudzba.Pice }}</td>
-              <td>{{ Narudzba.Napomena }}</td>
-              <td>
-                <button
-                  class="btn btn-danger btn-sm"
-                  @click="Delete(Narudzba.id)"
-                >
-                  Obriši
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="container mt-5">
+        <div class="col-lg-12 py-4 my-4 mx-auto">
+          <div class="table-responsive">
+            <table
+              class="
+                table
+                m-0
+                pd-4
+                py-4
+                md-4
+                mx-auto
+                table-striped table-hover
+                shadowbox
+              "
+            >
+              <thead>
+                <tr class="bg-reddanger text-white">
+                  <th scope="col ">Ime</th>
+                  <th scope="col">Prezime</th>
+                  <th scope="col">Broj Telefona</th>
+                  <th scope="col">Adresa</th>
+                  <th scope="col">Jelo</th>
+                  <th scope="col">Piće</th>
+                  <th scope="col">Cijena</th>
+                  <th scope="col">Napomena</th>
+                  <th scope="col">Brisanje</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- prikaz narudzbe -->
+                <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
+                  <th scope="col">{{ Narudzba.Ime }}</th>
+                  <th scope="col">{{ Narudzba.Prezime }}</th>
+                  <th scope="col">{{ Narudzba.BrojTelefona }}</th>
+                  <th scope="col">{{ Narudzba.Adresa }}</th>
+                  <th scope="col">{{ Narudzba.KategorijaJela }}</th>
+                  <th scope="col">{{ Narudzba.Jelo }}</th>
+                  <th scope="col">{{ Narudzba.Pice }}</th>
+                  <th scope="col">{{ Narudzba.Napomena }}</th>
+                  <td>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      @click="Delete(Narudzba.id)"
+                    >
+                      Obriši
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
