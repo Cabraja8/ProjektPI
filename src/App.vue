@@ -87,7 +87,7 @@
         </div>
       </div>
     </footer>
-    <div class="socket text-light text-center py3">
+    <div class="socket text-light text-center">
       <p>&copy; <a href="" target="_blank"></a></p>
     </div>
   </div>

@@ -1,41 +1,412 @@
 <template>
   <div class="upravljaj">
-    <div class="col-12 text-center mt-5">
-      <h1 class="text-dark pt-4">Pregled Artikla</h1>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
-      <div class="container-fluid">
-        <div class="container-fluid padding">
-          <div class="row">
-            <div class="col-lg-6 py-4 my-4 mx-auto md-4">
-              <div class="form-group">
-                <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
-                <select
-                  name="Odabir3"
-                  class="form-control"
-                  id="KategorijePrikaz4"
-                  v-model="KategorijaPrikaz4"
-                >
-                  <option value="Jelo" @click="Clear">Jelo</option>
-                  <option value="Piće" @click="Clear">Piće</option>
-                </select>
-                <div class="border-top border-danger w-100 mx-auto my-3"></div>
-                <template v-if="KategorijaPrikaz4 === 'Jelo'">
-                  <label for="kategorijeJela">Kategorija Jela:</label>
-                  <div
-                    class="
-                      form-group
-                      container-fluid
-                      padding
-                      w-80
-                      mx-auto
-                      text-center
-                    "
+    <div>
+      <div class="col-12 text-center mt-5">
+        <h1 class="text-dark pt-4">Pregled Artikla</h1>
+        <div class="border-top border-danger w-100 mx-auto my-3"></div>
+        <div class="container-fluid">
+          <div class="container-fluid padding">
+            <div class="row">
+              <div class="col-lg-6 py-4 my-4 mx-auto md-4">
+                <div class="form-group">
+                  <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
+                  <select
+                    name="Odabir3"
+                    class="form-control"
+                    id="KategorijePrikaz4"
+                    v-model="KategorijaPrikaz4"
                   >
+                    <option value="Jelo" @click="Clear">Jelo</option>
+                    <option value="Piće" @click="Clear">Piće</option>
+                  </select>
+                  <div
+                    class="border-top border-danger w-100 mx-auto my-3"
+                  ></div>
+
+                  <template v-if="KategorijaPrikaz4 === 'Jelo'">
+                    <label for="kategorijeJela">Kategorija Jela:</label>
+                    <div
+                      class="
+                        form-group
+                        container-fluid
+                        padding
+                        w-80
+                        mx-auto
+                        text-center
+                      "
+                    >
+                      <select
+                        class="form-control"
+                        id="kategorijeJela"
+                        v-model="KategorijaPrikaz3"
+                        @click="GetArtikliJela(KategorijaPrikaz3)"
+                      >
+                        <option
+                          v-for="KategorijaJela in KategorijeJela"
+                          :key="KategorijaJela.id"
+                        >
+                          {{ KategorijaJela.NazivJela }}
+                        </option>
+                      </select>
+                    </div>
+                  </template>
+                  <template v-if="KategorijaPrikaz4 === 'Piće'">
+                    <label for="kategorijePica">Kategorija Pića:</label>
+                    <div
+                      class="
+                        form-group
+                        container-fluid
+                        padding
+                        w-80
+                        mx-auto
+                        text-center
+                      "
+                    >
+                      <select
+                        class="form-control"
+                        id="kategorijeJela"
+                        v-model="KategorijaPrikaz3"
+                        @click="GetArtikliPica(KategorijaPrikaz3)"
+                      >
+                        <option
+                          v-for="KategorijaPice in KategorijePica"
+                          :key="KategorijaPice.id"
+                        >
+                          {{ KategorijaPice.NazivPica }}
+                        </option>
+                      </select>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <div class="container mt-5">
+                <div class="col-12 py-4 my-4 mx-auto md-3">
+                  <template v-if="KategorijaPrikaz4 === 'Jelo'">
+                    <div
+                      class="border-top border-danger w-100 mx-auto my-3"
+                    ></div>
+                    <div class="row">
+                      <Artikl
+                        class="col-lg-3"
+                        v-for="Artikla in Artikli"
+                        :key="Artikla.id"
+                        :ArtiklNaziv="Artikla"
+                        v-on:brisi="DeleteArtiklJela($event)"
+                        v-on:artikljelo="UrediArtiklJelo($event)"
+                      />
+                    </div>
+                    <div
+                      class="border-top border-danger w-100 mx-auto my-3"
+                    ></div>
+                  </template>
+                </div>
+              </div>
+              <div class="container mt-5">
+                <div class="col-12 py-4 my-4 mx-auto md-3">
+                  <template v-if="KategorijaPrikaz4 === 'Piće'">
+                    <div
+                      class="border-top border-danger w-100 mx-auto my-3"
+                    ></div>
+                    <div class="row">
+                      <Artikl
+                        class="col-lg-3"
+                        v-for="Artikla in Artikli"
+                        :key="Artikla.id"
+                        :ArtiklNaziv="Artikla"
+                        v-on:brisip="DeleteArtiklPica($event)"
+                      />
+                    </div>
+                    <div
+                      class="border-top border-danger w-100 mx-auto my-3"
+                    ></div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- UREDI ARTIKL -->
+      <div id="container">
+        <h1 class="text-dark pt-4">Uredi Artikl</h1>
+        <div class="border-top border-danger w-100 mx-auto my-3"></div>
+        <div class="container py-6 padding py-4 my-4">
+          <div
+            class="
+              row
+              wh-100
+              align
+              items-center
+              justify-content
+              form-container
+              formcon
+            "
+          >
+            <div class="col-sm-8 col-md-6 col-lg-4 bg-light rounded p-4 shadow">
+              <div class="row justify-content-center mb-4">
+                <img src="@/../public/images/logo.png" class="" />
+              </div>
+
+              <form>
+                <div class="form-group">
+                  <div class="mb-4">
+                    <label for="naziv2" class="form-label"
+                      >Naziv Proizvoda:</label
+                    >
+                    <input
+                      type="naziv2"
+                      class="form-control"
+                      id="naziv2"
+                      required
+                      v-model="NazivEdit"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="mb-4">
+                    <label for="sastojci2" class="form-label">Sastojci:</label>
+                    <input
+                      type="sastojci2"
+                      class="form-control"
+                      id="sastojci2"
+                      required
+                      v-model="SastojciEdit"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="mb-4">
+                    <label for="cijena2" class="form-label">Cijena:</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="cijena2"
+                      required
+                      v-model="CijenaEdit"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="file" class="form-label">Slika:</label>
+                  <div class="mb-4">
+                    <croppa
+                      :width="100"
+                      :height="100"
+                      required
+                      v-model="SlikaEdit"
+                    >
+                    </croppa>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="mb-4">
+                    <button type="button" class="btn btn-danger w-20">
+                      Odustani
+                    </button>
+                    <button type="button" class="btn btn-success w-20">
+                      Uredi Jelo
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="container">
+        <div class="container py-4 my-4">
+          <div class="container-fluid padding py-4 my-4">
+            <div class="row padding">
+              <div class="col-lg-6 py-4 my-4 md-0">
+                <!-- DODAJ KATEGORIJE -->
+                <h1>Dodaj kategorije</h1>
+                <div class="border-top border-danger w-100 mx-auto my-3"></div>
+                <div class="mt-4 py-4 md-4">
+                  <table class="table pd-4 py-4 md-4">
+                    <thead>
+                      <tr class="bg-reddanger text-white">
+                        <th scope="col">Naziv Kategorije</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <div class="form-group my-4 w-100 col">
+                          <select
+                            name="Odabir2"
+                            class="form-control"
+                            id="KategorijePrikaz2"
+                            v-model="KategorijaPrikaz2"
+                          >
+                            <option value="Jelo">Jelo</option>
+                            <option value="Piće">Piće</option>
+                          </select>
+                        </div>
+                      </tr>
+                      <tr>
+                        <td>
+                          <template v-if="KategorijaPrikaz2 === 'Jelo'">
+                            <div class="mb-4 w-100 col">
+                              <input
+                                type="kategorijaJela"
+                                v-model="Naziv_kategorijeJela"
+                                class="form-control w-80"
+                                id="kategorijaJela"
+                              />
+                            </div>
+                          </template>
+                          <template v-if="KategorijaPrikaz2 === 'Piće'">
+                            <div class="mb-4 w-100 col">
+                              <input
+                                type="kategorijaPica"
+                                v-model="Naziv_kategorijePica"
+                                class="form-control w-80"
+                                id="kategorijaPica"
+                              />
+                            </div>
+                          </template>
+                        </td>
+                        <template v-if="KategorijaPrikaz2 === 'Jelo'">
+                          <div class="mb-4 my-4">
+                            <button
+                              @click="AddKategoriju"
+                              class="btn btn-success btn-sm w-80"
+                              required
+                            >
+                              Dodaj Jelo
+                            </button>
+                          </div>
+                        </template>
+                        <template v-if="KategorijaPrikaz2 === 'Piće'">
+                          <div class="mb-4 my-4">
+                            <button
+                              @click="AddKategorijuPica"
+                              class="btn btn-success btn-sm w-80"
+                              required
+                            >
+                              Dodaj Piće
+                            </button>
+                          </div>
+                        </template>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-lg-6 py-4 my-4">
+                <!-- PRIKAZ KATEGORIJE -->
+                <h1>Prikaz kategorije</h1>
+                <div class="border-top border-danger w-100 mx-auto my-3"></div>
+                <div class="card mt-4 py-4 md-4">
+                  <table class="table m-0 pd-4 py-4 md-4 table-hover">
+                    <thead>
+                      <tr class="bg-reddanger text-white">
+                        <th scope="col ">Naziv Kategorije Jela</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="KategorijaJela in KategorijeJela"
+                        :key="KategorijaJela.id"
+                      >
+                        <td>{{ KategorijaJela.NazivJela }}</td>
+                        <td>
+                          <button
+                            class="btn btn-danger btn-sm w-100"
+                            @click="DeleteKategorijuJela(KategorijaJela.id)"
+                          >
+                            Briši
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table m-0 pd-4 py-4 md-4 table-hover">
+                    <thead>
+                      <tr class="bg-reddanger text-white">
+                        <th scope="col ">Naziv Kategorije Pića</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="KategorijePice in KategorijePica"
+                        :key="KategorijePice.id"
+                      >
+                        <td>{{ KategorijePice.NazivPica }}</td>
+                        <td>
+                          <button
+                            class="btn btn-danger btn-sm w-100"
+                            @click="DeleteKategorijuPica(KategorijePice.id)"
+                          >
+                            Briši
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- DODAJ ARTIKL -->
+        <h1>Dodaj Artikl</h1>
+        <div class="border-top border-danger w-100 mx-auto my-3"></div>
+        <div class="container py-6 padding py-4 my-4">
+          <div
+            class="
+              row
+              wh-100
+              align
+              items-center
+              justify-content
+              form-container
+              formcon
+            "
+          >
+            <div class="col-sm-8 col-md-6 col-lg-4 bg-light rounded p-4 shadow">
+              <div class="row justify-content-center mb-4">
+                <img src="@/../public/images/logo.png" class="" />
+              </div>
+
+              <form>
+                <div class="form-group">
+                  <div class="mb-4">
+                    <label for="naziv" class="form-label"
+                      >Naziv Proizvoda:</label
+                    >
+                    <input
+                      type="naziv"
+                      v-model="Naziv"
+                      class="form-control"
+                      id="naziv"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="kategorijePrikaz">Kategorija:</label>
+                  <select
+                    name="Odabir"
+                    class="form-control"
+                    id="kategorijePrikaz"
+                    v-model="KategorijaPrikaz"
+                    required
+                  >
+                    <option value="Jelo">Jelo</option>
+                    <option value="Piće">Piće</option>
+                  </select>
+                </div>
+                <template v-if="KategorijaPrikaz === 'Jelo'">
+                  <div class="form-group">
+                    <label for="kategorijeJela">Kategorija Jela:</label>
                     <select
                       class="form-control"
                       id="kategorijeJela"
-                      v-model="KategorijaPrikaz3"
-                      @click="GetArtikliJela(KategorijaPrikaz3)"
+                      v-model="KategorijaJelaPrikaz"
                     >
                       <option
                         v-for="KategorijaJela in KategorijeJela"
@@ -46,426 +417,151 @@
                     </select>
                   </div>
                 </template>
-                <template v-if="KategorijaPrikaz4 === 'Piće'">
-                  <label for="kategorijePica">Kategorija Pića:</label>
-                  <div
-                    class="
-                      form-group
-                      container-fluid
-                      padding
-                      w-80
-                      mx-auto
-                      text-center
-                    "
-                  >
+                <template v-if="KategorijaPrikaz === 'Piće'">
+                  <div class="form-group">
+                    <label for="kategorijePica">Kategorija Pića:</label>
                     <select
                       class="form-control"
-                      id="kategorijeJela"
-                      v-model="KategorijaPrikaz3"
-                      @click="GetArtikliPica(KategorijaPrikaz3)"
+                      id="kategorijePica"
+                      v-model="KategorijaPicaPrikaz"
+                      required
                     >
                       <option
-                        v-for="KategorijaPice in KategorijePica"
-                        :key="KategorijaPice.id"
+                        v-for="KategorijePice in KategorijePica"
+                        :key="KategorijePice.id"
                       >
-                        {{ KategorijaPice.NazivPica }}
+                        {{ KategorijePice.NazivPica }}
                       </option>
                     </select>
                   </div>
                 </template>
-              </div>
-            </div>
-            <div class="container mt-5">
-              <div class="col-12 py-4 my-4 mx-auto md-3">
-                <template v-if="KategorijaPrikaz4 === 'Jelo'">
-                  <div
-                    class="border-top border-danger w-100 mx-auto my-3"
-                  ></div>
-                  <div class="row">
-                    <Artikl
-                      class="col-lg-3"
-                      v-for="Artikla in Artikli"
-                      :key="Artikla.id"
-                      :ArtiklNaziv="Artikla"
-                      v-on:brisi="DeleteArtiklJela($event)"
+                <div class="form-group">
+                  <div class="mb-4">
+                    <label for="sastojci" class="form-label">Sastojci:</label>
+                    <input
+                      type="sastojci"
+                      class="form-control"
+                      id="sastojci"
+                      v-model="Sastojci"
+                      required
                     />
                   </div>
-                  <div
-                    class="border-top border-danger w-100 mx-auto my-3"
-                  ></div>
-                </template>
-              </div>
-            </div>
-            <div class="container mt-5">
-              <div class="col-12 py-4 my-4 mx-auto md-3">
-                <template v-if="KategorijaPrikaz4 === 'Piće'">
-                  <div
-                    class="border-top border-danger w-100 mx-auto my-3"
-                  ></div>
-                  <div class="row">
-                    <Artikl
-                      class="col-lg-3"
-                      v-for="Artikla in Artikli"
-                      :key="Artikla.id"
-                      :ArtiklNaziv="Artikla"
-                      v-on:brisip="DeleteArtiklPica($event)"
+                </div>
+                <div class="form-group">
+                  <div class="mb-4">
+                    <label for="cijena" class="form-label">Cijena:</label>
+                    <input
+                      type="number"
+                      v-model="Cijena"
+                      class="form-control"
+                      id="cijena"
+                      required
                     />
                   </div>
-                  <div
-                    class="border-top border-danger w-100 mx-auto my-3"
-                  ></div>
-                </template>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="container">
-      <div class="container py-4 my-4">
-        <div class="container-fluid padding py-4 my-4">
-          <div class="row padding">
-            <div class="col-lg-6 py-4 my-4 md-0">
-              <!-- DODAJ KATEGORIJE -->
-              <h1>Dodaj kategorije</h1>
-              <div class="border-top border-danger w-100 mx-auto my-3"></div>
-              <div class="mt-4 py-4 md-4">
-                <table class="table pd-4 py-4 md-4">
-                  <thead>
-                    <tr class="bg-reddanger text-white">
-                      <th scope="col">Naziv Kategorije</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <div class="form-group my-4 w-100 col">
-                        <select
-                          name="Odabir2"
-                          class="form-control"
-                          id="KategorijePrikaz2"
-                          v-model="KategorijaPrikaz2"
-                        >
-                          <option value="Jelo">Jelo</option>
-                          <option value="Piće">Piće</option>
-                        </select>
-                      </div>
-                    </tr>
-                    <tr>
-                      <td>
-                        <template v-if="KategorijaPrikaz2 === 'Jelo'">
-                          <div class="mb-4 w-100 col">
-                            <input
-                              type="kategorijaJela"
-                              v-model="Naziv_kategorijeJela"
-                              class="form-control w-80"
-                              id="kategorijaJela"
-                            />
-                          </div>
-                        </template>
-                        <template v-if="KategorijaPrikaz2 === 'Piće'">
-                          <div class="mb-4 w-100 col">
-                            <input
-                              type="kategorijaPica"
-                              v-model="Naziv_kategorijePica"
-                              class="form-control w-80"
-                              id="kategorijaPica"
-                            />
-                          </div>
-                        </template>
-                      </td>
-                      <template v-if="KategorijaPrikaz2 === 'Jelo'">
-                        <div class="mb-4 my-4">
-                          <button
-                            @click="AddKategoriju"
-                            class="btn btn-success btn-sm w-80"
-                            required
-                          >
-                            Dodaj Jelo
-                          </button>
-                        </div>
-                      </template>
-                      <template v-if="KategorijaPrikaz2 === 'Piće'">
-                        <div class="mb-4 my-4">
-                          <button
-                            @click="AddKategorijuPica"
-                            class="btn btn-success btn-sm w-80"
-                            required
-                          >
-                            Dodaj Piće
-                          </button>
-                        </div>
-                      </template>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="col-lg-6 py-4 my-4">
-              <!-- PRIKAZ KATEGORIJE -->
-              <h1>Prikaz kategorije</h1>
-              <div class="border-top border-danger w-100 mx-auto my-3"></div>
-              <div class="card mt-4 py-4 md-4">
-                <table class="table m-0 pd-4 py-4 md-4 table-hover">
-                  <thead>
-                    <tr class="bg-reddanger text-white">
-                      <th scope="col ">Naziv Kategorije Jela</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="KategorijaJela in KategorijeJela"
-                      :key="KategorijaJela.id"
-                    >
-                      <td>{{ KategorijaJela.NazivJela }}</td>
-                      <td>
-                        <button
-                          class="btn btn-danger btn-sm w-100"
-                          @click="DeleteKategorijuJela(KategorijaJela.id)"
-                        >
-                          Briši
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table class="table m-0 pd-4 py-4 md-4 table-hover">
-                  <thead>
-                    <tr class="bg-reddanger text-white">
-                      <th scope="col ">Naziv Kategorije Pića</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="KategorijePice in KategorijePica"
-                      :key="KategorijePice.id"
-                    >
-                      <td>{{ KategorijePice.NazivPica }}</td>
-                      <td>
-                        <button
-                          class="btn btn-danger btn-sm w-100"
-                          @click="DeleteKategorijuPica(KategorijePice.id)"
-                        >
-                          Briši
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- DODAJ ARTIKL -->
-      <h1>Dodaj Artikl</h1>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
-      <div class="container py-6 padding py-4 my-4">
-        <div
-          class="
-            row
-            wh-100
-            align
-            items-center
-            justify-content
-            form-container
-            formcon
-          "
-        >
-          <div class="col-sm-8 col-md-6 col-lg-4 bg-light rounded p-4 shadow">
-            <div class="row justify-content-center mb-4">
-              <img src="@/../public/images/logo.png" class="" />
-            </div>
-
-            <form>
-              <div class="form-group">
-                <div class="mb-4">
-                  <label for="naziv" class="form-label">Naziv Proizvoda:</label>
-                  <input
-                    type="naziv"
-                    v-model="Naziv"
-                    class="form-control"
-                    id="naziv"
-                    required
-                  />
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="kategorijePrikaz">Kategorija:</label>
-                <select
-                  name="Odabir"
-                  class="form-control"
-                  id="kategorijePrikaz"
-                  v-model="KategorijaPrikaz"
-                  required
-                >
-                  <option value="Jelo">Jelo</option>
-                  <option value="Piće">Piće</option>
-                </select>
-              </div>
-              <template v-if="KategorijaPrikaz === 'Jelo'">
                 <div class="form-group">
-                  <label for="kategorijeJela">Kategorija Jela:</label>
-                  <select
-                    class="form-control"
-                    id="kategorijeJela"
-                    v-model="KategorijaJelaPrikaz"
-                  >
-                    <option
-                      v-for="KategorijaJela in KategorijeJela"
-                      :key="KategorijaJela.id"
-                    >
-                      {{ KategorijaJela.NazivJela }}
-                    </option>
-                  </select>
+                  <label for="file" class="form-label">Slika:</label>
+                  <div class="mb-4">
+                    <croppa :width="100" :height="100" v-model="Slika" required>
+                    </croppa>
+                  </div>
                 </div>
-              </template>
-              <template v-if="KategorijaPrikaz === 'Piće'">
                 <div class="form-group">
-                  <label for="kategorijePica">Kategorija Pića:</label>
-                  <select
-                    class="form-control"
-                    id="kategorijePica"
-                    v-model="KategorijaPicaPrikaz"
-                    required
-                  >
-                    <option
-                      v-for="KategorijePice in KategorijePica"
-                      :key="KategorijePice.id"
-                    >
-                      {{ KategorijePice.NazivPica }}
-                    </option>
-                  </select>
+                  <div class="mb-4">
+                    <template v-if="KategorijaPrikaz === 'Jelo'">
+                      <button
+                        type="button"
+                        class="btn btn-danger w-20"
+                        @click="OdustaniArtikl"
+                      >
+                        Odustani
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success w-20"
+                        @click="DodajArtiklJelo"
+                      >
+                        Dodaj Jelo
+                      </button>
+                    </template>
+                    <template v-if="KategorijaPrikaz === 'Piće'">
+                      <button
+                        type="button"
+                        class="btn btn-danger w-20"
+                        @click="OdustaniArtikl"
+                      >
+                        Odustani
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success w-20"
+                        @click="DodajArtiklPice"
+                      >
+                        Dodaj Piće
+                      </button>
+                    </template>
+                  </div>
                 </div>
-              </template>
-              <div class="form-group">
-                <div class="mb-4">
-                  <label for="sastojci" class="form-label">Sastojci:</label>
-                  <input
-                    type="sastojci"
-                    class="form-control"
-                    id="sastojci"
-                    v-model="Sastojci"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="mb-4">
-                  <label for="cijena" class="form-label">Cijena:</label>
-                  <input
-                    type="number"
-                    v-model="Cijena"
-                    class="form-control"
-                    id="cijena"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="file" class="form-label">Slika:</label>
-                <div class="mb-4">
-                  <croppa :width="100" :height="100" v-model="Slika" required>
-                  </croppa>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="mb-4">
-                  <template v-if="KategorijaPrikaz === 'Jelo'">
-                    <button
-                      type="button"
-                      class="btn btn-danger w-20"
-                      @click="OdustaniArtikl"
-                    >
-                      Odustani
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-success w-20"
-                      @click="DodajArtiklJelo"
-                    >
-                      Dodaj Jelo
-                    </button>
-                  </template>
-                  <template v-if="KategorijaPrikaz === 'Piće'">
-                    <button
-                      type="button"
-                      class="btn btn-danger w-20"
-                      @click="OdustaniArtikl"
-                    >
-                      Odustani
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-success w-20"
-                      @click="DodajArtiklPice"
-                    >
-                      Dodaj Piće
-                    </button>
-                  </template>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- PREGLED NARUDŽBI -->
-      <div class="col-12 text-center mt-5">
-        <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
-        <div class="border-top border-danger w-100 mx-auto my-3"></div>
-      </div>
-      <div class="container mt-5">
-        <div class="col-lg-12 py-4 my-4 mx-auto">
-          <div class="table-responsive">
-            <table
-              class="
-                table
-                m-0
-                pd-4
-                py-4
-                md-4
-                mx-auto
-                table-striped table-hover
-                shadowbox
-              "
-            >
-              <thead>
-                <tr class="bg-reddanger text-white">
-                  <th scope="col ">Ime</th>
-                  <th scope="col">Prezime</th>
-                  <th scope="col">Broj Telefona</th>
-                  <th scope="col">Adresa</th>
-                  <th scope="col">Jelo</th>
-                  <th scope="col">Piće</th>
-                  <th scope="col">Cijena</th>
-                  <th scope="col">Napomena</th>
-                  <th scope="col">Brisanje</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- PRIKAZ -->
-                <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
-                  <th scope="col">{{ Narudzba.Ime }}</th>
-                  <th scope="col">{{ Narudzba.Prezime }}</th>
-                  <th scope="col">{{ Narudzba.BrojTelefona }}</th>
-                  <th scope="col">{{ Narudzba.Adresa }}</th>
-                  <th scope="col">{{ Narudzba.KategorijaJela }}</th>
-                  <th scope="col">{{ Narudzba.Jelo }}</th>
-                  <th scope="col">{{ Narudzba.Pice }}</th>
-                  <th scope="col">{{ Narudzba.Napomena }}</th>
-                  <td>
-                    <button
-                      class="btn btn-danger btn-sm"
-                      @click="Delete(Narudzba.id)"
-                    >
-                      Obriši
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- PREGLED NARUDŽBI -->
+        <div class="col-12 text-center mt-5">
+          <h1 class="text-dark pt-4">Pregled Narudžbi</h1>
+          <div class="border-top border-danger w-100 mx-auto my-3"></div>
+        </div>
+        <div class="container mt-5">
+          <div class="col-lg-12 py-4 my-4 mx-auto">
+            <div class="table-responsive">
+              <table
+                class="
+                  table
+                  m-0
+                  pd-4
+                  py-4
+                  md-4
+                  mx-auto
+                  table-striped table-hover
+                  shadowbox
+                "
+              >
+                <thead>
+                  <tr class="bg-reddanger text-white">
+                    <th scope="col ">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Broj Telefona</th>
+                    <th scope="col">Adresa</th>
+                    <th scope="col">Jelo</th>
+                    <th scope="col">Piće</th>
+                    <th scope="col">Cijena</th>
+                    <th scope="col">Napomena</th>
+                    <th scope="col">Brisanje</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- PRIKAZ -->
+                  <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
+                    <th scope="col">{{ Narudzba.Ime }}</th>
+                    <th scope="col">{{ Narudzba.Prezime }}</th>
+                    <th scope="col">{{ Narudzba.BrojTelefona }}</th>
+                    <th scope="col">{{ Narudzba.Adresa }}</th>
+                    <th scope="col">{{ Narudzba.KategorijaJela }}</th>
+                    <th scope="col">{{ Narudzba.Jelo }}</th>
+                    <th scope="col">{{ Narudzba.Pice }}</th>
+                    <th scope="col">{{ Narudzba.Napomena }}</th>
+                    <td>
+                      <button
+                        class="btn btn-danger btn-sm"
+                        @click="Delete(Narudzba.id)"
+                      >
+                        Obriši
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -512,9 +608,20 @@ export default {
       Sastojci: "",
       Cijena: "",
       Slika: null,
+      //EDIT
+      NazivEdit: "",
+      SastojciEdit: "",
+      CijenaEdit: "",
+      SlikaEdit: null,
+
+      //
+      showEdit: false,
 
       Artikli: [],
     };
+  },
+  props: {
+    showEdit: Boolean,
   },
 
   components: {
@@ -526,7 +633,6 @@ export default {
     this.GetKategorijuPica();
     this.GetArtikliJela();
     this.GetArtikliPica();
-    this.$emit("NaziviJela");
   },
 
   methods: {
@@ -811,6 +917,12 @@ export default {
         .then(() => {
           this.GetArtikliPica();
         });
+    },
+    UrediArtiklJelo(id) {
+      (this.NazivEdit = id),
+        (this.SastojciEdit = this.Sastojci),
+        (this.CijenaEdit = this.Cijena),
+        (this.SlikaEdit = this.Slika);
     },
   }, //  od methods
 };

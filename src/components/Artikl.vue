@@ -13,17 +13,20 @@
           <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
 
           <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
-            <div class="form-group c">
-              <a href="#" class="btn btn-success btn-12-sm">Uredi Jelo</a>
+            <div class="form-group">
+              <button
+                class="btn btn-success btn-12-sm"
+                @click="EditArtiklClick"
+              >
+                Uredi Jelo
+              </button>
               <button class="btn btn-danger btn-12-sm" @click="NaziviJela">
                 Obriši Jelo
               </button>
             </div>
           </template>
           <template v-else>
-            <button class="btn btn-success btn-12-sm" @click="EditArtiklClick">
-              Uredi Piće
-            </button>
+            <button class="btn btn-success btn-12-sm">Uredi Piće</button>
             <button class="btn btn-danger btn-12-sm" @click="NaziviPica">
               Obriši Piće
             </button>
@@ -44,6 +47,7 @@ export default {
     return {
       id: "",
       id2: "",
+      artiklisve: [],
     };
   },
   components: {
@@ -61,7 +65,11 @@ export default {
 
       this.$emit("brisip", this.id2);
     },
-    EditArtiklClick() {},
+    EditArtiklClick() {
+      this.id = this.ArtiklNaziv.id;
+      console.log("test", this.id);
+      this.$emit("artikljelo", this.id);
+    },
   }, //od Methods
 };
 </script>

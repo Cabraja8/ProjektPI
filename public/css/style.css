@@ -168,3 +168,11 @@ ul.social li {
 .bg-reddanger {
   background-color: #ed4646;
 }
+
+.shadowbox {
+  box-shadow: 0 0.1rem, 5rem rgba(0, 0, 0, 1);
+}
+
+.bg-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+}
