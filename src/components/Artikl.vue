@@ -67,8 +67,15 @@ export default {
     },
     EditArtiklClick() {
       this.id = this.ArtiklNaziv.id;
-      console.log("test", this.id);
-      this.$emit("artikljelo", this.id);
+
+      this.$emit(
+        "artikljelo",
+        (this.artiklj = {
+          NazivJ: this.ArtiklNaziv.Naziv,
+          SastojciJ: this.ArtiklNaziv.Sastojci,
+          CijenaJ: this.ArtiklNaziv.Cijena,
+        })
+      );
     },
   }, //od Methods
 };

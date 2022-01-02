@@ -187,7 +187,7 @@
                     />
                   </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="file" class="form-label">Slika:</label>
                   <div class="mb-4">
                     <croppa
@@ -198,7 +198,7 @@
                     >
                     </croppa>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                   <div class="mb-4">
                     <button type="button" class="btn btn-danger w-20">
@@ -918,11 +918,10 @@ export default {
           this.GetArtikliPica();
         });
     },
-    UrediArtiklJelo(id) {
-      (this.NazivEdit = id),
-        (this.SastojciEdit = this.Sastojci),
-        (this.CijenaEdit = this.Cijena),
-        (this.SlikaEdit = this.Slika);
+    UrediArtiklJelo(artiklj) {
+      (this.NazivEdit = artiklj.NazivJ),
+        (this.SastojciEdit = artiklj.SastojciJ),
+        (this.CijenaEdit = artiklj.CijenaJ);
     },
   }, //  od methods
 };
