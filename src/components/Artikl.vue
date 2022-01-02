@@ -16,7 +16,7 @@
             <div class="form-group">
               <button
                 class="btn btn-success btn-12-sm"
-                @click="EditArtiklClick"
+                @click="EditArtiklClickJela"
               >
                 Uredi Jelo
               </button>
@@ -26,7 +26,12 @@
             </div>
           </template>
           <template v-else>
-            <button class="btn btn-success btn-12-sm">Uredi Piće</button>
+            <button
+              class="btn btn-success btn-12-sm"
+              @click="EditArtiklClickPica"
+            >
+              Uredi Piće
+            </button>
             <button class="btn btn-danger btn-12-sm" @click="NaziviPica">
               Obriši Piće
             </button>
@@ -65,15 +70,30 @@ export default {
 
       this.$emit("brisip", this.id2);
     },
-    EditArtiklClick() {
+    EditArtiklClickJela() {
       this.id = this.ArtiklNaziv.id;
 
       this.$emit(
         "artikljelo",
         (this.artiklj = {
+          ide: this.ArtiklNaziv.id,
           NazivJ: this.ArtiklNaziv.Naziv,
           SastojciJ: this.ArtiklNaziv.Sastojci,
           CijenaJ: this.ArtiklNaziv.Cijena,
+        })
+      );
+    },
+
+    EditArtiklClickPica() {
+      this.id2 = this.ArtiklNaziv.id;
+
+      this.$emit(
+        "artiklpica",
+        (this.artiklp = {
+          ide2: this.ArtiklNaziv.id,
+          NazivP: this.ArtiklNaziv.Naziv,
+          SastojciP: this.ArtiklNaziv.Sastojci,
+          CijenaP: this.ArtiklNaziv.Cijena,
         })
       );
     },

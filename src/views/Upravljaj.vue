@@ -114,6 +114,7 @@
                         :key="Artikla.id"
                         :ArtiklNaziv="Artikla"
                         v-on:brisip="DeleteArtiklPica($event)"
+                        v-on:artiklpica="UredArtiklPice($event)"
                       />
                     </div>
                     <div
@@ -126,90 +127,114 @@
           </div>
         </div>
       </div>
-      <!-- UREDI ARTIKL -->
-      <div id="container">
-        <h1 class="text-dark pt-4">Uredi Artikl</h1>
-        <div class="border-top border-danger w-100 mx-auto my-3"></div>
-        <div class="container py-6 padding py-4 my-4">
-          <div
-            class="
-              row
-              wh-100
-              align
-              items-center
-              justify-content
-              form-container
-              formcon
-            "
-          >
-            <div class="col-sm-8 col-md-6 col-lg-4 bg-light rounded p-4 shadow">
-              <div class="row justify-content-center mb-4">
-                <img src="@/../public/images/logo.png" class="" />
+      <!-- UREDI ARTIKL --><br />
+      <div v-show="showEdit">
+        <div id="container">
+          <h1 class="text-dark pt-4">Uredi Artikl</h1>
+          <div class="border-top border-danger w-100 mx-auto my-3"></div>
+          <div class="container py-6 padding py-4 my-4">
+            <div
+              class="
+                row
+                wh-100
+                align
+                items-center
+                justify-content
+                form-container
+                formcon
+              "
+            >
+              <div
+                class="col-sm-8 col-md-6 col-lg-4 bg-light rounded p-4 shadow"
+              >
+                <div class="row justify-content-center mb-4">
+                  <img src="@/../public/images/logo.png" class="" />
+                </div>
+
+                <form>
+                  <div class="form-group">
+                    <div class="mb-4">
+                      <label for="naziv2" class="form-label"
+                        >Naziv Proizvoda:</label
+                      >
+                      <input
+                        type="naziv2"
+                        class="form-control"
+                        id="naziv2"
+                        required
+                        v-model="NazivEdit"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="mb-4">
+                      <label for="sastojci2" class="form-label"
+                        >Sastojci:</label
+                      >
+                      <input
+                        type="sastojci2"
+                        class="form-control"
+                        id="sastojci2"
+                        required
+                        v-model="SastojciEdit"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="mb-4">
+                      <label for="cijena2" class="form-label">Cijena:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="cijena2"
+                        required
+                        v-model="CijenaEdit"
+                      />
+                    </div>
+                  </div>
+                  <template v-if="KategorijaPrikaz4 === 'Jelo'">
+                    <div class="form-group">
+                      <div class="mb-4">
+                        <button
+                          type="button"
+                          class="btn btn-danger w-20"
+                          @click="ArtiklOdustaniEdit"
+                        >
+                          Odustani
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-success w-20"
+                          @click="ArtiklUrediJelo(idedit)"
+                        >
+                          Uredi Jelo
+                        </button>
+                      </div>
+                    </div>
+                  </template>
+                  <template v-if="KategorijaPrikaz4 === 'Piće'">
+                    <div class="form-group">
+                      <div class="mb-4">
+                        <button
+                          type="button"
+                          class="btn btn-danger w-20"
+                          @click="ArtiklOdustaniEdit"
+                        >
+                          Odustani
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-success w-20"
+                          @click="ArtiklUrediPice(idedit2)"
+                        >
+                          Uredi Piće
+                        </button>
+                      </div>
+                    </div>
+                  </template>
+                </form>
               </div>
-
-              <form>
-                <div class="form-group">
-                  <div class="mb-4">
-                    <label for="naziv2" class="form-label"
-                      >Naziv Proizvoda:</label
-                    >
-                    <input
-                      type="naziv2"
-                      class="form-control"
-                      id="naziv2"
-                      required
-                      v-model="NazivEdit"
-                    />
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="mb-4">
-                    <label for="sastojci2" class="form-label">Sastojci:</label>
-                    <input
-                      type="sastojci2"
-                      class="form-control"
-                      id="sastojci2"
-                      required
-                      v-model="SastojciEdit"
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="mb-4">
-                    <label for="cijena2" class="form-label">Cijena:</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="cijena2"
-                      required
-                      v-model="CijenaEdit"
-                    />
-                  </div>
-                </div>
-                <!-- <div class="form-group">
-                  <label for="file" class="form-label">Slika:</label>
-                  <div class="mb-4">
-                    <croppa
-                      :width="100"
-                      :height="100"
-                      required
-                      v-model="SlikaEdit"
-                    >
-                    </croppa>
-                  </div>
-                </div> -->
-                <div class="form-group">
-                  <div class="mb-4">
-                    <button type="button" class="btn btn-danger w-20">
-                      Odustani
-                    </button>
-                    <button type="button" class="btn btn-success w-20">
-                      Uredi Jelo
-                    </button>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
         </div>
@@ -612,10 +637,12 @@ export default {
       NazivEdit: "",
       SastojciEdit: "",
       CijenaEdit: "",
-      SlikaEdit: null,
+      idedit: "",
+      idedit2: "",
+      ArtiklEditJ: [],
 
       //
-      showEdit: false,
+      showEdit: true,
 
       Artikli: [],
     };
@@ -745,6 +772,9 @@ export default {
           this.GetKategorijuJela();
           this.GetArtikliJela();
         });
+      setTimeout(() => {
+        this.KategorijaPrikaz3 = "";
+      }, 100);
     },
     // BRISANJE KATEGORIJE PIĆA
     DeleteKategorijuPica(id) {
@@ -755,6 +785,9 @@ export default {
           this.GetKategorijuPica();
           this.GetArtikliPica();
         });
+      setTimeout(() => {
+        this.KategorijaPrikaz3 = "";
+      }, 100);
     },
 
     //DODAVANJE ARTIKLA (JELO) -- PREKO FORME
@@ -919,9 +952,74 @@ export default {
         });
     },
     UrediArtiklJelo(artiklj) {
-      (this.NazivEdit = artiklj.NazivJ),
+      this.showEdit = true;
+      (this.idedit = artiklj.ide),
+        (this.NazivEdit = artiklj.NazivJ),
         (this.SastojciEdit = artiklj.SastojciJ),
         (this.CijenaEdit = artiklj.CijenaJ);
+      setTimeout(() => {
+        document.getElementsByTagName("br")[0].scrollIntoView();
+      }, 100);
+    },
+    UredArtiklPice(artiklp) {
+      this.showEdit = true;
+      (this.idedit2 = artiklp.ide2),
+        (this.NazivEdit = artiklp.NazivP),
+        (this.SastojciEdit = artiklp.SastojciP),
+        (this.CijenaEdit = artiklp.CijenaP);
+
+      setTimeout(() => {
+        document.getElementsByTagName("br")[0].scrollIntoView();
+      }, 100);
+    },
+
+    ArtiklOdustaniEdit() {
+      (this.NazivEdit = ""), (this.SastojciEdit = ""), (this.CijenaEdit = "");
+      setTimeout(() => {
+        this.showEdit = false;
+        document.getElementsByTagName("h1")[1].scrollIntoView();
+      }, 500);
+    },
+
+    ArtiklUrediJelo(idedit) {
+      db.collection("Jelo")
+        .doc(this.KategorijaPrikaz3)
+        .collection(this.KategorijaPrikaz3)
+        .doc(this.idedit)
+        .update({
+          Naziv: this.NazivEdit,
+          Sastojci: this.SastojciEdit,
+          Cijena: this.CijenaEdit,
+          Date: Date.now(),
+        })
+        .then(() => {
+          this.GetArtikliJela();
+        });
+      setTimeout(() => {
+        this.ArtiklOdustaniEdit();
+        this.showEdit = false;
+        document.getElementsByTagName("h1")[1].scrollIntoView();
+      }, 1000);
+    },
+    ArtiklUrediPice(idedit2) {
+      db.collection("Pica")
+        .doc(this.KategorijaPrikaz3)
+        .collection(this.KategorijaPrikaz3)
+        .doc(this.idedit2)
+        .update({
+          Naziv: this.NazivEdit,
+          Sastojci: this.SastojciEdit,
+          Cijena: this.CijenaEdit,
+          Date: Date.now(),
+        })
+        .then(() => {
+          this.GetArtikliPica();
+        });
+      setTimeout(() => {
+        this.ArtiklOdustaniEdit();
+        this.showEdit = false;
+        document.getElementsByTagName("h1")[1].scrollIntoView();
+      }, 1000);
     },
   }, //  od methods
 };
