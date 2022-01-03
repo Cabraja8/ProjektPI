@@ -12,7 +12,7 @@
                   <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
                   <select
                     name="Odabir3"
-                    class="form-control"
+                    class="form-control w-50 mx-auto"
                     id="KategorijePrikaz4"
                     v-model="KategorijaPrikaz4"
                   >
@@ -30,7 +30,7 @@
                         form-group
                         container-fluid
                         padding
-                        w-80
+                        w-50
                         mx-auto
                         text-center
                       "
@@ -57,7 +57,7 @@
                         form-group
                         container-fluid
                         padding
-                        w-80
+                        w-50
                         mx-auto
                         text-center
                       "
@@ -767,6 +767,7 @@ export default {
     DeleteKategorijuJela(id) {
       db.collection("Jelo")
         .doc(id)
+
         .delete()
         .then(() => {
           this.GetKategorijuJela();
@@ -776,8 +777,10 @@ export default {
         this.KategorijaPrikaz3 = "";
       }, 100);
     },
+
     // BRISANJE KATEGORIJE PIĆA
     DeleteKategorijuPica(id) {
+      console.log(id);
       db.collection("Pica")
         .doc(id)
         .delete()
@@ -917,6 +920,7 @@ export default {
       this.KategorijaPrikaz3 = "";
       this.GetArtikliJela();
       this.GetArtikliPica();
+      this.Artikli = [];
     },
 
     // BRISANJE forme
