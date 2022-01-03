@@ -5,6 +5,57 @@
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
 
+    <select
+      name="Odabir5"
+      class="form-control w-50 mx-auto"
+      id="KategorijePrikaz4"
+      v-model="PrikazKategorije"
+    >
+      <option value="Jelo">Jelo</option>
+      <option value="Piće">Piće</option>
+    </select>
+    <template v-if="PrikazKategorije === 'Jelo'">
+      <div class="form-group">
+        <label for="kategorijeJela">Kategorija Jela:</label>
+        <select
+          class="form-control mx-auto w-50"
+          id="kategorijeJela"
+          v-model="KategorijaJelaPrikaz"
+        >
+          <option
+            v-for="KategorijaJela in KategorijeJela"
+            :key="KategorijaJela.id"
+          >
+            {{ KategorijaJela.NazivJela }}
+          </option>
+        </select>
+      </div>
+      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+      <div class="container"></div>
+      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+    </template>
+    <template v-if="PrikazKategorije === 'Piće'">
+      <div class="form-group">
+        <label for="kategorijePica">Kategorija Pića:</label>
+        <select
+          class="form-control mx-auto w-50"
+          id="kategorijePica"
+          v-model="KategorijaPicaPrikaz"
+          required
+        >
+          <option
+            v-for="KategorijePice in KategorijePica"
+            :key="KategorijePice.id"
+          >
+            {{ KategorijePice.NazivPica }}
+          </option>
+        </select>
+      </div>
+      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+      <div class="container"></div>
+      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+    </template>
+
     <div class="col-12 text-center mt-5">
       <h1 class="text-dark pt-4">Narući</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -60,14 +111,7 @@
             </div>
             <div class="form-group">
               <label for="kategorije">Kategorija Proizvoda:</label>
-              <select class="form-control" id="kategorije">
-                <option
-                  v-for="Kategorija in KategorijeJela"
-                  :key="Kategorija.id"
-                >
-                  {{ Kategorija.Naziv }}
-                </option>
-              </select>
+              <select class="form-control" id="kategorije"></select>
             </div>
             <div class="mb-4">
               <label for="jelo" class="form-label">Jelo:</label>
@@ -124,9 +168,20 @@ import { db } from "@/firebase";
 import { firebase } from "@/firebase";
 import Upravljaj from "@/views/Upravljaj.vue";
 import Artikl from "@/components/Artikl.vue";
+import { storage } from "@/firebase";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
 
 export default {
   name: "Narudzbe",
+  props: ["JeloPrikaz"],
+  props: ["ArtiklNaziv"],
+
   data() {
     return {
       Ime: "",
@@ -137,15 +192,29 @@ export default {
       Jelo: "",
       Pice: "",
       Napomena: "",
+      KategorijaJelaPrikaz: "",
+      KategorijaPicaPrikaz: "",
+
+      KategorijeJela: [],
+      KategorijePica: [],
+
+      ArtikliPolje: [],
+      PrikazKategorije: "",
+      PrikazKategorije1: "",
     };
   },
   mounted() {
-    this.GetKategoriju();
+    // this.GetKategoriju();
   },
   // props: ["ArtiklNaziv"],
   // props: ["KategorijaJela"],
   components: {
     Artikl,
+  },
+  mounted() {
+    // this.GetAllJela();
+    this.GetKategorijuJelaP();
+    this.GetKategorijuPicaP();
   },
   methods: {
     Posalji() {
@@ -160,6 +229,56 @@ export default {
         Napomena: this.Napomena,
         Date: Date.now(),
       });
+    },
+    GetAllJela() {
+      db.collection("Jelo")
+        .doc(this.PrikazKategorije)
+        .collection(this.PrikazKategorije)
+
+        .get()
+        .then((query) => {
+          this.ArtikliPolje = [];
+          query.forEach((doc) => {
+            this.ArtikliPolje.push({
+              id: doc.id,
+              Naziv: doc.data().Naziv,
+              KategorijaJela: doc.data().KategorijaJela,
+              Sastojci: doc.data().Sastojci,
+              Cijena: doc.data().Cijena,
+              Slika: doc.data().Slika,
+            });
+          });
+        });
+    },
+
+    GetKategorijuJelaP() {
+      db.collection("Jelo")
+        .orderBy("Date", "desc")
+        .get()
+        .then((query) => {
+          this.KategorijeJela = [];
+          query.forEach((doc) => {
+            this.KategorijeJela.push({
+              id: doc.id,
+              NazivJela: doc.data().NazivJela,
+            });
+          });
+        });
+    },
+
+    GetKategorijuPicaP() {
+      db.collection("Pica")
+        .orderBy("Date", "desc")
+        .get()
+        .then((query) => {
+          this.KategorijePica = [];
+          query.forEach((doc) => {
+            this.KategorijePica.push({
+              id: doc.id,
+              NazivPica: doc.data().NazivPica,
+            });
+          });
+        });
     },
 
     Odustani() {},

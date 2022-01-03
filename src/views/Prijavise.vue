@@ -39,7 +39,7 @@
             <button
               type="button"
               @click="logiranje"
-              class="btn btn-danger w-100"
+              class="btn btn-success w-100 mx-auto my-4 rounded"
             >
               Log in
             </button>
