@@ -12,7 +12,7 @@
           <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
           <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
 
-          <template>
+          <template v-if="user !== null">
             <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
               <div class="form-group">
                 <button
@@ -38,7 +38,7 @@
               </button>
             </template>
           </template>
-          <template>
+          <template v-if="user === null">
             <div class="form-group">
               <button class="btn btn-success btn-12-sm" @click="NaruciJelo">
                 Dodaj Jelo
@@ -64,6 +64,7 @@ export default {
       id: "",
       id2: "",
       artiklisve: [],
+      user: store.currentUser,
     };
   },
   components: {

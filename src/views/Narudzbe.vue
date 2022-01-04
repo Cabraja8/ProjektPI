@@ -4,32 +4,38 @@
       <h1 class="text-dark pt-4">Pregled</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-
-    <select
-      name="Odabir5"
-      class="form-control w-50 mx-auto"
-      id="KategorijePrikaz4"
-      v-model="PrikazKategorije"
-    >
-      <option value="Jelo">Jelo</option>
-      <option value="Piće">Piće</option>
-    </select>
+    <div class="form-group container-fluid padding w-50 mx-auto text-center">
+      <select
+        name="Odabir5"
+        class="form-control w-50 mx-auto"
+        id="KategorijePrikaz4"
+        v-model="PrikazKategorije"
+      >
+        <option value="Jelo">Jelo</option>
+        <option value="Piće">Piće</option>
+      </select>
+      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+    </div>
     <template v-if="PrikazKategorije === 'Jelo'">
       <div class="form-group">
         <label for="kategorijeJela">Kategorija Jela:</label>
-        <select
-          class="form-control mx-auto w-50"
-          id="kategorijeJela"
-          v-model="KategorijaJelaPrikaz"
-          @click="GetArtikliJela(KategorijaJelaPrikaz)"
+        <div
+          class="form-group container-fluid padding w-50 mx-auto text-center"
         >
-          <option
-            v-for="KategorijaJela in KategorijeJela"
-            :key="KategorijaJela.id"
+          <select
+            class="form-control w-50 mx-auto"
+            id="kategorijeJela"
+            v-model="KategorijaJelaPrikaz"
+            @click="GetArtikliJela(KategorijaJelaPrikaz)"
           >
-            {{ KategorijaJela.NazivJela }}
-          </option>
-        </select>
+            <option
+              v-for="KategorijaJela in KategorijeJela"
+              :key="KategorijaJela.id"
+            >
+              {{ KategorijaJela.NazivJela }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div class="container mt-5">
@@ -37,12 +43,10 @@
           <div class="border-top border-danger w-100 mx-auto my-3"></div>
           <div class="row">
             <Artikl
-              class="col-lg-3"
+              class="col-lg-3 col-md-6 col-sm-12"
               v-for="Artikla in Artikli"
               :key="Artikla.id"
               :ArtiklNaziv="Artikla"
-              v-on:brisi="DeleteArtiklJela($event)"
-              v-on:artikljelo="UrediArtiklJelo($event)"
             />
           </div>
           <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -52,23 +56,39 @@
     <template v-if="PrikazKategorije === 'Piće'">
       <div class="form-group">
         <label for="kategorijePica">Kategorija Pića:</label>
-        <select
-          class="form-control mx-auto w-50"
-          id="kategorijePica"
-          v-model="KategorijaPicaPrikaz"
-          required
+        <div
+          class="form-group container-fluid padding w-50 mx-auto text-center"
         >
-          <option
-            v-for="KategorijePice in KategorijePica"
-            :key="KategorijePice.id"
+          <select
+            class="form-control mx-auto w-50"
+            id="kategorijePica"
+            v-model="KategorijaPicaPrikaz"
+            required
+            @click="GetArtikliPica(KategorijaPicaPrikaz)"
           >
-            {{ KategorijePice.NazivPica }}
-          </option>
-        </select>
+            <option
+              v-for="KategorijePice in KategorijePica"
+              :key="KategorijePice.id"
+            >
+              {{ KategorijePice.NazivPica }}
+            </option>
+          </select>
+        </div>
+        <div class="container mt-5">
+          <div class="col-12 py-4 my-4 mx-auto md-3">
+            <div class="border-top border-danger w-100 mx-auto my-3"></div>
+            <div class="row">
+              <Artikl
+                class="col-lg-3 col-md-6 col-sm-12"
+                v-for="Artikla in Artikli"
+                :key="Artikla.id"
+                :ArtiklNaziv="Artikla"
+              />
+            </div>
+            <div class="border-top border-danger w-100 mx-auto my-3"></div>
+          </div>
+        </div>
       </div>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
-      <div class="container"></div>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </template>
 
     <div class="col-12 text-center mt-5">
@@ -122,28 +142,6 @@
                 v-model="Adresa"
                 class="form-control"
                 id="Adresa"
-              />
-            </div>
-            <div class="form-group">
-              <label for="kategorije">Kategorija Proizvoda:</label>
-              <select class="form-control" id="kategorije"></select>
-            </div>
-            <div class="mb-4">
-              <label for="jelo" class="form-label">Jelo:</label>
-              <input
-                type="jelo"
-                v-model="Jelo"
-                class="form-control"
-                id="jelo"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="pice" class="form-label">Piće:</label>
-              <input
-                type="pice"
-                v-model="Pice"
-                class="form-control"
-                id="pice"
               />
             </div>
             <div class="mb-4">
@@ -200,6 +198,7 @@ export default {
 
   data() {
     return {
+      //naruc
       Ime: "",
       Prezime: "",
       BrojTelefona: "",
@@ -208,6 +207,7 @@ export default {
       Jelo: "",
       Pice: "",
       Napomena: "",
+      //naruc
       KategorijaJelaPrikaz: "",
       KategorijaPicaPrikaz: "",
       Artikli: [],
@@ -234,6 +234,35 @@ export default {
     this.GetKategorijuPicaP();
   },
   methods: {
+    GetKategorijuJelaP() {
+      db.collection("Jelo")
+        .orderBy("Date", "desc")
+        .get()
+        .then((query) => {
+          this.KategorijeJela = [];
+          query.forEach((doc) => {
+            this.KategorijeJela.push({
+              id: doc.id,
+              NazivJela: doc.data().NazivJela,
+            });
+          });
+        });
+    },
+
+    GetKategorijuPicaP() {
+      db.collection("Pica")
+        .orderBy("Date", "desc")
+        .get()
+        .then((query) => {
+          this.KategorijePica = [];
+          query.forEach((doc) => {
+            this.KategorijePica.push({
+              id: doc.id,
+              NazivPica: doc.data().NazivPica,
+            });
+          });
+        });
+    },
     Posalji() {
       db.collection("Narudzbe").doc().set({
         Ime: this.Ime,
@@ -267,32 +296,22 @@ export default {
           });
         });
     },
-
-    GetKategorijuJelaP() {
-      db.collection("Jelo")
-        .orderBy("Date", "desc")
-        .get()
-        .then((query) => {
-          this.KategorijeJela = [];
-          query.forEach((doc) => {
-            this.KategorijeJela.push({
-              id: doc.id,
-              NazivJela: doc.data().NazivJela,
-            });
-          });
-        });
-    },
-
-    GetKategorijuPicaP() {
+    GetArtikliPica(KategorijaPrikaz3) {
       db.collection("Pica")
-        .orderBy("Date", "desc")
+        .doc(this.KategorijaPicaPrikaz)
+        .collection(this.KategorijaPicaPrikaz)
+
         .get()
         .then((query) => {
-          this.KategorijePica = [];
+          this.Artikli = [];
           query.forEach((doc) => {
-            this.KategorijePica.push({
+            this.Artikli.push({
               id: doc.id,
-              NazivPica: doc.data().NazivPica,
+              Naziv: doc.data().Naziv,
+              KategorijaPica: doc.data().KategorijaPica,
+              Sastojci: doc.data().Sastojci,
+              Cijena: doc.data().Cijena,
+              Slika: doc.data().Slika,
             });
           });
         });
