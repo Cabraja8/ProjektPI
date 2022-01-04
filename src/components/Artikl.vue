@@ -12,29 +12,38 @@
           <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
           <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
 
-          <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
-            <div class="form-group">
+          <template>
+            <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
+              <div class="form-group">
+                <button
+                  class="btn btn-success btn-12-sm"
+                  @click="EditArtiklClickJela"
+                >
+                  Uredi Jelo
+                </button>
+                <button class="btn btn-danger btn-12-sm" @click="NaziviJela">
+                  Obriši Jelo
+                </button>
+              </div>
+            </template>
+            <template v-else>
               <button
                 class="btn btn-success btn-12-sm"
-                @click="EditArtiklClickJela"
+                @click="EditArtiklClickPica"
               >
-                Uredi Jelo
+                Uredi Piće
               </button>
-              <button class="btn btn-danger btn-12-sm" @click="NaziviJela">
-                Obriši Jelo
+              <button class="btn btn-danger btn-12-sm" @click="NaziviPica">
+                Obriši Piće
+              </button>
+            </template>
+          </template>
+          <template>
+            <div class="form-group">
+              <button class="btn btn-success btn-12-sm" @click="NaruciJelo">
+                Dodaj Jelo
               </button>
             </div>
-          </template>
-          <template v-else>
-            <button
-              class="btn btn-success btn-12-sm"
-              @click="EditArtiklClickPica"
-            >
-              Uredi Piće
-            </button>
-            <button class="btn btn-danger btn-12-sm" @click="NaziviPica">
-              Obriši Piće
-            </button>
           </template>
         </div>
       </div>
@@ -44,6 +53,8 @@
 
 <script>
 import upravljaj from "@/views/Upravljaj.vue";
+import store from "@/store";
+import Narudzbe from "@/views/Narudzbe.vue";
 
 export default {
   name: "Artikl",
@@ -97,6 +108,7 @@ export default {
         })
       );
     },
+    NaruciJelo() {},
   }, //od Methods
 };
 </script>

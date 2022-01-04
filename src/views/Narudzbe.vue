@@ -21,6 +21,7 @@
           class="form-control mx-auto w-50"
           id="kategorijeJela"
           v-model="KategorijaJelaPrikaz"
+          @click="GetArtikliJela(KategorijaJelaPrikaz)"
         >
           <option
             v-for="KategorijaJela in KategorijeJela"
@@ -30,9 +31,23 @@
           </option>
         </select>
       </div>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
-      <div class="container"></div>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+
+      <div class="container mt-5">
+        <div class="col-12 py-4 my-4 mx-auto md-3">
+          <div class="border-top border-danger w-100 mx-auto my-3"></div>
+          <div class="row">
+            <Artikl
+              class="col-lg-3"
+              v-for="Artikla in Artikli"
+              :key="Artikla.id"
+              :ArtiklNaziv="Artikla"
+              v-on:brisi="DeleteArtiklJela($event)"
+              v-on:artikljelo="UrediArtiklJelo($event)"
+            />
+          </div>
+          <div class="border-top border-danger w-100 mx-auto my-3"></div>
+        </div>
+      </div>
     </template>
     <template v-if="PrikazKategorije === 'Piće'">
       <div class="form-group">
@@ -169,6 +184,7 @@ import { firebase } from "@/firebase";
 import Upravljaj from "@/views/Upravljaj.vue";
 import Artikl from "@/components/Artikl.vue";
 import { storage } from "@/firebase";
+import store from "@/store";
 import {
   getStorage,
   ref,
@@ -194,6 +210,8 @@ export default {
       Napomena: "",
       KategorijaJelaPrikaz: "",
       KategorijaPicaPrikaz: "",
+      Artikli: [],
+      KategorijaPrikaz3: "",
 
       KategorijeJela: [],
       KategorijePica: [],
@@ -212,7 +230,6 @@ export default {
     Artikl,
   },
   mounted() {
-    // this.GetAllJela();
     this.GetKategorijuJelaP();
     this.GetKategorijuPicaP();
   },
@@ -230,16 +247,16 @@ export default {
         Date: Date.now(),
       });
     },
-    GetAllJela() {
+    GetArtikliJela(KategorijaJelaPrikaz) {
       db.collection("Jelo")
-        .doc(this.PrikazKategorije)
-        .collection(this.PrikazKategorije)
+        .doc(this.KategorijaJelaPrikaz)
+        .collection(this.KategorijaJelaPrikaz)
 
         .get()
         .then((query) => {
-          this.ArtikliPolje = [];
+          this.Artikli = [];
           query.forEach((doc) => {
-            this.ArtikliPolje.push({
+            this.Artikli.push({
               id: doc.id,
               Naziv: doc.data().Naziv,
               KategorijaJela: doc.data().KategorijaJela,
