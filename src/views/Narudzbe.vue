@@ -97,11 +97,12 @@
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
     <div class="container mt-5">
-      <Artikl
+      <!-- <Artikl
         class="col-lg-3 col-md-6 col-sm-12"
         v-for="Artikli in ArtikliPolje"
         :key="Artikli.id"
-      />
+        :ArtiklNaziv="Artikla"
+      /> -->
     </div>
     <div class="border-top border-danger w-100 mx-auto my-3"></div>
     <div class="container py-6 padding py-4 my-4">
@@ -246,6 +247,7 @@ export default {
   mounted() {
     this.GetKategorijuJelaP();
     this.GetKategorijuPicaP();
+    this.GetDodanaJela();
   },
   methods: {
     GetKategorijuJelaP() {
@@ -332,12 +334,44 @@ export default {
     },
 
     DodajJelo(narucij) {
-      this.ArtikliPolje.push({
-        // idj: this.narucij.idjs,
-        nazivj: this.narucij.NazivJs,
-        sastojcij: this.narucij.SastojciJs,
-        cijenaj: this.narucij.CijenaJs,
-      });
+      (this.idj = narucij.idjs),
+        (this.nazivj = narucij.NazivJs),
+        (this.sastojcij = narucij.SastojciJs),
+        (this.cijenaj = narucij.CijenaJs),
+        (this.slikaj = narucij.SlikaJs);
+      console.log(this.idj);
+
+      db.collection("JeloNaruci")
+        .doc()
+        .set({
+          id: this.idj,
+          Naziv: this.nazivj,
+          Sastojci: this.sastojcij,
+          Cijena: this.cijenaj,
+          Slika: this.slikaj,
+
+          Date: Date.now(),
+        })
+        .then(() => {
+          this.GetDodanaJela();
+        });
+    },
+    GetDodanaJela() {
+      db.collection("JeloNaruci")
+        .doc()
+        .get()
+        .then((query) => {
+          this.ArtikliPolje = [];
+          query.forEach((doc) => {
+            this.ArtikliPolje.push({
+              id: doc.id,
+              Naziv: doc.data().Naziv,
+              Sastojci: doc.data().Sastojci,
+              Cijena: doc.data().Cijena,
+              Slika: doc.data().Slika,
+            });
+          });
+        });
     },
 
     Odustani() {},

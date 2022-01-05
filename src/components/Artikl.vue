@@ -120,14 +120,15 @@ export default {
     },
     NaruciJelo() {
       this.id = this.ArtiklNaziv.id;
-
+      console.log("test", this.id);
       this.$emit(
         "jelonaruci",
         (this.narucij = {
-          // idjs: this.ArtiklNaziv.id,
+          idjs: this.id,
           NazivJs: this.ArtiklNaziv.Naziv,
           SastojciJs: this.ArtiklNaziv.Sastojci,
           CijenaJs: this.ArtiklNaziv.Cijena,
+          SlikaJs: this.ArtiklNaziv.Slika,
         })
       );
     },
