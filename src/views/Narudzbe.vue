@@ -47,6 +47,7 @@
               v-for="Artikla in Artikli"
               :key="Artikla.id"
               :ArtiklNaziv="Artikla"
+              v-on:jelonaruci="DodajJelo($event)"
             />
           </div>
           <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -92,9 +93,17 @@
     </template>
 
     <div class="col-12 text-center mt-5">
-      <h1 class="text-dark pt-4">Narući</h1>
+      <h1 class="text-dark pt-4">Tvoj Odabir</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
+    <div class="container mt-5">
+      <Artikl
+        class="col-lg-3 col-md-6 col-sm-12"
+        v-for="Artikli in ArtikliPolje"
+        :key="Artikli.id"
+      />
+    </div>
+    <div class="border-top border-danger w-100 mx-auto my-3"></div>
     <div class="container py-6 padding py-4 my-4">
       <div
         class="
@@ -219,6 +228,11 @@ export default {
       ArtikliPolje: [],
       PrikazKategorije: "",
       PrikazKategorije1: "",
+
+      idj: "",
+      nazivj: "",
+      sastojcij: "",
+      cijenaj: "",
     };
   },
   mounted() {
@@ -315,6 +329,15 @@ export default {
             });
           });
         });
+    },
+
+    DodajJelo(narucij) {
+      this.ArtikliPolje.push({
+        // idj: this.narucij.idjs,
+        nazivj: this.narucij.NazivJs,
+        sastojcij: this.narucij.SastojciJs,
+        cijenaj: this.narucij.CijenaJs,
+      });
     },
 
     Odustani() {},

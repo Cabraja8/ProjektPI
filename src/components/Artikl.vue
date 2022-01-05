@@ -39,11 +39,20 @@
             </template>
           </template>
           <template v-if="user === null">
-            <div class="form-group">
-              <button class="btn btn-success btn-12-sm" @click="NaruciJelo">
-                Dodaj Jelo
-              </button>
-            </div>
+            <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
+              <div class="form-group">
+                <button class="btn btn-success w-50 btn-sm" @click="NaruciJelo">
+                  +
+                </button>
+              </div>
+            </template>
+            <template v-else>
+              <div class="form-group">
+                <button class="btn btn-success btn-12-sm" @click="NaruciPice">
+                  +
+                </button>
+              </div>
+            </template>
           </template>
         </div>
       </div>
@@ -109,7 +118,21 @@ export default {
         })
       );
     },
-    NaruciJelo() {},
+    NaruciJelo() {
+      this.id = this.ArtiklNaziv.id;
+
+      this.$emit(
+        "jelonaruci",
+        (this.narucij = {
+          // idjs: this.ArtiklNaziv.id,
+          NazivJs: this.ArtiklNaziv.Naziv,
+          SastojciJs: this.ArtiklNaziv.Sastojci,
+          CijenaJs: this.ArtiklNaziv.Cijena,
+        })
+      );
+    },
+
+    NaruciPice() {},
   }, //od Methods
 };
 </script>

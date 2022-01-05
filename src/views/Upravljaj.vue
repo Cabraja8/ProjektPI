@@ -109,7 +109,7 @@
                     ></div>
                     <div class="row">
                       <Artikl
-                        class="col-lg-3 col-md-6"
+                        class="col-lg-3 col-md-6 col-sm-12"
                         v-for="Artikla in Artikli"
                         :key="Artikla.id"
                         :ArtiklNaziv="Artikla"
