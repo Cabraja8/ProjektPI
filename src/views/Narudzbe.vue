@@ -93,16 +93,20 @@
     </template>
 
     <div class="col-12 text-center mt-5">
-      <h1 class="text-dark pt-4">Tvoj Odabir</h1>
+      <h1 class="text-dark pt-4">Vaš Odabir</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
     <div class="container mt-5">
-      <!-- <Artikl
-        class="col-lg-3 col-md-6 col-sm-12"
-        v-for="Artikli in ArtikliPolje"
-        :key="Artikli.id"
-        :ArtiklNaziv="Artikla"
-      /> -->
+      <div class="col-12 py-4 my-4 mx-auto md-3">
+        <div class="row">
+          <Artikl
+            class="col-lg-3 col-md-6 col-sm-12"
+            v-for="Artikla in ArtikliPolje"
+            :key="Artikla.id"
+            :ArtiklNaziv="Artikla"
+          />
+        </div>
+      </div>
     </div>
     <div class="border-top border-danger w-100 mx-auto my-3"></div>
     <div class="container py-6 padding py-4 my-4">
@@ -343,6 +347,7 @@ export default {
 
       db.collection("JeloNaruci")
         .doc()
+
         .set({
           id: this.idj,
           Naziv: this.nazivj,
@@ -358,7 +363,7 @@ export default {
     },
     GetDodanaJela() {
       db.collection("JeloNaruci")
-        .doc()
+
         .get()
         .then((query) => {
           this.ArtikliPolje = [];
