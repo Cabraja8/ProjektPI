@@ -251,7 +251,6 @@ export default {
   mounted() {
     this.GetKategorijuJelaP();
     this.GetKategorijuPicaP();
-    this.GetDodanaJela();
   },
   methods: {
     GetKategorijuJelaP() {
@@ -345,38 +344,20 @@ export default {
         (this.slikaj = narucij.SlikaJs);
       console.log(this.idj);
 
-      db.collection("JeloNaruci")
-        .doc()
+      let CartItem = this.idj === this.ArtikliPolje.id;
 
-        .set({
+      if (CartItem) {
+        console.log("test");
+      } else {
+        this.ArtikliPolje.push({
           id: this.idj,
           Naziv: this.nazivj,
           Sastojci: this.sastojcij,
           Cijena: this.cijenaj,
           Slika: this.slikaj,
-
-          Date: Date.now(),
-        })
-        .then(() => {
-          this.GetDodanaJela();
         });
-    },
-    GetDodanaJela() {
-      db.collection("JeloNaruci")
-
-        .get()
-        .then((query) => {
-          this.ArtikliPolje = [];
-          query.forEach((doc) => {
-            this.ArtikliPolje.push({
-              id: doc.id,
-              Naziv: doc.data().Naziv,
-              Sastojci: doc.data().Sastojci,
-              Cijena: doc.data().Cijena,
-              Slika: doc.data().Slika,
-            });
-          });
-        });
+      }
+      console.log(this.ArtikliPolje);
     },
 
     Odustani() {},
