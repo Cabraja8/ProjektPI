@@ -39,18 +39,49 @@
             </template>
           </template>
           <template v-if="user === null">
-            <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
+            <template v-if="ArtiklNaziv.KategorijaJela">
               <div class="form-group">
                 <button class="btn btn-success w-50 btn-sm" @click="NaruciJelo">
-                  +
+                  Dodaj Jelo
                 </button>
               </div>
             </template>
-            <template v-else>
+            <template v-if="ArtiklNaziv.KategorijaPica">
               <div class="form-group">
-                <button class="btn btn-success btn-12-sm" @click="NaruciPice">
-                  +
+                <button class="btn btn-success btn-sm" @click="NaruciPice">
+                  Dodaj Piće
                 </button>
+              </div>
+            </template>
+            <template
+              v-if="!ArtiklNaziv.KategorijaPica && !ArtiklNaziv.KategorijaJela"
+            >
+              <div class="mx-auto container-fluid">
+                <div class="row">
+                  <button
+                    class="
+                      btn btn-danger
+                      rounded
+                      col-md-4 col-sm-4 col-lg-4 col-sm-4 col
+                    "
+                  >
+                    -
+                  </button>
+
+                  <div class="col col-md-4 col-lg-4 col-sm-4">
+                    <h4 class="h4">1</h4>
+                  </div>
+
+                  <button
+                    class="
+                      btn btn-success
+                      rounded
+                      col-md-4 col-sm-4 col-lg-4 col-sm-4 col
+                    "
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </template>
           </template>
@@ -133,7 +164,21 @@ export default {
       );
     },
 
-    NaruciPice() {},
+    NaruciPice() {
+      this.id2 = this.ArtiklNaziv.id;
+
+      console.log("test", this.id2);
+      this.$emit(
+        "picenaruci",
+        (this.narucip = {
+          idps: this.id2,
+          NazivPs: this.ArtiklNaziv.Naziv,
+          SastojciPs: this.ArtiklNaziv.Sastojci,
+          CijenaPs: this.ArtiklNaziv.Cijena,
+          SlikaPs: this.ArtiklNaziv.Slika,
+        })
+      );
+    },
   }, //od Methods
 };
 </script>

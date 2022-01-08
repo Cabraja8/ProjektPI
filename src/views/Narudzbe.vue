@@ -84,6 +84,7 @@
                 v-for="Artikla in Artikli"
                 :key="Artikla.id"
                 :ArtiklNaziv="Artikla"
+                v-on:picenaruci="DodajPice($event)"
               />
             </div>
             <div class="border-top border-danger w-100 mx-auto my-3"></div>
@@ -108,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div class="border-top border-danger w-100 mx-auto my-3"></div>
+
     <div class="container py-6 padding py-4 my-4">
       <div
         class="
@@ -167,14 +168,16 @@
                 id="Napomena"
               />
             </div>
-            <div class="mb-4">
-              <label for="Iznos" class="form-label">Iznos:</label>
-            </div>
-            <div class="mb-4">
-              <label for="Iznoskn" class="form-label"> 0,00</label>
-            </div>
-            <div class="mb-4">
-              <label for="HRK" class="form-label">HRK</label>
+            <div class="col">
+              <div class="row">
+                <div class="mb-4">
+                  <label for="Iznos" class="form-label">Iznos:</label>
+
+                  <label for="Iznoskn" class="form-label"> 0,00</label>
+
+                  <label for="HRK" class="form-label">HRK</label>
+                </div>
+              </div>
             </div>
             <button type="button" @click="Odustani" class="btn btn-danger w-50">
               Odustani
@@ -238,6 +241,11 @@ export default {
       nazivj: "",
       sastojcij: "",
       cijenaj: "",
+
+      idp: "",
+      nazivp: "",
+      sastojcip: "",
+      cijenap: "",
     };
   },
   mounted() {
@@ -344,20 +352,38 @@ export default {
         (this.slikaj = narucij.SlikaJs);
       console.log(this.idj);
 
-      let CartItem = this.idj === this.ArtikliPolje.id;
+      let kolicina = 1;
 
-      if (CartItem) {
-        console.log("test");
-      } else {
-        this.ArtikliPolje.push({
-          id: this.idj,
-          Naziv: this.nazivj,
-          Sastojci: this.sastojcij,
-          Cijena: this.cijenaj,
-          Slika: this.slikaj,
-        });
-      }
+      this.ArtikliPolje.push({
+        id: this.idj,
+        Naziv: this.nazivj,
+        Sastojci: this.sastojcij,
+        Cijena: this.cijenaj,
+        Slika: this.slikaj,
+        kolicina: this.kolicina,
+      });
+
       console.log(this.ArtikliPolje);
+    },
+    DodajPice(narucip) {
+      (this.idp = narucip.idps),
+        (this.nazivp = narucip.NazivPs),
+        (this.sastojcip = narucip.SastojciPs),
+        (this.cijenap = narucip.CijenaPs),
+        (this.slikap = narucip.SlikaPs);
+
+      let kolicina = 1;
+
+      console.log("test2", narucip.idps);
+
+      this.ArtikliPolje.push({
+        id: this.idp,
+        Naziv: this.nazivp,
+        Sastojci: this.sastojcip,
+        Cijena: this.cijenap,
+        Slika: this.slikap,
+        kolicina: this.kolicina,
+      });
     },
 
     Odustani() {},
