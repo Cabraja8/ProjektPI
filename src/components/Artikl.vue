@@ -15,15 +15,22 @@
           <template v-if="user !== null">
             <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
               <div class="form-group">
-                <button
-                  class="btn btn-success btn-12-sm"
-                  @click="EditArtiklClickJela"
-                >
-                  Uredi Jelo
-                </button>
-                <button class="btn btn-danger btn-12-sm" @click="NaziviJela">
-                  Obriši Jelo
-                </button>
+                <div class="row">
+                  <div class="col">
+                    <button
+                      class="btn btn-success"
+                      @click="EditArtiklClickJela"
+                    >
+                      Uredi Jelo
+                    </button>
+                    <button
+                      class="btn btn-danger btn-12-sm"
+                      @click="NaziviJela"
+                    >
+                      Obriši Jelo
+                    </button>
+                  </div>
+                </div>
               </div>
             </template>
             <template v-else>
@@ -41,20 +48,14 @@
           <template v-if="user === null">
             <template v-if="ArtiklNaziv.KategorijaJela">
               <div class="form-group">
-                <button
-                  class="btn btn-success w-50 btn-sm"
-                  @click="NaruciJelo(id)"
-                >
+                <button class="btn btn-success w-50 btn-sm" @click="NaruciJelo">
                   Dodaj Jelo
                 </button>
               </div>
             </template>
             <template v-if="ArtiklNaziv.KategorijaPica">
               <div class="form-group">
-                <button
-                  class="btn btn-success w-50 btn-sm"
-                  @click="NaruciPice(id2)"
-                >
+                <button class="btn btn-success w-50 btn-sm" @click="NaruciPice">
                   Dodaj Piće
                 </button>
               </div>
@@ -139,7 +140,8 @@ export default {
           ide: this.ArtiklNaziv.id,
           NazivJ: this.ArtiklNaziv.Naziv,
           SastojciJ: this.ArtiklNaziv.Sastojci,
-          CijenaP: this.ArtiklNaziv.Cijena,
+          CijenaJ: this.ArtiklNaziv.Cijena,
+          KolicinaJ: this.Kolicina,
         })
       );
     },
@@ -154,7 +156,7 @@ export default {
           NazivP: this.ArtiklNaziv.Naziv,
           SastojciP: this.ArtiklNaziv.Sastojci,
           CijenaP: this.ArtiklNaziv.Cijena,
-          KolicinaP: this.ArtiklNaziv.kolicina,
+          KolicinaP: this.kolicina,
         })
       );
     },
@@ -207,7 +209,8 @@ export default {
 
       if (this.kolicina === 0) {
         console.log("nula");
-        this.$emit();
+
+        this.$emit("nulaje", this.ArtiklNaziv.id);
       }
     },
   }, //od Methods

@@ -105,6 +105,7 @@
             v-for="Artikla in ArtikliPolje"
             :key="Artikla.id"
             :ArtiklNaziv="Artikla"
+            v-on:nulaje="NulaBrisi($event)"
           />
         </div>
       </div>
@@ -380,8 +381,6 @@ export default {
         (this.slikap = narucip.SlikaPs),
         (this.kolicinap = narucip.KolicinaPs);
 
-      let kolicina = 1;
-
       console.log("test2", narucip.idps);
 
       this.ArtikliPolje.push({
@@ -390,8 +389,22 @@ export default {
         Sastojci: this.sastojcip,
         Cijena: this.cijenap,
         Slika: this.slikap,
-        Kolicina: this.kolicinap,
+        kolicina: this.kolicinap,
       });
+    },
+
+    NulaBrisi(id) {
+      console.log("nula je obrisi");
+      console.log(" testiranje", id);
+      console.log("polje", this.ArtikliPolje.id);
+
+      let t = "";
+
+      for (let i in this.ArtikliPolje) {
+        t += this.ArtikliPolje[i];
+        console.log("i=", i);
+      }
+      console.log("t=", t);
     },
 
     Odustani() {},
