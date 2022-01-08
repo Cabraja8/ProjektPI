@@ -241,11 +241,13 @@ export default {
       nazivj: "",
       sastojcij: "",
       cijenaj: "",
+      kolicinaj: "",
 
       idp: "",
       nazivp: "",
       sastojcip: "",
       cijenap: "",
+      kolicinap: "",
     };
   },
   mounted() {
@@ -319,6 +321,7 @@ export default {
               Sastojci: doc.data().Sastojci,
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
+              Kolicina: doc.data().Kolicina,
             });
           });
         });
@@ -339,6 +342,7 @@ export default {
               Sastojci: doc.data().Sastojci,
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
+              Kolicina: doc.data().Kolicina,
             });
           });
         });
@@ -349,10 +353,13 @@ export default {
         (this.nazivj = narucij.NazivJs),
         (this.sastojcij = narucij.SastojciJs),
         (this.cijenaj = narucij.CijenaJs),
-        (this.slikaj = narucij.SlikaJs);
+        (this.slikaj = narucij.SlikaJs),
+        (this.kolicinaj = narucij.KolicinaJs);
+
       console.log(this.idj);
 
       let kolicina = 1;
+      console.log(this.kolicinaj);
 
       this.ArtikliPolje.push({
         id: this.idj,
@@ -360,7 +367,7 @@ export default {
         Sastojci: this.sastojcij,
         Cijena: this.cijenaj,
         Slika: this.slikaj,
-        kolicina: this.kolicina,
+        kolicina: this.kolicinaj,
       });
 
       console.log(this.ArtikliPolje);
@@ -370,7 +377,8 @@ export default {
         (this.nazivp = narucip.NazivPs),
         (this.sastojcip = narucip.SastojciPs),
         (this.cijenap = narucip.CijenaPs),
-        (this.slikap = narucip.SlikaPs);
+        (this.slikap = narucip.SlikaPs),
+        (this.kolicinap = narucip.KolicinaPs);
 
       let kolicina = 1;
 
@@ -382,7 +390,7 @@ export default {
         Sastojci: this.sastojcip,
         Cijena: this.cijenap,
         Slika: this.slikap,
-        kolicina: this.kolicina,
+        Kolicina: this.kolicinap,
       });
     },
 

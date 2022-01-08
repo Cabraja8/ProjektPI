@@ -645,6 +645,7 @@ export default {
       showEdit: true,
 
       Artikli: [],
+      Kolicina: 1,
     };
   },
   props: {
@@ -780,7 +781,6 @@ export default {
 
     // BRISANJE KATEGORIJE PIĆA
     DeleteKategorijuPica(id) {
-      console.log(id);
       db.collection("Pica")
         .doc(id)
         .delete()
@@ -813,6 +813,7 @@ export default {
                   KategorijaJela: this.KategorijaPrikaz,
                   Cijena: this.Cijena,
                   Slika: url,
+                  Kolicina: this.Kolicina,
                   Date: Date.now(),
                 })
                 .then(() => {
@@ -852,6 +853,7 @@ export default {
                   KategorijaPica: this.KategorijaPrikaz,
                   Cijena: this.Cijena,
                   Slika: url,
+                  Kolicina: this.Kolicina,
                   Date: Date.now(),
                 })
                 .then(() => {
@@ -888,6 +890,7 @@ export default {
               Sastojci: doc.data().Sastojci,
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
+              Kolicina: doc.data().Kolicina,
             });
           });
         });
@@ -911,6 +914,7 @@ export default {
               Sastojci: doc.data().Sastojci,
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
+              Kolicina: doc.data().Kolicina,
             });
           });
         });

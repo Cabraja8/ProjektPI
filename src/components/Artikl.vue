@@ -41,14 +41,20 @@
           <template v-if="user === null">
             <template v-if="ArtiklNaziv.KategorijaJela">
               <div class="form-group">
-                <button class="btn btn-success w-50 btn-sm" @click="NaruciJelo">
+                <button
+                  class="btn btn-success w-50 btn-sm"
+                  @click="NaruciJelo(id)"
+                >
                   Dodaj Jelo
                 </button>
               </div>
             </template>
             <template v-if="ArtiklNaziv.KategorijaPica">
               <div class="form-group">
-                <button class="btn btn-success btn-sm" @click="NaruciPice">
+                <button
+                  class="btn btn-success w-50 btn-sm"
+                  @click="NaruciPice(id2)"
+                >
                   Dodaj Piće
                 </button>
               </div>
@@ -64,20 +70,20 @@
                       rounded
                       col-md-4 col-sm-4 col-lg-4 col-sm-4 col
                     "
+                    @click="Smanji(id)"
                   >
                     -
                   </button>
-
                   <div class="col col-md-4 col-lg-4 col-sm-4">
-                    <h4 class="h4">1</h4>
+                    <h4 class="h4">{{ this.kolicina }}</h4>
                   </div>
-
                   <button
                     class="
                       btn btn-success
                       rounded
                       col-md-4 col-sm-4 col-lg-4 col-sm-4 col
                     "
+                    @click="Povecaj(id)"
                   >
                     +
                   </button>
@@ -105,6 +111,8 @@ export default {
       id2: "",
       artiklisve: [],
       user: store.currentUser,
+      kolicina: this.ArtiklNaziv.kolicina,
+      cijena: this.ArtiklNaziv.Cijena,
     };
   },
   components: {
@@ -131,7 +139,7 @@ export default {
           ide: this.ArtiklNaziv.id,
           NazivJ: this.ArtiklNaziv.Naziv,
           SastojciJ: this.ArtiklNaziv.Sastojci,
-          CijenaJ: this.ArtiklNaziv.Cijena,
+          CijenaP: this.ArtiklNaziv.Cijena,
         })
       );
     },
@@ -146,12 +154,15 @@ export default {
           NazivP: this.ArtiklNaziv.Naziv,
           SastojciP: this.ArtiklNaziv.Sastojci,
           CijenaP: this.ArtiklNaziv.Cijena,
+          KolicinaP: this.ArtiklNaziv.kolicina,
         })
       );
     },
     NaruciJelo() {
       this.id = this.ArtiklNaziv.id;
+      this.Kolicina = this.ArtiklNaziv.Kolicina;
       console.log("test", this.id);
+
       this.$emit(
         "jelonaruci",
         (this.narucij = {
@@ -160,14 +171,16 @@ export default {
           SastojciJs: this.ArtiklNaziv.Sastojci,
           CijenaJs: this.ArtiklNaziv.Cijena,
           SlikaJs: this.ArtiklNaziv.Slika,
+          KolicinaJs: this.Kolicina,
         })
       );
     },
 
     NaruciPice() {
       this.id2 = this.ArtiklNaziv.id;
-
+      this.Kolicina = this.ArtiklNaziv.Kolicina;
       console.log("test", this.id2);
+
       this.$emit(
         "picenaruci",
         (this.narucip = {
@@ -176,8 +189,26 @@ export default {
           SastojciPs: this.ArtiklNaziv.Sastojci,
           CijenaPs: this.ArtiklNaziv.Cijena,
           SlikaPs: this.ArtiklNaziv.Slika,
+          KolicinaPs: this.Kolicina,
         })
       );
+    },
+
+    Povecaj(id) {
+      this.kolicina = this.kolicina + 1;
+
+      this.ArtiklNaziv.Cijena = parseInt(this.cijena * this.kolicina);
+    },
+
+    Smanji(id) {
+      this.kolicina = this.kolicina - 1;
+
+      this.ArtiklNaziv.Cijena = parseInt(this.cijena * this.kolicina);
+
+      if (this.kolicina === 0) {
+        console.log("nula");
+        this.$emit();
+      }
     },
   }, //od Methods
 };
