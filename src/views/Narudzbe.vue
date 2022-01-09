@@ -394,21 +394,19 @@ export default {
     },
 
     NulaBrisi(id) {
-      console.log("nula je obrisi");
-      console.log(" testiranje", id);
-      console.log("polje", this.ArtikliPolje.id);
-
       let t = "";
 
-      for (let i in this.ArtikliPolje) {
-        t += this.ArtikliPolje[i];
-        console.log("i=", i);
+      for (let i = 0; i < this.ArtikliPolje.length; i++) {
+        if (id === this.ArtikliPolje[i].id) {
+          delete this.ArtikliPolje[i];
+          this.ArtikliPolje.splice(i, 1);
+        }
       }
-      console.log("t=", t);
+      console.log(this.ArtikliPolje);
     },
 
     Odustani() {},
-  },
+  }, // od methods
 };
 </script>
 

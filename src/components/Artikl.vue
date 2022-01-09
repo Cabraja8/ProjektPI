@@ -69,20 +69,20 @@
                     class="
                       btn btn-danger
                       rounded
-                      col-md-4 col-sm-4 col-lg-4 col-sm-4 col
+                      col-md-4 col-sm-4 col-lg-3 col-sm-4 col
                     "
                     @click="Smanji(id)"
                   >
                     -
                   </button>
-                  <div class="col col-md-4 col-lg-4 col-sm-4">
-                    <h4 class="h4">{{ this.kolicina }}</h4>
+                  <div class="col col-md-4 col-lg-6 col-sm-4">
+                    <h5 class="h5">{{ this.kolicina }}</h5>
                   </div>
                   <button
                     class="
                       btn btn-success
                       rounded
-                      col-md-4 col-sm-4 col-lg-4 col-sm-4 col
+                      col-md-4 col-sm-4 col-lg-3 col-sm-4 col
                     "
                     @click="Povecaj(id)"
                   >
