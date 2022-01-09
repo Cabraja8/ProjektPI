@@ -47,11 +47,17 @@
           </template>
           <template v-if="user === null">
             <template v-if="ArtiklNaziv.KategorijaJela">
-              <div class="form-group">
-                <button class="btn btn-success w-50 btn-sm" @click="NaruciJelo">
-                  Dodaj Jelo
-                </button>
-              </div>
+              <template v-if="!dodan">
+                <div class="form-group">
+                  <button
+                    class="btn btn-success w-50 btn-sm"
+                    @click="NaruciJelo"
+                  >
+                    Dodaj Jelo
+                  </button>
+                </div>
+              </template>
+              <template v-else> Dodan </template>
             </template>
             <template v-if="ArtiklNaziv.KategorijaPica">
               <div class="form-group">
@@ -110,7 +116,7 @@ export default {
     return {
       id: "",
       id2: "",
-      artiklisve: [],
+      dodan: false,
       user: store.currentUser,
       kolicina: this.ArtiklNaziv.kolicina,
       cijena: this.ArtiklNaziv.Cijena,
@@ -165,6 +171,8 @@ export default {
       this.Kolicina = this.ArtiklNaziv.Kolicina;
       console.log("test", this.id);
 
+      this.dodan = true;
+
       this.$emit(
         "jelonaruci",
         (this.narucij = {
@@ -208,8 +216,9 @@ export default {
       this.ArtiklNaziv.Cijena = parseInt(this.cijena * this.kolicina);
 
       if (this.kolicina === 0) {
-        console.log("nula");
+        this.dodan = false;
 
+        console.log("test", this.dodan);
         this.$emit("nulaje", this.ArtiklNaziv.id);
       }
     },

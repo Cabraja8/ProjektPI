@@ -357,11 +357,6 @@ export default {
         (this.slikaj = narucij.SlikaJs),
         (this.kolicinaj = narucij.KolicinaJs);
 
-      console.log(this.idj);
-
-      let kolicina = 1;
-      console.log(this.kolicinaj);
-
       this.ArtikliPolje.push({
         id: this.idj,
         Naziv: this.nazivj,
@@ -394,8 +389,6 @@ export default {
     },
 
     NulaBrisi(id) {
-      let t = "";
-
       for (let i = 0; i < this.ArtikliPolje.length; i++) {
         if (id === this.ArtikliPolje[i].id) {
           delete this.ArtikliPolje[i];
