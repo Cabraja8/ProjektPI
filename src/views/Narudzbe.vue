@@ -243,19 +243,18 @@ export default {
       sastojcij: "",
       cijenaj: "",
       kolicinaj: "",
+      dodanj: "",
 
       idp: "",
       nazivp: "",
       sastojcip: "",
       cijenap: "",
       kolicinap: "",
+      dodanp: "",
     };
   },
-  mounted() {
-    // this.GetKategoriju();
-  },
-  // props: ["ArtiklNaziv"],
-  // props: ["KategorijaJela"],
+  mounted() {},
+
   components: {
     Artikl,
   },
@@ -323,6 +322,7 @@ export default {
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
               Kolicina: doc.data().Kolicina,
+              dodan: doc.data().dodan,
             });
           });
         });
@@ -344,6 +344,7 @@ export default {
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
               Kolicina: doc.data().Kolicina,
+              dodan: doc.data().dodan,
             });
           });
         });
@@ -356,6 +357,7 @@ export default {
         (this.cijenaj = narucij.CijenaJs),
         (this.slikaj = narucij.SlikaJs),
         (this.kolicinaj = narucij.KolicinaJs);
+      this.dodanj = narucij.dodanJs;
 
       this.ArtikliPolje.push({
         id: this.idj,
@@ -364,6 +366,7 @@ export default {
         Cijena: this.cijenaj,
         Slika: this.slikaj,
         kolicina: this.kolicinaj,
+        dodan: this.dodanj,
       });
 
       console.log(this.ArtikliPolje);
@@ -375,8 +378,7 @@ export default {
         (this.cijenap = narucip.CijenaPs),
         (this.slikap = narucip.SlikaPs),
         (this.kolicinap = narucip.KolicinaPs);
-
-      console.log("test2", narucip.idps);
+      this.dodanp = narucip.dodanPs;
 
       this.ArtikliPolje.push({
         id: this.idp,
@@ -385,6 +387,7 @@ export default {
         Cijena: this.cijenap,
         Slika: this.slikap,
         kolicina: this.kolicinap,
+        dodan: this.dodanp,
       });
     },
 

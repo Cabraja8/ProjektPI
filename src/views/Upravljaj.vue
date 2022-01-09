@@ -646,6 +646,7 @@ export default {
 
       Artikli: [],
       Kolicina: 1,
+      dodan: false,
     };
   },
   props: {
@@ -814,6 +815,7 @@ export default {
                   Cijena: this.Cijena,
                   Slika: url,
                   Kolicina: this.Kolicina,
+                  dodan: this.dodan,
                   Date: Date.now(),
                 })
                 .then(() => {
@@ -854,6 +856,7 @@ export default {
                   Cijena: this.Cijena,
                   Slika: url,
                   Kolicina: this.Kolicina,
+                  dodan: this.dodan,
                   Date: Date.now(),
                 })
                 .then(() => {
@@ -891,6 +894,7 @@ export default {
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
               Kolicina: doc.data().Kolicina,
+              dodan: doc.data().dodan,
             });
           });
         });
@@ -915,6 +919,7 @@ export default {
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
               Kolicina: doc.data().Kolicina,
+              dodan: doc.data().dodan,
             });
           });
         });
