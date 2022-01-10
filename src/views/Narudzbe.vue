@@ -359,6 +359,14 @@ export default {
         (this.kolicinaj = narucij.KolicinaJs);
       this.dodanj = narucij.dodanJs;
 
+      for (let i = 0; i < this.ArtikliPolje.length; i++) {
+        if (this.idj === this.ArtikliPolje[i].id) {
+          this.$emit("povecaj", this.idj);
+          delete this.ArtikliPolje[i];
+          this.ArtikliPolje.splice(i, 1);
+        }
+      }
+
       this.ArtikliPolje.push({
         id: this.idj,
         Naziv: this.nazivj,
@@ -379,6 +387,13 @@ export default {
         (this.slikap = narucip.SlikaPs),
         (this.kolicinap = narucip.KolicinaPs);
       this.dodanp = narucip.dodanPs;
+
+      for (let i = 0; i < this.ArtikliPolje.length; i++) {
+        if (this.idp === this.ArtikliPolje[i].id) {
+          delete this.ArtikliPolje[i];
+          this.ArtikliPolje.splice(i, 1);
+        }
+      }
 
       this.ArtikliPolje.push({
         id: this.idp,

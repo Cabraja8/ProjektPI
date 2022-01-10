@@ -47,16 +47,16 @@
           </template>
           <template v-if="user === null">
             <template v-if="ArtiklNaziv.KategorijaJela">
-              <template v-if="!dodano">
-                <div class="form-group">
-                  <button
-                    class="btn btn-success w-50 btn-sm"
-                    @click="NaruciJelo"
-                  >
-                    Dodaj Jelo
-                  </button>
-                </div>
-              </template>
+              <div class="form-group">
+                <button
+                  v-on:click="dodan = true"
+                  class="btn btn-success w-50 btn-sm"
+                  @click="NaruciJelo"
+                  v-on:povecaj="Povecaj($event)"
+                >
+                  Dodaj Jelo
+                </button>
+              </div>
             </template>
             <template v-if="ArtiklNaziv.KategorijaPica">
               <div class="form-group">
@@ -96,7 +96,6 @@
                 </div>
               </div>
             </template>
-            <template v-if="dodano"> Dodan </template>
           </template>
         </div>
       </div>
@@ -120,10 +119,6 @@ export default {
       user: store.currentUser,
       kolicina: this.ArtiklNaziv.kolicina,
       cijena: this.ArtiklNaziv.Cijena,
-
-      dodan: this.ArtiklNaziv.dodan,
-
-      dodano: false,
     };
   },
   components: {
@@ -152,7 +147,7 @@ export default {
           SastojciJ: this.ArtiklNaziv.Sastojci,
           CijenaJ: this.ArtiklNaziv.Cijena,
           KolicinaJ: this.Kolicina,
-          dodanJ: this.dodan,
+          dodanJ: this.ArtiklNaziv.dodan,
         })
       );
     },
@@ -168,15 +163,13 @@ export default {
           SastojciP: this.ArtiklNaziv.Sastojci,
           CijenaP: this.ArtiklNaziv.Cijena,
           KolicinaP: this.kolicina,
-          dodanP: this.dodan,
+          dodanP: this.ArtiklNaziv.dodan,
         })
       );
     },
     NaruciJelo() {
       this.id = this.ArtiklNaziv.id;
       this.Kolicina = this.ArtiklNaziv.Kolicina;
-
-      console.log("dodan", this.ArtiklNaziv.dodan);
 
       this.$emit(
         "jelonaruci",
@@ -187,10 +180,10 @@ export default {
           CijenaJs: this.ArtiklNaziv.Cijena,
           SlikaJs: this.ArtiklNaziv.Slika,
           KolicinaJs: this.Kolicina,
-          dodanJs: this.dodan,
+          dodanJs: this.ArtiklNaziv.dodan,
         })
       );
-      this.dodano = true;
+
       console.log("dodan", this.ArtiklNaziv.dodan);
     },
 
@@ -208,7 +201,7 @@ export default {
           CijenaPs: this.ArtiklNaziv.Cijena,
           SlikaPs: this.ArtiklNaziv.Slika,
           KolicinaPs: this.Kolicina,
-          dodanPs: this.dodan,
+          dodanPs: this.ArtiklNaziv.dodan,
         })
       );
     },
@@ -226,10 +219,6 @@ export default {
 
       if (this.kolicina === 0) {
         this.$emit("nulaje", this.ArtiklNaziv.id);
-
-        this.dodano = false;
-
-        console.log("dodan2", this.dodano);
       }
     },
   }, //od Methods
