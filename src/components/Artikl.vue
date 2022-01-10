@@ -10,9 +10,9 @@
         <div class="card-body py-4 my-4 col-lg-12 md-4">
           <h5 class="card-title">{{ ArtiklNaziv.Naziv }}</h5>
           <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
-          <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
 
           <template v-if="user !== null">
+            <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
             <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
               <div class="form-group">
                 <div class="row">
@@ -46,13 +46,13 @@
             </template>
           </template>
           <template v-if="user === null">
+            <p class="card-text">{{ this.cijena }},00 HRK</p>
             <template v-if="ArtiklNaziv.KategorijaJela">
               <div class="form-group">
                 <button
                   v-on:click="dodan = true"
                   class="btn btn-success w-50 btn-sm"
                   @click="NaruciJelo"
-                  v-on:povecaj="Povecaj($event)"
                 >
                   Dodaj Jelo
                 </button>
@@ -121,6 +121,8 @@ export default {
       cijena: this.ArtiklNaziv.Cijena,
     };
   },
+
+  mounted() {},
   components: {
     upravljaj,
   },
@@ -147,7 +149,6 @@ export default {
           SastojciJ: this.ArtiklNaziv.Sastojci,
           CijenaJ: this.ArtiklNaziv.Cijena,
           KolicinaJ: this.Kolicina,
-          dodanJ: this.ArtiklNaziv.dodan,
         })
       );
     },
@@ -163,7 +164,6 @@ export default {
           SastojciP: this.ArtiklNaziv.Sastojci,
           CijenaP: this.ArtiklNaziv.Cijena,
           KolicinaP: this.kolicina,
-          dodanP: this.ArtiklNaziv.dodan,
         })
       );
     },
@@ -180,11 +180,8 @@ export default {
           CijenaJs: this.ArtiklNaziv.Cijena,
           SlikaJs: this.ArtiklNaziv.Slika,
           KolicinaJs: this.Kolicina,
-          dodanJs: this.ArtiklNaziv.dodan,
         })
       );
-
-      console.log("dodan", this.ArtiklNaziv.dodan);
     },
 
     NaruciPice() {
@@ -201,7 +198,6 @@ export default {
           CijenaPs: this.ArtiklNaziv.Cijena,
           SlikaPs: this.ArtiklNaziv.Slika,
           KolicinaPs: this.Kolicina,
-          dodanPs: this.ArtiklNaziv.dodan,
         })
       );
     },
@@ -209,13 +205,13 @@ export default {
     Povecaj(id) {
       this.kolicina = this.kolicina + 1;
 
-      this.ArtiklNaziv.Cijena = parseInt(this.cijena * this.kolicina);
+      this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.kolicina);
     },
 
     Smanji(id) {
       this.kolicina = this.kolicina - 1;
 
-      this.ArtiklNaziv.Cijena = parseInt(this.cijena * this.kolicina);
+      this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.kolicina);
 
       if (this.kolicina === 0) {
         this.$emit("nulaje", this.ArtiklNaziv.id);

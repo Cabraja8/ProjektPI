@@ -4,23 +4,29 @@
       <h1 class="text-dark pt-4">Pregled</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
     </div>
-    <div class="form-group container-fluid padding w-50 mx-auto text-center">
-      <select
-        name="Odabir5"
-        class="form-control w-50 mx-auto"
-        id="KategorijePrikaz4"
-        v-model="PrikazKategorije"
-      >
-        <option value="Jelo">Jelo</option>
-        <option value="Piće">Piće</option>
-      </select>
-      <div class="border-top border-danger w-100 mx-auto my-3"></div>
+    <div class="row">
+      <div class="col-lg-6 py-4 my-4 mx-auto md-4">
+        <div class="form-group">
+          <div class="form-group container-fluid padding mx-auto text-center">
+            <select
+              name="Odabir5"
+              class="form-control w-50 mx-auto"
+              id="KategorijePrikaz4"
+              v-model="PrikazKategorije"
+            >
+              <option value="Jelo">Jelo</option>
+              <option value="Piće">Piće</option>
+            </select>
+            <div class="border-top border-danger w-100 mx-auto my-3"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <template v-if="PrikazKategorije === 'Jelo'">
       <div class="form-group">
         <label for="kategorijeJela">Kategorija Jela:</label>
         <div
-          class="form-group container-fluid padding w-50 mx-auto text-center"
+          class="form-group container-fluid w-50 padding mx-auto text-center"
         >
           <select
             class="form-control w-50 mx-auto"
@@ -162,31 +168,39 @@
             </div>
             <div class="mb-4">
               <label for="Napomena" class="form-label">Napomena:</label>
-              <input
-                type="Napomena"
-                v-model="Napomena"
-                class="form-control"
-                id="Napomena"
-              />
+              <textarea v-model="Napomena" class="form-control" id="Napomena" />
             </div>
-            <div class="col">
+            <div class="col-lg-12 text-center">
+              <div class="mb-4">
+                <label for="Iznos" class="form-label">Iznos:</label>
+
+                <label for="Iznoskn" class="form-label"> 0,00</label>
+
+                <label for="HRK" class="form-label">HRK</label>
+              </div>
+            </div>
+            <div class="mb-4">
               <div class="row">
-                <div class="mb-4">
-                  <label for="Iznos" class="form-label">Iznos:</label>
-
-                  <label for="Iznoskn" class="form-label"> 0,00</label>
-
-                  <label for="HRK" class="form-label">HRK</label>
+                <div class="mb-4 col-md-12 col-lg-12 col-sm-12">
+                  <button
+                    type="button"
+                    @click="Odustani"
+                    class="btn btn-danger w-50 rounded"
+                  >
+                    Odustani
+                  </button>
+                </div>
+                <div class="mb-4 col-md-12 col-lg-12 col-sm-12">
+                  <button
+                    type="button"
+                    @click="Posalji"
+                    class="btn btn-success w-50 rounded"
+                  >
+                    Pošalji
+                  </button>
                 </div>
               </div>
             </div>
-            <button type="button" @click="Odustani" class="btn btn-danger w-50">
-              Odustani
-            </button>
-            <div class="mb-4"></div>
-            <button type="button" @click="Posalji" class="btn btn-danger w-50">
-              Pošalji
-            </button>
           </form>
         </div>
       </div>
@@ -293,17 +307,27 @@ export default {
         });
     },
     Posalji() {
-      db.collection("Narudzbe").doc().set({
-        Ime: this.Ime,
-        Prezime: this.Prezime,
-        BrojTelefona: this.BrojTelefona,
-        Adresa: this.Adresa,
-        KategorijaJela: this.KategorijaJela,
-        Jelo: this.Jelo,
-        Pice: this.Pice,
-        Napomena: this.Napomena,
-        Date: Date.now(),
-      });
+      if (
+        this.Ime === "" ||
+        this.Prezime === "" ||
+        this.BrojTelefona === "" ||
+        this.Adresa === "" ||
+        this.ArtikliPolje === []
+      ) {
+        alert("Molim vas ispunite cijelu formu ili košaricu");
+      } else {
+        db.collection("Narudzbe").doc().set({
+          Ime: this.Ime,
+          Prezime: this.Prezime,
+          BrojTelefona: this.BrojTelefona,
+          Adresa: this.Adresa,
+          KategorijaJela: this.KategorijaJela,
+          Jelo: this.Jelo,
+          Pice: this.Pice,
+          Napomena: this.Napomena,
+          Date: Date.now(),
+        });
+      }
     },
     GetArtikliJela(KategorijaJelaPrikaz) {
       db.collection("Jelo")
@@ -322,7 +346,6 @@ export default {
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
               Kolicina: doc.data().Kolicina,
-              dodan: doc.data().dodan,
             });
           });
         });
@@ -344,7 +367,6 @@ export default {
               Cijena: doc.data().Cijena,
               Slika: doc.data().Slika,
               Kolicina: doc.data().Kolicina,
-              dodan: doc.data().dodan,
             });
           });
         });
@@ -357,11 +379,10 @@ export default {
         (this.cijenaj = narucij.CijenaJs),
         (this.slikaj = narucij.SlikaJs),
         (this.kolicinaj = narucij.KolicinaJs);
-      this.dodanj = narucij.dodanJs;
 
       for (let i = 0; i < this.ArtikliPolje.length; i++) {
         if (this.idj === this.ArtikliPolje[i].id) {
-          this.$emit("povecaj", this.idj);
+          alert("već je dodano u košarici");
           delete this.ArtikliPolje[i];
           this.ArtikliPolje.splice(i, 1);
         }
@@ -386,10 +407,10 @@ export default {
         (this.cijenap = narucip.CijenaPs),
         (this.slikap = narucip.SlikaPs),
         (this.kolicinap = narucip.KolicinaPs);
-      this.dodanp = narucip.dodanPs;
 
       for (let i = 0; i < this.ArtikliPolje.length; i++) {
         if (this.idp === this.ArtikliPolje[i].id) {
+          alert("već je dodano u košarici");
           delete this.ArtikliPolje[i];
           this.ArtikliPolje.splice(i, 1);
         }
@@ -402,7 +423,6 @@ export default {
         Cijena: this.cijenap,
         Slika: this.slikap,
         kolicina: this.kolicinap,
-        dodan: this.dodanp,
       });
     },
 
@@ -416,7 +436,14 @@ export default {
       console.log(this.ArtikliPolje);
     },
 
-    Odustani() {},
+    Odustani() {
+      (this.Ime = ""),
+        (this.Prezime = ""),
+        (this.BrojTelefona = ""),
+        (this.Adresa = ""),
+        (this.Napomena = ""),
+        (this.ArtikliPolje = []);
+    },
   }, // od methods
 };
 </script>
