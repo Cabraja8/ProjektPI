@@ -557,8 +557,7 @@
                     <th scope="col">Prezime</th>
                     <th scope="col">Broj Telefona</th>
                     <th scope="col">Adresa</th>
-                    <th scope="col">Jelo</th>
-                    <th scope="col">Piće</th>
+                    <th scope="col">Naruđžba</th>
                     <th scope="col">Cijena</th>
                     <th scope="col">Napomena</th>
                     <th scope="col">Brisanje</th>
@@ -571,9 +570,8 @@
                     <th scope="col">{{ Narudzba.Prezime }}</th>
                     <th scope="col">{{ Narudzba.BrojTelefona }}</th>
                     <th scope="col">{{ Narudzba.Adresa }}</th>
-                    <th scope="col">{{ Narudzba.KategorijaJela }}</th>
-                    <th scope="col">{{ Narudzba.Jelo }}</th>
-                    <th scope="col">{{ Narudzba.Pice }}</th>
+                    <th scope="col">{{ Narudzba.Narudzba }}</th>
+                    <th scope="col">{{ Narudzba.cijena }},00 HRK</th>
                     <th scope="col">{{ Narudzba.Napomena }}</th>
                     <td>
                       <button
@@ -681,9 +679,8 @@ export default {
               Prezime: doc.data().Prezime,
               BrojTelefona: doc.data().BrojTelefona,
               Adresa: doc.data().Adresa,
-              KategorijaJela: doc.data().KategorijaJela,
-              Jelo: doc.data().Jelo,
-              Pice: doc.data().Pice,
+              Narudzba: doc.data().Narudzba,
+              cijena: doc.data().cijena,
               Napomena: doc.data().Napomena,
             });
           });

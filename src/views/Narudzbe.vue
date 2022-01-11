@@ -112,6 +112,7 @@
             :key="Artikla.id"
             :ArtiklNaziv="Artikla"
             v-on:nulaje="NulaBrisi($event)"
+            v-on:dodaj="Dodaj($event)"
           />
         </div>
       </div>
@@ -174,9 +175,9 @@
               <div class="mb-4">
                 <label for="Iznos" class="form-label">Iznos:</label>
 
-                <label for="Iznoskn" class="form-label"> 0,00</label>
-
-                <label for="HRK" class="form-label">HRK</label>
+                <label for="Iznoskn" class="form-label"
+                  >{{ this.sveukupnacijena }},00 HRK</label
+                >
               </div>
             </div>
             <div class="mb-4">
@@ -259,12 +260,21 @@ export default {
       kolicinaj: "",
       dodanj: "",
 
+      naziv: "",
+      cijena: "",
+      kolicina: "",
+
       idp: "",
       nazivp: "",
       sastojcip: "",
       cijenap: "",
       kolicinap: "",
       dodanp: "",
+
+      sveukupnacijena: 0,
+
+      sve: "",
+      Narudzba: "",
     };
   },
   mounted() {},
@@ -306,28 +316,67 @@ export default {
           });
         });
     },
+
+    Dodaj(pov) {
+      this.naziv = pov.naziv;
+      this.kolicina = pov.Kolicina;
+
+      console.log("naziv", this.naziv);
+      console.log("kol", this.kolicina);
+
+      for (let i = 0; i < this.ArtikliPolje.length; i++) {
+        if (this.ArtikliPolje[i].Naziv === this.naziv)
+          this.ArtikliPolje[i].kolicina = this.kolicina;
+      }
+
+      console.log(this.ArtikliPolje);
+    },
+
     Posalji() {
+      let t = "";
+      let k = "";
+      let c = 0;
+      let svi = "";
+      let sveuk = 0;
+
+      for (let i = 0; i < this.ArtikliPolje.length; i++) {
+        t = this.ArtikliPolje[i].Naziv;
+        k = this.ArtikliPolje[i].kolicina;
+        c = this.ArtikliPolje[i].Cijena;
+
+        svi = svi + " " + t + " x" + k;
+
+        this.Narudzba = svi;
+
+        sveuk = c * k;
+
+        this.sveukupnacijena = this.sveukupnacijena + sveuk;
+      }
+
       if (
         this.Ime === "" ||
         this.Prezime === "" ||
         this.BrojTelefona === "" ||
         this.Adresa === "" ||
-        this.ArtikliPolje === []
+        this.ArtikliPolje === [] ||
+        this.Narudzba === ""
       ) {
-        alert("Molim vas ispunite cijelu formu ili košaricu");
+        alert("Molim vas ispunite cijelu formu ");
       } else {
         db.collection("Narudzbe").doc().set({
           Ime: this.Ime,
           Prezime: this.Prezime,
           BrojTelefona: this.BrojTelefona,
           Adresa: this.Adresa,
-          KategorijaJela: this.KategorijaJela,
-          Jelo: this.Jelo,
-          Pice: this.Pice,
+          Narudzba: this.Narudzba,
+          cijena: this.sveukupnacijena,
           Napomena: this.Napomena,
           Date: Date.now(),
         });
       }
+      setTimeout(() => {
+        this.Odustani();
+      }, 100);
     },
     GetArtikliJela(KategorijaJelaPrikaz) {
       db.collection("Jelo")
@@ -395,10 +444,7 @@ export default {
         Cijena: this.cijenaj,
         Slika: this.slikaj,
         kolicina: this.kolicinaj,
-        dodan: this.dodanj,
       });
-
-      console.log(this.ArtikliPolje);
     },
     DodajPice(narucip) {
       (this.idp = narucip.idps),
@@ -433,7 +479,6 @@ export default {
           this.ArtikliPolje.splice(i, 1);
         }
       }
-      console.log(this.ArtikliPolje);
     },
 
     Odustani() {
@@ -442,7 +487,8 @@ export default {
         (this.BrojTelefona = ""),
         (this.Adresa = ""),
         (this.Napomena = ""),
-        (this.ArtikliPolje = []);
+        (this.ArtikliPolje = []),
+        (this.Narudzba = "");
     },
   }, // od methods
 };

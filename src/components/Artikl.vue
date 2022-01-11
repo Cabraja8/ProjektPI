@@ -81,7 +81,7 @@
                     -
                   </button>
                   <div class="col col-md-4 col-lg-6 col-sm-4">
-                    <h5 class="h5">{{ this.kolicina }}</h5>
+                    <h5 class="h5">{{ this.Kolicina }}</h5>
                   </div>
                   <button
                     class="
@@ -117,7 +117,7 @@ export default {
       id2: "",
 
       user: store.currentUser,
-      kolicina: this.ArtiklNaziv.kolicina,
+      Kolicina: this.ArtiklNaziv.kolicina,
       cijena: this.ArtiklNaziv.Cijena,
     };
   },
@@ -148,7 +148,6 @@ export default {
           NazivJ: this.ArtiklNaziv.Naziv,
           SastojciJ: this.ArtiklNaziv.Sastojci,
           CijenaJ: this.ArtiklNaziv.Cijena,
-          KolicinaJ: this.Kolicina,
         })
       );
     },
@@ -163,7 +162,6 @@ export default {
           NazivP: this.ArtiklNaziv.Naziv,
           SastojciP: this.ArtiklNaziv.Sastojci,
           CijenaP: this.ArtiklNaziv.Cijena,
-          KolicinaP: this.kolicina,
         })
       );
     },
@@ -187,7 +185,6 @@ export default {
     NaruciPice() {
       this.id2 = this.ArtiklNaziv.id;
       this.Kolicina = this.ArtiklNaziv.Kolicina;
-      console.log("test", this.id2);
 
       this.$emit(
         "picenaruci",
@@ -203,17 +200,33 @@ export default {
     },
 
     Povecaj(id) {
-      this.kolicina = this.kolicina + 1;
+      this.Kolicina++;
 
-      this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.kolicina);
+      this.$emit(
+        "dodaj",
+        (this.pov = {
+          naziv: this.ArtiklNaziv.Naziv,
+          Kolicina: this.Kolicina,
+        })
+      );
+
+      this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.Kolicina);
     },
 
     Smanji(id) {
-      this.kolicina = this.kolicina - 1;
+      this.Kolicina--;
 
-      this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.kolicina);
+      this.$emit(
+        "dodaj",
+        (this.pov = {
+          naziv: this.ArtiklNaziv.Naziv,
+          Kolicina: this.Kolicina,
+        })
+      );
 
-      if (this.kolicina === 0) {
+      this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.Kolicina);
+
+      if (this.Kolicina === 0) {
         this.$emit("nulaje", this.ArtiklNaziv.id);
       }
     },
