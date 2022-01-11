@@ -176,3 +176,11 @@ ul.social li {
 .bg-overlay {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+.bg-op {
+  opacity: 0.9;
+}
+
+.bg-op:hover {
+  opacity: 1;
+}

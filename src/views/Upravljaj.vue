@@ -15,9 +15,10 @@
                     class="form-control w-50 mx-auto"
                     id="KategorijePrikaz4"
                     v-model="KategorijaPrikaz4"
+                    @click="Clear"
                   >
-                    <option value="Jelo" @click="Clear">Jelo</option>
-                    <option value="Piće" @click="Clear">Piće</option>
+                    <option value="Jelo">Jelo</option>
+                    <option value="Piće">Piće</option>
                   </select>
                   <div
                     class="border-top border-danger w-100 mx-auto my-3"
@@ -99,10 +100,7 @@
                       class="border-top border-danger w-100 mx-auto my-3"
                     ></div>
                   </template>
-                </div>
-              </div>
-              <div class="container mt-5">
-                <div class="col-12 py-4 my-4 mx-auto md-3">
+
                   <template v-if="KategorijaPrikaz4 === 'Piće'">
                     <div
                       class="border-top border-danger w-100 mx-auto my-3"
@@ -942,9 +940,9 @@ export default {
 
     Clear() {
       this.KategorijaPrikaz3 = "";
+      this.Artikli = [];
       this.GetArtikliJela();
       this.GetArtikliPica();
-      this.Artikli = [];
     },
 
     // BRISANJE forme
@@ -1000,9 +998,13 @@ export default {
         (this.SastojciEdit = artiklp.SastojciP),
         (this.CijenaEdit = artiklp.CijenaP);
 
-      setTimeout(() => {
-        document.getElementsByTagName("br")[0].scrollIntoView();
-      }, 100);
+      if (this.NazivEdit === "" && this.CijenaEdit === "") {
+        alert("Molim vas popunite cijelu formu");
+      } else {
+        setTimeout(() => {
+          document.getElementsByTagName("br")[0].scrollIntoView();
+        }, 100);
+      }
     },
 
     ArtiklOdustaniEdit() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="artikl">
+  <div class="artikl bg-op">
     <div class="container-fluid py-4 my-4 bg-reddanger md-0 col-lg-12 mt-5">
       <div class="card container-fluid">
         <img
@@ -8,7 +8,8 @@
           alt="..."
         />
         <div class="card-body py-4 my-4 col-lg-12 md-4">
-          <h5 class="card-title">{{ ArtiklNaziv.Naziv }}</h5>
+          <h4 class="text-dark pt-4">{{ ArtiklNaziv.Naziv }}</h4>
+          <div class="border-top border-danger w-75 mx-auto my-3"></div>
           <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
 
           <template v-if="user !== null">

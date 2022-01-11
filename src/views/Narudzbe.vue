@@ -13,6 +13,7 @@
               class="form-control w-50 mx-auto"
               id="KategorijePrikaz4"
               v-model="PrikazKategorije"
+              @click="Clear"
             >
               <option value="Jelo">Jelo</option>
               <option value="Piće">Piće</option>
@@ -176,7 +177,7 @@
                 <label for="Iznos" class="form-label">Iznos:</label>
 
                 <label for="Iznoskn" class="form-label"
-                  >{{ this.sveukupnacijena }},00 HRK</label
+                  >{{ this.sveukupno }},00 HRK</label
                 >
               </div>
             </div>
@@ -275,6 +276,8 @@ export default {
 
       sve: "",
       Narudzba: "",
+
+      sveukupno: 0,
     };
   },
   mounted() {},
@@ -318,18 +321,29 @@ export default {
     },
 
     Dodaj(pov) {
+      let k = 0;
+      let c = 0;
+      let sv = 0;
       this.naziv = pov.naziv;
       this.kolicina = pov.Kolicina;
-
-      console.log("naziv", this.naziv);
-      console.log("kol", this.kolicina);
+      this.sveukupno = 0;
 
       for (let i = 0; i < this.ArtikliPolje.length; i++) {
         if (this.ArtikliPolje[i].Naziv === this.naziv)
           this.ArtikliPolje[i].kolicina = this.kolicina;
-      }
 
-      console.log(this.ArtikliPolje);
+        k = this.ArtikliPolje[i].kolicina;
+        c = this.ArtikliPolje[i].Cijena;
+        this.sveukupno = this.sveukupno + c * k;
+      }
+      console.log("ovo je cijena", this.sveukupno);
+    },
+
+    Clear() {
+      this.KategorijaJelaPrikaz = "";
+      this.Artikli = [];
+      this.GetArtikliJela();
+      this.GetArtikliPica();
     },
 
     Posalji() {
@@ -376,6 +390,7 @@ export default {
       }
       setTimeout(() => {
         this.Odustani();
+        alert("Poslano!");
       }, 100);
     },
     GetArtikliJela(KategorijaJelaPrikaz) {
@@ -422,6 +437,10 @@ export default {
     },
 
     DodajJelo(narucij) {
+      let k = 0;
+      let c = 0;
+      let a = false;
+
       (this.idj = narucij.idjs),
         (this.nazivj = narucij.NazivJs),
         (this.sastojcij = narucij.SastojciJs),
@@ -432,6 +451,7 @@ export default {
       for (let i = 0; i < this.ArtikliPolje.length; i++) {
         if (this.idj === this.ArtikliPolje[i].id) {
           alert("već je dodano u košarici");
+          a = true;
           delete this.ArtikliPolje[i];
           this.ArtikliPolje.splice(i, 1);
         }
@@ -445,8 +465,25 @@ export default {
         Slika: this.slikaj,
         kolicina: this.kolicinaj,
       });
+      if (a === false) {
+        for (let i = 0; i < this.ArtikliPolje.length; i++) {
+          if (this.ArtikliPolje[i].Naziv === this.nazivj) {
+            this.ArtikliPolje[i].kolicina = 1;
+
+            k = this.ArtikliPolje[i].kolicina;
+            c = this.ArtikliPolje[i].Cijena;
+            this.sveukupno = this.sveukupno + c * k;
+          }
+        }
+      }
+
+      console.log("ovo je cijena", this.sveukupno);
     },
     DodajPice(narucip) {
+      let k = 0;
+      let c = 0;
+      let a = false;
+
       (this.idp = narucip.idps),
         (this.nazivp = narucip.NazivPs),
         (this.sastojcip = narucip.SastojciPs),
@@ -457,6 +494,7 @@ export default {
       for (let i = 0; i < this.ArtikliPolje.length; i++) {
         if (this.idp === this.ArtikliPolje[i].id) {
           alert("već je dodano u košarici");
+          a = true;
           delete this.ArtikliPolje[i];
           this.ArtikliPolje.splice(i, 1);
         }
@@ -470,6 +508,19 @@ export default {
         Slika: this.slikap,
         kolicina: this.kolicinap,
       });
+      if (a === false) {
+        for (let i = 0; i < this.ArtikliPolje.length; i++) {
+          if (this.ArtikliPolje[i].Naziv === this.nazivp) {
+            this.ArtikliPolje[i].kolicina = 1;
+
+            k = this.ArtikliPolje[i].kolicina;
+            c = this.ArtikliPolje[i].Cijena;
+            this.sveukupno = this.sveukupno + c * k;
+          }
+        }
+      }
+
+      console.log("ovo je cijena", this.sveukupno);
     },
 
     NulaBrisi(id) {
@@ -488,7 +539,9 @@ export default {
         (this.Adresa = ""),
         (this.Napomena = ""),
         (this.ArtikliPolje = []),
-        (this.Narudzba = "");
+        (this.Narudzba = ""),
+        (this.sveukupnacijena = ""),
+        (this.sveukupno = 0);
     },
   }, // od methods
 };
