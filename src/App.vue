@@ -31,8 +31,8 @@
               </li>
 
               <li v-if="!store.currentUser" class="nav-item">
-                <router-link to="/Narudzbe" class="nav-link"
-                  >Naruđžbe</router-link
+                <router-link to="/Jelovnik" class="nav-link"
+                  >Jelovnik</router-link
                 >
               </li>
               <li v-if="store.currentUser" class="nav-item">
@@ -69,16 +69,24 @@
             <p>"domaće je najbolje"</p>
             <ul class="social pt-3">
               <li>
-                <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"
+                  ><i class="fab fa-facebook"></i
+                ></a>
               </li>
               <li>
-                <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"
+                  ><i class="fab fa-instagram"></i
+                ></a>
               </li>
               <li>
-                <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://twitter.com/" target="_blank"
+                  ><i class="fab fa-twitter"></i
+                ></a>
               </li>
               <li>
-                <a href="" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"
+                  ><i class="fab fa-youtube"></i
+                ></a>
               </li>
             </ul>
             <br />

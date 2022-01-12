@@ -107,7 +107,7 @@
 <script>
 import upravljaj from "@/views/Upravljaj.vue";
 import store from "@/store";
-import Narudzbe from "@/views/Narudzbe.vue";
+import Jelovnik from "@/views/Jelovnik.vue";
 
 export default {
   name: "Artikl",
@@ -126,6 +126,7 @@ export default {
   mounted() {},
   components: {
     upravljaj,
+    Jelovnik,
   },
 
   methods: {

@@ -35,7 +35,7 @@
           <img src="@/../public/images/ponude.jpg" alt="" class="w-100" />
           <h4 class="my-4">Ponude</h4>
           <p>Sve šta vas zanimna stistnite gumb za više informacija</p>
-          <router-link to="@/../Narudzbe" class="btn btn-outline-danger btn-md"
+          <router-link to="@/../Jelovnik" class="btn btn-outline-danger btn-md"
             >Pogledajte ponude</router-link
           >
         </div>
@@ -61,13 +61,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
-  // components: {
-  //   HelloWorld,
-  // },
 };
 </script>

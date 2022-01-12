@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Onama from "@/views/Onama.vue";
-import Narudzbe from "@/views/Narudzbe.vue";
+import Jelovnik from "@/views/Jelovnik.vue";
 import prijavise from "@/views/Prijavise.vue";
 import upravljaj from "@/views/Upravljaj.vue";
 import store from "@/store.js";
@@ -22,9 +22,9 @@ const routes = [
     component: Onama,
   },
   {
-    path: "/Narudzbe",
-    name: "narudzbe",
-    component: Narudzbe,
+    path: "/Jelovnik",
+    name: "Jelovnik",
+    component: Jelovnik,
     meta: {
       needsUser: false,
     },

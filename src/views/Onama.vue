@@ -9,7 +9,7 @@
       <div class="container-fluid padding py-4 my-4">
         <div class="row padding">
           <div class="col-lg-8 py-4 my-4">
-            <h1>O ponudama</h1>
+            <h1>O nama</h1>
 
             <p>
               U zadnjih 10 godina, specijalizirali smo se u jelima s roštilja,
@@ -35,7 +35,7 @@
           <div class="col-lg-8 py-4 my-4">
             <h1>Take away</h1>
 
-            <p>Najbolje jesti kod kuće uz obitelj</p>
+            <p>Najbolje jesti kod kuće</p>
           </div>
           <div class="col-lg-4">
             <img
@@ -67,7 +67,6 @@
       </div>
     </div>
 
-    <div class="border-top border-danger w-100 mx-auto my-3"></div>
     <div class="col-12 text-center mt-5">
       <h1 class="text-dark pt-4">Lokacija</h1>
       <div class="border-top border-danger w-100 mx-auto my-3"></div>
