@@ -2,6 +2,7 @@
   <div class="upravljaj">
     <div>
       <div class="col-12 text-center mt-5">
+        <!-- PREGLED ARTIKLA -->
         <h1 class="text-dark pt-4">Pregled Artikla</h1>
         <div class="border-top border-danger w-100 mx-auto my-3"></div>
         <div class="container-fluid">
@@ -9,6 +10,7 @@
             <div class="row">
               <div class="col-lg-6 py-4 my-4 mx-auto md-4">
                 <div class="form-group">
+                  <!-- ODABIR KATEGORIJE JELO ILI PIĆE -->
                   <h1 class="text-dark pt-4">Odaberi Kategoriju</h1>
                   <select
                     name="Odabir3"
@@ -36,6 +38,7 @@
                         text-center
                       "
                     >
+                      <!-- PRIKAZ SVIH DODANIH KATEGORIJA JELA -->
                       <select
                         class="form-control"
                         id="kategorijeJela"
@@ -63,6 +66,7 @@
                         text-center
                       "
                     >
+                      <!-- PRIKAZ SVIH DODANIH KATEGORIJA PIĆA -->
                       <select
                         class="form-control"
                         id="kategorijeJela"
@@ -82,6 +86,7 @@
               </div>
               <div class="container mt-5">
                 <div class="col-12 py-4 my-4 mx-auto md-3">
+                  <!-- PRIKAZ JELA(PETLJA)  -->
                   <template v-if="KategorijaPrikaz4 === 'Jelo'">
                     <div
                       class="border-top border-danger w-100 mx-auto my-3"
@@ -100,7 +105,7 @@
                       class="border-top border-danger w-100 mx-auto my-3"
                     ></div>
                   </template>
-
+                  <!-- PRIKAZ PIĆA(PETLJA)  -->
                   <template v-if="KategorijaPrikaz4 === 'Piće'">
                     <div
                       class="border-top border-danger w-100 mx-auto my-3"
@@ -148,7 +153,7 @@
                 <div class="row justify-content-center mb-4">
                   <img src="@/../public/images/logo.png" class="" />
                 </div>
-
+                <!-- NAZIV ARTIKLA  -->
                 <form>
                   <div class="form-group">
                     <div class="mb-4">
@@ -164,7 +169,7 @@
                       />
                     </div>
                   </div>
-
+                  <!-- SASTOJCI ARTIKLA -->
                   <div class="form-group">
                     <div class="mb-4">
                       <label for="sastojci2" class="form-label"
@@ -179,6 +184,7 @@
                       />
                     </div>
                   </div>
+                  <!-- CIJENA ARTIKLA -->
                   <div class="form-group">
                     <div class="mb-4">
                       <label for="cijena2" class="form-label">Cijena:</label>
@@ -191,6 +197,7 @@
                       />
                     </div>
                   </div>
+                  <!-- ODUSTANI I UREDI SE PRIKAZUJU AKO JE KATEGORIJA - JELO -->
                   <template v-if="KategorijaPrikaz4 === 'Jelo'">
                     <div class="form-group">
                       <div class="mb-4">
@@ -211,6 +218,7 @@
                       </div>
                     </div>
                   </template>
+                  <!-- ODUSTANI I UREDI SE PRIKAZUJU AKO JE KATEGORIJA - PIĆE -->
                   <template v-if="KategorijaPrikaz4 === 'Piće'">
                     <div class="form-group">
                       <div class="mb-4">
@@ -255,6 +263,7 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <!-- ODABIR KATEGORIJE  - JELO/PIĆE -->
                         <div class="form-group my-4 w-100 col">
                           <select
                             name="Odabir2"
@@ -269,6 +278,7 @@
                       </tr>
                       <tr>
                         <td>
+                          <!--  DODAJ KATEGORIJU JELA (INPUT / V-MODEL) -->
                           <template v-if="KategorijaPrikaz2 === 'Jelo'">
                             <div class="mb-4 w-100 col">
                               <input
@@ -279,6 +289,7 @@
                               />
                             </div>
                           </template>
+                          <!--  DODAJ KATEGORIJU PIĆA (INPUT / V-MODEL) -->
                           <template v-if="KategorijaPrikaz2 === 'Piće'">
                             <div class="mb-4 w-100 col">
                               <input
@@ -290,6 +301,7 @@
                             </div>
                           </template>
                         </td>
+                        <!--  DODAJ KATEGORIJU JELA (GUMB) -->
                         <template v-if="KategorijaPrikaz2 === 'Jelo'">
                           <div class="mb-4 my-4">
                             <button
@@ -301,6 +313,7 @@
                             </button>
                           </div>
                         </template>
+                        <!--  DODAJ KATEGORIJU PIĆA (GUMB) -->
                         <template v-if="KategorijaPrikaz2 === 'Piće'">
                           <div class="mb-4 my-4">
                             <button
@@ -317,8 +330,8 @@
                   </table>
                 </div>
               </div>
+              <!-- PRIKAZ KATEGORIJE -->
               <div class="col-lg-6 py-4 my-4">
-                <!-- PRIKAZ KATEGORIJE -->
                 <h1>Prikaz kategorije</h1>
                 <div class="border-top border-danger w-100 mx-auto my-3"></div>
                 <div class="card mt-4 py-4 md-4">
@@ -346,6 +359,7 @@
                       </tr>
                     </tbody>
                   </table>
+
                   <table class="table m-0 pd-4 py-4 md-4 table-hover">
                     <thead>
                       <tr class="bg-reddanger text-white">
@@ -394,7 +408,7 @@
               <div class="row justify-content-center mb-4">
                 <img src="@/../public/images/logo.png" class="" />
               </div>
-
+              <!-- NAZIV PROIZVODA - DODAJ ARTIKL -->
               <form>
                 <div class="form-group">
                   <div class="mb-4">
@@ -410,6 +424,7 @@
                     />
                   </div>
                 </div>
+                <!-- KATEGORIJA PROIZVODA - DODAJ ARTIKL -->
                 <div class="form-group">
                   <label for="kategorijePrikaz">Kategorija:</label>
                   <select
@@ -423,6 +438,7 @@
                     <option value="Piće">Piće</option>
                   </select>
                 </div>
+                <!-- KATEGORIJA JELA - DODAJ ARTIKL -->
                 <template v-if="KategorijaPrikaz === 'Jelo'">
                   <div class="form-group">
                     <label for="kategorijeJela">Kategorija Jela:</label>
@@ -440,6 +456,7 @@
                     </select>
                   </div>
                 </template>
+                <!-- KATEGORIJA PIĆA - DODAJ ARTIKL -->
                 <template v-if="KategorijaPrikaz === 'Piće'">
                   <div class="form-group">
                     <label for="kategorijePica">Kategorija Pića:</label>
@@ -458,6 +475,7 @@
                     </select>
                   </div>
                 </template>
+                <!-- SASTOJCI - DODAJ ARITKL -->
                 <div class="form-group">
                   <div class="mb-4">
                     <label for="sastojci" class="form-label">Sastojci:</label>
@@ -482,6 +500,7 @@
                     />
                   </div>
                 </div>
+                <!-- SLIKA - DODAJ ARTIKL -->
                 <div class="form-group">
                   <label for="file" class="form-label">Slika:</label>
                   <div class="mb-4">
@@ -489,6 +508,7 @@
                     </croppa>
                   </div>
                 </div>
+                <!-- PRIKAZ GUMOVA AKO JE KATEGORIJA JELA -->
                 <div class="form-group">
                   <div class="mb-4">
                     <template v-if="KategorijaPrikaz === 'Jelo'">
@@ -507,6 +527,7 @@
                         Dodaj Jelo
                       </button>
                     </template>
+                    <!-- PRIKAZ GUMOVA AKO JE KATEGORIJA PIĆA -->
                     <template v-if="KategorijaPrikaz === 'Piće'">
                       <button
                         type="button"
@@ -549,6 +570,7 @@
                   shadowbox
                 "
               >
+                <!-- TABLICA NARUDZBE -->
                 <thead>
                   <tr class="bg-reddanger text-white">
                     <th scope="col ">Ime</th>
@@ -562,7 +584,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- PRIKAZ -->
+                  <!-- PRIKAZ TABLICE NARUDZBI -->
                   <tr v-for="Narudzba in Narudzbe" :key="Narudzba.id">
                     <th scope="col">{{ Narudzba.Ime }}</th>
                     <th scope="col">{{ Narudzba.Prezime }}</th>
@@ -938,6 +960,8 @@ export default {
         });
     },
 
+    // BRISANJE ODABIRA KAD SE KLIKNE
+
     Clear() {
       this.KategorijaPrikaz3 = "";
       this.Artikli = [];
@@ -957,6 +981,8 @@ export default {
         this.Slika.remove();
     },
 
+    // BRISANJE JELA - OBRIŠI JELO
+
     DeleteArtiklJela(id) {
       db.collection("Jelo")
         .doc(this.KategorijaPrikaz3)
@@ -967,6 +993,7 @@ export default {
           this.GetArtikliJela();
         });
     },
+    // BRISANJE PIĆE - OBRIŠI  PIĆE
     DeleteArtiklPica(id2) {
       db.collection("Pica")
         .doc(this.KategorijaPrikaz3)
@@ -977,6 +1004,8 @@ export default {
           this.GetArtikliPica();
         });
     },
+
+    // DOHVAĆANJE PODATAKA JELA
     UrediArtiklJelo(artiklj) {
       this.showEdit = true;
       (this.idedit = artiklj.ide),
@@ -991,6 +1020,8 @@ export default {
         }, 100);
       }
     },
+
+    // DOHVAĆANJE PODATAKA PIĆA
     UredArtiklPice(artiklp) {
       this.showEdit = true;
       (this.idedit2 = artiklp.ide2),
@@ -1007,6 +1038,8 @@ export default {
       }
     },
 
+    // ODUSTANI OD EDITA
+
     ArtiklOdustaniEdit() {
       (this.NazivEdit = ""), (this.SastojciEdit = ""), (this.CijenaEdit = "");
       setTimeout(() => {
@@ -1014,6 +1047,8 @@ export default {
         document.getElementsByTagName("h1")[1].scrollIntoView();
       }, 500);
     },
+
+    // UPDAJTANJE PODATAKA U FIREBASE-U JELA
 
     ArtiklUrediJelo(idedit) {
       if (this.NazivEdit === "" || this.CijenaEdit === "") {
@@ -1039,6 +1074,8 @@ export default {
         }, 1000);
       }
     },
+
+    // UPDAJTANJE PODATAKA U FIREBASE-U PIĆA
     ArtiklUrediPice(idedit2) {
       if (this.NazivEdit === "" || this.CijenaEdit === "") {
         alert("Molim vas popunite cijelu formu");

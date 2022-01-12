@@ -1,20 +1,26 @@
 <template>
   <div class="artikl bg-op">
     <div class="container-fluid py-3 my-4 bg-reddanger md-0 col-lg-12 mt-5">
-      <div class="card container-fluid">
+      <div class="card">
+        <!-- PRIKAZ ARTIKL - SLIKA ARTIKLA-->
         <img
           :src="ArtiklNaziv.Slika"
           class="card-img-top img-thumbnail"
           alt="..."
         />
+        <!-- PRIKAZ ARTIKLA - NAZIV ARTIKLA -->
         <div class="card-body py-4 my-4 col-lg-12 md-4">
           <h4 class="text-dark pt-4">{{ ArtiklNaziv.Naziv }}</h4>
+          <!-- PRIKAZ ARTIKLA - SASTOJCI ARTIKLA -->
           <div class="border-top border-danger w-75 mx-auto my-3"></div>
           <p class="card-text">{{ ArtiklNaziv.Sastojci }}</p>
 
+          <!-- PRIKAZ GUMOVE ARTIKLA AKO JE KORISNIK ULOGIRAN -->
           <template v-if="user !== null">
+            <!-- PRIKAZ CIJENE  -->
             <p class="card-text">{{ ArtiklNaziv.Cijena }},00 HRK</p>
             <template v-if="ArtiklNaziv.KategorijaJela === 'Jelo'">
+              <!-- UREDI JELO / OBRIŠI JELO  -->
               <div class="form-group">
                 <div class="row">
                   <div class="col">
@@ -34,6 +40,7 @@
                 </div>
               </div>
             </template>
+            <!-- UREDI PIĆE / OBRIŠI PIĆE -->
             <template v-else>
               <button
                 class="btn btn-success btn-12-sm"
@@ -46,6 +53,8 @@
               </button>
             </template>
           </template>
+          <!-- PRIKAZ GUMOVA AKO KORISNIK NIJE ULOGIRAN -->
+          <!-- DODAJ JELO U KOŠARICU-->
           <template v-if="user === null">
             <p class="card-text">{{ this.cijena }},00 HRK</p>
             <template v-if="ArtiklNaziv.KategorijaJela">
@@ -59,6 +68,7 @@
                 </button>
               </div>
             </template>
+            <!-- DODAJ PIĆE U KOŠARICU -->
             <template v-if="ArtiklNaziv.KategorijaPica">
               <div class="form-group">
                 <button class="btn btn-success w-50 btn-sm" @click="NaruciPice">
@@ -66,6 +76,7 @@
                 </button>
               </div>
             </template>
+            <!-- PRIKAZ KOŠARICE -->
             <template
               v-if="!ArtiklNaziv.KategorijaPica && !ArtiklNaziv.KategorijaJela"
             >
@@ -76,10 +87,11 @@
                       btn btn-danger
                       rounded
                       col-md-4 col-sm-4 col-lg-3 col-sm-4 col
+                      text-center
                     "
                     @click="Smanji(ArtiklNaziv.id)"
                   >
-                    -
+                    <div class="text-center"><h5 class="h5">-</h5></div>
                   </button>
                   <div class="col col-md-4 col-lg-6 col-sm-4">
                     <h5 class="h5">{{ this.Kolicina }}</h5>
@@ -89,10 +101,13 @@
                       btn btn-success
                       rounded
                       col-md-4 col-sm-4 col-lg-3 col-sm-4 col
+                      text-center
                     "
                     @click="Povecaj(ArtiklNaziv.id)"
                   >
-                    +
+                    <div class="text-center">
+                      <h5 class="h5">+</h5>
+                    </div>
                   </button>
                 </div>
               </div>
@@ -130,16 +145,19 @@ export default {
   },
 
   methods: {
+    // DOHVAĆANJE ID-EVE JELA
     NaziviJela() {
       this.id = this.ArtiklNaziv.id;
 
       this.$emit("brisi", this.id);
     },
+    // DOHVAĆANJE ID-EVE PIĆA
     NaziviPica() {
       this.id2 = this.ArtiklNaziv.id;
 
       this.$emit("brisip", this.id2);
     },
+    // DOHVAĆA SVE PODATKE ZA JELA ZA EDIT
     EditArtiklClickJela() {
       this.id = this.ArtiklNaziv.id;
 
@@ -154,6 +172,7 @@ export default {
       );
     },
 
+    // DOHVAĆA SVE PODATKE ZA PIĆE ZA EDIT
     EditArtiklClickPica() {
       this.id2 = this.ArtiklNaziv.id;
 
@@ -167,6 +186,8 @@ export default {
         })
       );
     },
+
+    // POMOČNA FUNKCIJA KOJA ŠALJE U KOŠRAICU PODATKE
     NaruciJelo() {
       this.id = this.ArtiklNaziv.id;
       this.Kolicina = this.ArtiklNaziv.Kolicina;
@@ -183,6 +204,8 @@ export default {
         })
       );
     },
+
+    // POMOČNA FUNKCIJA KOJA ŠALJE U KOŠRAICU PODATKE
 
     NaruciPice() {
       this.id2 = this.ArtiklNaziv.id;
@@ -201,6 +224,10 @@ export default {
       );
     },
 
+    // KOLIČINA
+
+    // POVEČAJ KOLIČINU
+
     Povecaj(id) {
       this.Kolicina++;
 
@@ -214,6 +241,8 @@ export default {
 
       this.cijena = parseInt(this.ArtiklNaziv.Cijena * this.Kolicina);
     },
+
+    // SMANJI KOLIČINU
 
     Smanji(id) {
       this.Kolicina--;
