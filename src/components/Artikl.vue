@@ -1,6 +1,6 @@
 <template>
   <div class="artikl bg-op">
-    <div class="container-fluid py-4 my-4 bg-reddanger md-0 col-lg-12 mt-5">
+    <div class="container-fluid py-3 my-4 bg-reddanger md-0 col-lg-12 mt-5">
       <div class="card container-fluid">
         <img
           :src="ArtiklNaziv.Slika"
