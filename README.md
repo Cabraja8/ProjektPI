@@ -13,7 +13,7 @@ Figma: https://www.figma.com/proto/CxMn285XxR4uwVo6webgOH/prototip_su%C4%8Delja?
 
 ### Javni link na aplikaciju
 
-Web:
+Web: https://restorankras.netlify.app/
 
 # Organizacija
 
